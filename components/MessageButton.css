@@ -1,0 +1,73 @@
+.tt-message-button {
+  position: relative;
+  width: var(--element-height-large);
+  height: var(--element-height-large);
+  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--action-tertiary-rest);
+  border: 0;
+  border-radius: var(--radius-default);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.tt-message-button:hover {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-message-button:active {
+  background-color: var(--action-tertiary-active);
+}
+
+.tt-message-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+.tt-message-button__icon > svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Badge — unread indicator. Dot for count=1, pill with number for count>=2. */
+.tt-message-button__badge {
+  position: absolute;
+  background-color: var(--surface-info-active);
+  border: 2px solid var(--surface-default);
+  border-radius: var(--radius-full);
+  box-sizing: content-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-on-action);
+  font-family: Rubik, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* Dot-only (count=1): 12×12 circle */
+.tt-message-button__badge:not(.tt-message-button__badge--text) {
+  top: 5px;
+  left: 23px;
+  width: 12px;
+  height: 12px;
+}
+
+/* Pill with number (count>=2) */
+.tt-message-button__badge--text {
+  top: 1px;
+  left: 19px;
+  min-width: 16px;
+  padding: 2px;
+  height: 16px;
+}
+.tt-message-button__badge-text {
+  display: inline-block;
+  min-width: 16px;
+  text-align: center;
+}

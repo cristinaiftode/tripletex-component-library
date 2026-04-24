@@ -1,0 +1,12 @@
+:root {
+  --element-height-tiny: 20px;
+  --element-height-small: 24px;
+  --element-height-medium: 32px;
+  --element-height-large: 40px;
+
+  --radius-default: 4px;
+  --radius-full: 99999px;
+
+  --icon-size-small: 20px;
+  --icon-size-medium: 24px;
+}

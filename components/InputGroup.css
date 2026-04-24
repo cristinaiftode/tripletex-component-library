@@ -1,0 +1,75 @@
+.tt-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 240px;
+  font-family: Rubik, sans-serif;
+}
+
+.tt-input-group__label {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.tt-input-group__required {
+  color: var(--text-primary);
+}
+
+.tt-input-group__control {
+  width: 100%;
+}
+.tt-input-group__control > .tt-input,
+.tt-input-group__control > .tt-select,
+.tt-input-group__control > .tt-textarea,
+.tt-input-group__control > .tt-period,
+.tt-input-group__control > .tt-stepper {
+  width: 100%;
+}
+
+.tt-input-group__helper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tt-input-group__helper-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.tt-input-group__helper-icon > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.tt-input-group__helper-text {
+  color: var(--text-primary);
+}
+
+/* muted helper for default variant */
+.tt-input-group--variant-default .tt-input-group__helper-text {
+  color: var(--text-muted);
+}
+
+/* Variant icon colors match the field border semantic */
+.tt-input-group--variant-info .tt-input-group__helper-icon {
+  color: var(--border-active);
+}
+.tt-input-group--variant-warning .tt-input-group__helper-icon {
+  color: var(--border-warning-focus);
+}
+.tt-input-group--variant-error .tt-input-group__helper-icon {
+  color: var(--border-error-focus);
+}

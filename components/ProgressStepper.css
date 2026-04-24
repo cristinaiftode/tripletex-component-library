@@ -1,0 +1,207 @@
+.tt-progress-stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: Rubik, sans-serif;
+  color: var(--text-primary, #2e384d);
+  --tt-progress-stepper-active: var(--surface-info-active, #0a41fa);
+  --tt-progress-stepper-inactive: var(--border-muted, #d5d7db);
+  --tt-progress-stepper-surface: var(--surface-background, #f7f8fc);
+  --tt-progress-stepper-surface-default: var(--surface-default, #ffffff);
+  --tt-progress-stepper-muted: var(--text-muted, #6b7280);
+  --tt-progress-stepper-on-action: var(--text-on-action, #ffffff);
+}
+
+.tt-progress-stepper__step {
+  position: relative;
+}
+
+.tt-progress-stepper__indicator-col {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tt-progress-stepper__indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tt-progress-stepper__check {
+  color: currentColor;
+  display: block;
+}
+
+.tt-progress-stepper__number,
+.tt-progress-stepper__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.tt-progress-stepper__icon > svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* --- BULLET TYPE --- */
+.tt-progress-stepper--bullet .tt-progress-stepper__indicator {
+  width: 16px;
+  height: 16px;
+}
+.tt-progress-stepper--bullet .tt-progress-stepper__step--completed .tt-progress-stepper__indicator {
+  background: var(--tt-progress-stepper-active);
+  color: var(--tt-progress-stepper-on-action);
+}
+.tt-progress-stepper--bullet .tt-progress-stepper__step--current .tt-progress-stepper__indicator {
+  background: var(--tt-progress-stepper-active);
+  box-shadow: 0 0 0 2px rgba(10, 65, 250, 0.2);
+}
+.tt-progress-stepper--bullet .tt-progress-stepper__step--upcoming .tt-progress-stepper__indicator {
+  background: var(--tt-progress-stepper-surface);
+  border: 2px solid var(--tt-progress-stepper-inactive);
+}
+
+/* --- NUMBER & ICON TYPE share 24px circle --- */
+.tt-progress-stepper--number .tt-progress-stepper__indicator,
+.tt-progress-stepper--icon .tt-progress-stepper__indicator {
+  width: 24px;
+  height: 24px;
+}
+.tt-progress-stepper--number .tt-progress-stepper__step--completed .tt-progress-stepper__indicator,
+.tt-progress-stepper--icon .tt-progress-stepper__step--completed .tt-progress-stepper__indicator {
+  background: var(--tt-progress-stepper-surface-default);
+  border: 2px solid var(--tt-progress-stepper-active);
+  color: var(--tt-progress-stepper-active);
+}
+.tt-progress-stepper--number .tt-progress-stepper__step--current .tt-progress-stepper__indicator,
+.tt-progress-stepper--icon .tt-progress-stepper__step--current .tt-progress-stepper__indicator {
+  background: var(--tt-progress-stepper-active);
+  color: var(--tt-progress-stepper-on-action);
+  box-shadow: 0 0 0 2px rgba(10, 65, 250, 0.2);
+}
+.tt-progress-stepper--number .tt-progress-stepper__step--upcoming .tt-progress-stepper__indicator,
+.tt-progress-stepper--icon .tt-progress-stepper__step--upcoming .tt-progress-stepper__indicator {
+  background: var(--tt-progress-stepper-surface);
+  border: 2px solid var(--tt-progress-stepper-inactive);
+  color: var(--text-primary, #2e384d);
+}
+
+/* --- CONTENT --- */
+.tt-progress-stepper__content {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 1.4;
+  min-width: 0;
+}
+
+.tt-progress-stepper__label {
+  color: var(--text-primary, #2e384d);
+  font-weight: 400;
+}
+.tt-progress-stepper__step--current .tt-progress-stepper__label {
+  font-weight: 500;
+}
+
+.tt-progress-stepper__description {
+  color: var(--tt-progress-stepper-muted);
+}
+
+/* --- CONNECTOR base --- */
+.tt-progress-stepper__connector {
+  position: absolute;
+  background: var(--tt-progress-stepper-inactive);
+  display: block;
+}
+.tt-progress-stepper__step--connector-active .tt-progress-stepper__connector {
+  background: var(--tt-progress-stepper-active);
+}
+
+/* --- VERTICAL LAYOUT --- */
+.tt-progress-stepper--vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.tt-progress-stepper--vertical .tt-progress-stepper__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.tt-progress-stepper--vertical .tt-progress-stepper__indicator-col {
+  width: 24px;
+  align-self: stretch;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0;
+}
+.tt-progress-stepper--vertical.tt-progress-stepper--bullet .tt-progress-stepper__indicator-col {
+  width: 16px;
+}
+.tt-progress-stepper--vertical .tt-progress-stepper__connector {
+  top: 24px;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+}
+.tt-progress-stepper--vertical.tt-progress-stepper--bullet .tt-progress-stepper__connector {
+  top: 16px;
+}
+.tt-progress-stepper--vertical .tt-progress-stepper__content {
+  padding-top: 1px;
+}
+.tt-progress-stepper--vertical.tt-progress-stepper--bullet .tt-progress-stepper__content {
+  padding-top: 0;
+}
+
+/* --- HORIZONTAL LAYOUT --- */
+.tt-progress-stepper--horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0;
+}
+.tt-progress-stepper--horizontal .tt-progress-stepper__step {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.tt-progress-stepper--horizontal .tt-progress-stepper__indicator-col {
+  width: 100%;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+}
+.tt-progress-stepper--horizontal .tt-progress-stepper__connector {
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(50% + 16px);
+  right: -50%;
+}
+.tt-progress-stepper--horizontal.tt-progress-stepper--bullet .tt-progress-stepper__connector {
+  left: calc(50% + 12px);
+}
+.tt-progress-stepper--horizontal .tt-progress-stepper__content {
+  text-align: center;
+  padding: 0 12px;
+  width: 100%;
+  align-items: center;
+}

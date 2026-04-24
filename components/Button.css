@@ -1,0 +1,87 @@
+.tt-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--radius-default);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  letter-spacing: var(--letter-spacing-base);
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+}
+
+.tt-button:focus { outline: none; }
+
+.tt-button:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--border-focus);
+  border-radius: var(--radius-default);
+  pointer-events: none;
+}
+
+.tt-button--size-medium { height: var(--element-height-large); }
+.tt-button--size-small { height: var(--element-height-medium); }
+
+.tt-button--variant-primary {
+  background: var(--action-primary-rest);
+  color: var(--text-on-action);
+}
+.tt-button--variant-primary:hover { background: var(--action-primary-hover); }
+.tt-button--variant-primary:active { background: var(--action-primary-active); }
+
+.tt-button--variant-secondary {
+  background: var(--action-secondary-rest);
+  color: var(--text-action);
+}
+.tt-button--variant-secondary:hover { background: var(--action-secondary-hover); }
+.tt-button--variant-secondary:active { background: var(--action-secondary-active); }
+
+.tt-button--variant-tertiary {
+  background: var(--action-tertiary-rest);
+  color: var(--text-action);
+}
+.tt-button--variant-tertiary:hover { background: var(--action-tertiary-hover); }
+.tt-button--variant-tertiary:active { background: var(--action-tertiary-active); }
+
+.tt-button--variant-icon {
+  background: var(--action-tertiary-rest);
+  color: var(--text-action);
+  padding: 0;
+  gap: 0;
+}
+.tt-button--variant-icon.tt-button--size-medium {
+  width: var(--element-height-large);
+  height: var(--element-height-large);
+  padding: 10px;
+}
+.tt-button--variant-icon.tt-button--size-small {
+  width: var(--element-height-medium);
+  height: var(--element-height-medium);
+  padding: 6px;
+}
+.tt-button--variant-icon:hover { background: var(--action-tertiary-hover); }
+.tt-button--variant-icon:active { background: var(--action-tertiary-active); }
+
+.tt-button:disabled,
+.tt-button[aria-disabled="true"] {
+  background: var(--surface-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.tt-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+  flex-shrink: 0;
+}

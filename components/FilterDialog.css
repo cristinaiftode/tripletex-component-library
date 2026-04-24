@@ -1,0 +1,203 @@
+.tt-filter-dialog {
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  max-width: 100%;
+  background: var(--surface-default, #ffffff);
+  border: 1px solid var(--border-muted, #d5d7db);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(46, 56, 77, 0.08);
+  font-family: Rubik, sans-serif;
+  color: var(--text-primary, #2e384d);
+  box-sizing: border-box;
+}
+
+.tt-filter-dialog__section {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-muted, #d5d7db);
+}
+.tt-filter-dialog__section:last-child {
+  border-bottom: none;
+}
+
+.tt-filter-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+}
+
+.tt-filter-dialog__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary, #2e384d);
+}
+
+.tt-filter-dialog__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-primary, #2e384d);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.tt-filter-dialog__toggle:hover {
+  background: var(--action-tertiary-hover, #ced9fe);
+}
+.tt-filter-dialog__toggle:focus-visible {
+  outline: 2px solid var(--border-active, #0a41fa);
+  outline-offset: 2px;
+}
+
+.tt-filter-dialog__saved-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tt-filter-dialog__saved-item {
+  display: flex;
+  min-width: 0;
+}
+
+/* --- Saved filter chip --- */
+.tt-saved-filter {
+  display: inline-flex;
+  align-items: stretch;
+  height: 44px;
+  background: var(--surface-background, #f7f8fc);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  min-width: 0;
+}
+.tt-saved-filter:hover {
+  background: var(--action-tertiary-hover, #ced9fe);
+}
+.tt-saved-filter--active {
+  background: var(--action-secondary-rest, #e6ebff);
+  border-color: var(--border-active, #0a41fa);
+}
+.tt-saved-filter--active .tt-saved-filter__name {
+  color: var(--text-action, #0a41fa);
+  font-weight: 500;
+}
+.tt-saved-filter--active .tt-saved-filter__icon {
+  color: var(--text-action, #0a41fa);
+}
+
+.tt-saved-filter__main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.tt-saved-filter__main:focus-visible {
+  outline: 2px solid var(--border-active, #0a41fa);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+.tt-saved-filter__icon {
+  display: block;
+  color: var(--text-primary, #2e384d);
+  flex-shrink: 0;
+}
+
+.tt-saved-filter__name {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary, #2e384d);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.tt-saved-filter__menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--border-muted, #d5d7db);
+  color: var(--text-primary, #2e384d);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.tt-saved-filter__menu:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.tt-saved-filter__menu:focus-visible {
+  outline: 2px solid var(--border-active, #0a41fa);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+.tt-saved-filter--active .tt-saved-filter__menu {
+  border-left-color: var(--border-active, #0a41fa);
+  color: var(--text-action, #0a41fa);
+}
+
+/* --- Filter options actions --- */
+.tt-filter-dialog__section--options .tt-filter-dialog__header {
+  min-height: 0;
+  margin-bottom: 8px;
+}
+
+.tt-filter-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tt-filter-dialog__link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-action, #0a41fa);
+  cursor: pointer;
+  text-align: left;
+}
+.tt-filter-dialog__link:hover {
+  text-decoration: underline;
+}
+.tt-filter-dialog__link:focus-visible {
+  outline: 2px solid var(--border-active, #0a41fa);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.tt-filter-dialog__link:disabled {
+  color: var(--text-placeholder, #abafb7);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+/* --- Body slot --- */
+.tt-filter-dialog__body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

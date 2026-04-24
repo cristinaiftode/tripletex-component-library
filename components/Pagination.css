@@ -1,0 +1,71 @@
+.tt-pagination,
+.tt-table-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: Rubik, sans-serif;
+}
+
+.tt-pagination {
+  justify-content: center;
+  width: 182px;
+}
+
+.tt-table-pagination {
+  justify-content: flex-end;
+}
+
+.tt-pagination__button,
+.tt-table-pagination__button {
+  height: 40px;
+  padding: 9.5px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--action-tertiary-rest);
+  border: 0;
+  border-radius: var(--radius-default, 4px);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-action);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tt-pagination__button:hover:not(:disabled),
+.tt-table-pagination__button:hover:not(:disabled) {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-pagination__button:disabled,
+.tt-table-pagination__button:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.tt-table-pagination__icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+}
+.tt-table-pagination__icon-btn > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.tt-pagination__status {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.tt-table-pagination__range {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

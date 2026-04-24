@@ -1,0 +1,114 @@
+.tt-radio {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: Rubik, sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+.tt-radio--disabled {
+  cursor: not-allowed;
+}
+
+.tt-radio__control {
+  position: relative;
+  display: inline-flex;
+  padding: 1px;
+  flex-shrink: 0;
+}
+
+.tt-radio__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.tt-radio__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  background-color: var(--surface-background);
+  border: 1px solid var(--border-primary);
+  border-radius: 999px;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.tt-radio__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: transparent;
+  transition: background-color 0.12s ease;
+}
+
+.tt-radio:hover .tt-radio__circle {
+  border-color: var(--border-hover);
+}
+
+.tt-radio__input:checked ~ .tt-radio__circle {
+  border-color: var(--border-active);
+}
+.tt-radio__input:checked ~ .tt-radio__circle .tt-radio__dot {
+  background-color: var(--border-active);
+}
+.tt-radio:hover .tt-radio__input:checked ~ .tt-radio__circle {
+  border-color: var(--border-hover);
+}
+
+.tt-radio__input:focus-visible ~ .tt-radio__circle {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.tt-radio--disabled .tt-radio__circle {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-disabled);
+}
+.tt-radio--disabled:hover .tt-radio__circle {
+  border-color: var(--border-disabled);
+}
+.tt-radio--disabled .tt-radio__input:checked ~ .tt-radio__circle .tt-radio__dot {
+  background-color: var(--border-disabled);
+}
+
+.tt-radio__label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+.tt-radio--disabled .tt-radio__label {
+  color: var(--text-disabled);
+}
+
+/* Group */
+.tt-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: Rubik, sans-serif;
+}
+.tt-radio-group__label {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+.tt-radio-group__items {
+  display: flex;
+  gap: 8px;
+}
+.tt-radio-group--vertical .tt-radio-group__items {
+  flex-direction: column;
+}
+.tt-radio-group--horizontal .tt-radio-group__items {
+  flex-direction: row;
+  gap: 16px;
+}

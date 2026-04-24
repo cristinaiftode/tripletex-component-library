@@ -1,0 +1,68 @@
+.tt-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary, #2e384d);
+  min-width: 0;
+}
+
+.tt-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.tt-status__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  min-width: 16px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  font-family: Rubik, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-on-action, #ffffff);
+  flex-shrink: 0;
+}
+
+.tt-status__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.tt-status--success .tt-status__dot,
+.tt-status--success .tt-status__count {
+  background-color: var(--surface-success-active, #33ac2e);
+}
+
+.tt-status--warning .tt-status__dot {
+  background-color: var(--surface-warning-active, #f7c137);
+}
+.tt-status--warning .tt-status__count {
+  background-color: #e6a80a;
+}
+
+.tt-status--error .tt-status__dot,
+.tt-status--error .tt-status__count {
+  background-color: var(--surface-error-active, #e83645);
+}
+
+.tt-status--neutral .tt-status__dot,
+.tt-status--neutral .tt-status__count {
+  background-color: var(--global-grey-60, #818794);
+}
+
+.tt-status--new .tt-status__dot,
+.tt-status--new .tt-status__count {
+  background-color: var(--surface-info-active, #0a41fa);
+}

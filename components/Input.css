@@ -1,0 +1,160 @@
+.tt-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--element-height-large);
+  width: 160px;
+  padding: 10px 16px;
+  background-color: var(--surface-background);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default);
+  box-sizing: border-box;
+  color: var(--text-primary);
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.tt-input:hover {
+  border-color: var(--border-hover);
+}
+.tt-input:focus-within {
+  border-color: var(--border-active);
+}
+
+.tt-input--disabled,
+.tt-input--disabled:hover,
+.tt-input--disabled:focus-within {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.tt-input__field {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+}
+.tt-input__field::placeholder {
+  color: var(--text-placeholder);
+}
+.tt-input--disabled .tt-input__field::placeholder {
+  color: var(--text-disabled);
+}
+.tt-input__field:disabled {
+  cursor: not-allowed;
+}
+
+.tt-input__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--text-primary);
+}
+.tt-input__icon > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.tt-input--disabled .tt-input__icon {
+  color: var(--text-disabled);
+}
+
+.tt-input__affix {
+  flex-shrink: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.tt-input--disabled .tt-input__affix {
+  color: var(--text-disabled);
+}
+
+.tt-input__reveal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+.tt-input__reveal:disabled {
+  cursor: not-allowed;
+}
+
+/* === Semantic variants === */
+
+.tt-input--variant-info {
+  /* same shell as default, just surfaces the info icon */
+}
+
+.tt-input--variant-automation {
+  background-color: var(--surface-automation-rest);
+  border-color: var(--border-automation);
+  color: var(--text-primary);
+}
+.tt-input--variant-automation:hover {
+  border-color: var(--border-automation-hover);
+}
+.tt-input--variant-automation:focus-within {
+  border-color: var(--border-automation-focus);
+}
+.tt-input--variant-automation .tt-input__icon--variant {
+  color: var(--border-automation-focus);
+}
+
+.tt-input--variant-warning {
+  background-color: var(--surface-warning-rest);
+  border-color: var(--border-warning);
+}
+.tt-input--variant-warning:hover {
+  border-color: var(--border-warning-hover);
+}
+.tt-input--variant-warning:focus-within {
+  border-color: var(--border-warning-focus);
+}
+.tt-input--variant-warning .tt-input__icon--variant {
+  color: var(--border-warning-focus);
+}
+
+.tt-input--variant-error {
+  background-color: var(--surface-error-rest);
+  border-color: var(--border-error);
+}
+.tt-input--variant-error:hover {
+  border-color: var(--border-error-hover);
+}
+.tt-input--variant-error:focus-within {
+  border-color: var(--border-error-focus);
+}
+.tt-input--variant-error .tt-input__icon--variant {
+  color: var(--border-error-focus);
+}
+
+/* Hide number input spinners */
+.tt-input__field[type="number"]::-webkit-outer-spin-button,
+.tt-input__field[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.tt-input__field[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

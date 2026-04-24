@@ -1,0 +1,59 @@
+.tt-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 8px 0 4px;
+  border-radius: 99999px;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.tt-label__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+.tt-label__icon > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.tt-label__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Category backgrounds */
+.tt-label--info,
+.tt-label--help,
+.tt-label--tips,
+.tt-label--news,
+.tt-label--get-started {
+  background-color: var(--surface-info-highlight);
+}
+
+.tt-label--automated {
+  background-color: var(--surface-automation-highlight);
+}
+
+.tt-label--done {
+  background-color: var(--surface-success-highlight);
+}
+
+.tt-label--attention {
+  background-color: var(--surface-warning-highlight);
+}
+
+.tt-label--error {
+  background-color: var(--surface-error-highlight);
+}

@@ -1,0 +1,130 @@
+.tt-table-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface-default, #ffffff);
+  border: 1px solid var(--border-muted, #d5d7db);
+  border-radius: 4px;
+  font-family: Rubik, sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.tt-table-filter__main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.tt-table-filter__filter {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.tt-table-filter__search {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.tt-table-filter__slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.tt-table-filter__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* --- Filter Button --- */
+.tt-filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  background: var(--action-secondary-rest, #e6ebff);
+  border: none;
+  border-radius: 4px;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-action, #0a41fa);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease;
+}
+.tt-filter-button:hover {
+  background: var(--action-secondary-hover, #ced9fe);
+}
+.tt-filter-button:focus-visible {
+  outline: 2px solid var(--border-active, #0a41fa);
+  outline-offset: 2px;
+}
+.tt-filter-button__label {
+  display: inline-block;
+}
+.tt-filter-button__icon {
+  display: block;
+  color: currentColor;
+}
+.tt-filter-button--active .tt-filter-button__icon {
+  color: var(--text-action, #0a41fa);
+}
+.tt-filter-button__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background: var(--surface-info-active, #0a41fa);
+  color: var(--text-on-action, #ffffff);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* --- Icon action button (right side) --- */
+.tt-table-filter__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-primary, #2e384d);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+.tt-table-filter__icon-btn:hover {
+  background: var(--action-tertiary-hover, #ced9fe);
+}
+.tt-table-filter__icon-btn:focus-visible {
+  outline: 2px solid var(--border-active, #0a41fa);
+  outline-offset: 2px;
+}
+.tt-table-filter__icon-btn--active {
+  background: var(--action-secondary-rest, #e6ebff);
+  color: var(--text-action, #0a41fa);
+}
+.tt-table-filter__icon-btn > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}

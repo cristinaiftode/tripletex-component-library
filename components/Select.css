@@ -1,0 +1,138 @@
+.tt-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 160px;
+  height: var(--element-height-large);
+  background-color: var(--surface-background);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default);
+  box-sizing: border-box;
+  font-family: Rubik, sans-serif;
+}
+
+.tt-select:hover {
+  border-color: var(--border-hover);
+}
+.tt-select:focus-within {
+  border-color: var(--border-active);
+}
+
+.tt-select--disabled,
+.tt-select--disabled:hover,
+.tt-select--disabled:focus-within {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.tt-select__field {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  padding: 10px 38px 10px 16px;
+  margin: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.tt-select__field:required:invalid,
+.tt-select__field option[value=""] {
+  color: var(--text-placeholder);
+}
+.tt-select__field option {
+  color: var(--text-primary);
+}
+.tt-select__field:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+/* Widen right padding when a variant icon is present */
+.tt-select:has(.tt-select__icon--variant) .tt-select__field {
+  padding-right: 62px;
+}
+
+.tt-select__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--text-primary);
+  pointer-events: none;
+}
+.tt-select__icon > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.tt-select__icon--chevron {
+  right: 10px;
+}
+.tt-select__icon--variant {
+  right: 34px;
+}
+.tt-select--disabled .tt-select__icon {
+  color: var(--text-disabled);
+}
+
+/* Semantic variants */
+
+.tt-select--variant-automation {
+  background-color: var(--surface-automation-rest);
+  border-color: var(--border-automation);
+}
+.tt-select--variant-automation:hover {
+  border-color: var(--border-automation-hover);
+}
+.tt-select--variant-automation:focus-within {
+  border-color: var(--border-automation-focus);
+}
+.tt-select--variant-automation .tt-select__icon--variant {
+  color: var(--border-automation-focus);
+}
+
+.tt-select--variant-warning {
+  background-color: var(--surface-warning-rest);
+  border-color: var(--border-warning);
+}
+.tt-select--variant-warning:hover {
+  border-color: var(--border-warning-hover);
+}
+.tt-select--variant-warning:focus-within {
+  border-color: var(--border-warning-focus);
+}
+.tt-select--variant-warning .tt-select__icon--variant {
+  color: var(--border-warning-focus);
+}
+
+.tt-select--variant-error {
+  background-color: var(--surface-error-rest);
+  border-color: var(--border-error);
+}
+.tt-select--variant-error:hover {
+  border-color: var(--border-error-hover);
+}
+.tt-select--variant-error:focus-within {
+  border-color: var(--border-error-focus);
+}
+.tt-select--variant-error .tt-select__icon--variant {
+  color: var(--border-error-focus);
+}

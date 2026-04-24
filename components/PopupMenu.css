@@ -1,0 +1,109 @@
+.tt-popup-menu {
+  background-color: var(--surface-background, #f7f8fc);
+  border: 1px solid var(--border-primary, #818794);
+  border-radius: var(--radius-default, 4px);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: stretch;
+  font-family: Rubik, sans-serif;
+  box-sizing: border-box;
+}
+
+.tt-popup-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 10px 8px;
+  border-radius: var(--radius-default, 4px);
+  background-color: var(--surface-background, #f7f8fc);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.tt-popup-menu__item:hover:not(:disabled),
+.tt-popup-menu__item--focused {
+  background-color: var(--surface-info-hover, #e6ebff);
+}
+.tt-popup-menu__item--focused {
+  border-color: var(--border-focus, #6c8dfc);
+}
+.tt-popup-menu__item--selected {
+  background-color: var(--surface-info-hover, #e6ebff);
+  font-weight: 500;
+}
+.tt-popup-menu__item--disabled,
+.tt-popup-menu__item:disabled {
+  color: var(--text-disabled, #51596a);
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--surface-background, #f7f8fc);
+}
+
+.tt-popup-menu__item-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+}
+.tt-popup-menu__item-icon > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.tt-popup-menu__item-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- PopupGroupHeader --- */
+.tt-popup-group-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  padding: 4px 0;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+.tt-popup-group-header--with-label {
+  min-height: 32px;
+}
+.tt-popup-group-header__divider {
+  border-top: 1px solid var(--border-muted, #d5d7db);
+  height: 0;
+  width: 100%;
+}
+.tt-popup-group-header__label {
+  padding: 0 8px;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-muted, #6b7280);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: flex-end;
+  flex: 1 0 0;
+  min-height: 0;
+  padding-top: 4px;
+}

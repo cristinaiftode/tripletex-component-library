@@ -1,0 +1,36 @@
+.tt-modifier-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  color: var(--text-primary, #2e384d);
+  flex-shrink: 0;
+}
+
+.tt-modifier-key > svg {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+.tt-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 20px;
+  color: var(--text-primary, #2e384d);
+}
+
+.tt-shortcut__letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 2px;
+  font-family: Rubik, sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--text-placeholder, #abafb7);
+  flex-shrink: 0;
+}

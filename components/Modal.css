@@ -1,0 +1,162 @@
+.tt-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--surface-modal);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubik, sans-serif;
+}
+.tt-modal-backdrop--mobile {
+  align-items: flex-end;
+}
+
+.tt-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  background-color: var(--surface-default);
+  border-radius: var(--radius-default, 4px);
+  box-sizing: border-box;
+  color: var(--text-primary);
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+.tt-modal--with-illustration {
+  width: 520px;
+}
+
+.tt-modal--mobile {
+  padding: 24px;
+  width: 520px;
+  max-width: 100%;
+  border-radius: 16px 16px 0 0;
+}
+
+.tt-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background-color: var(--action-tertiary-rest);
+  border: 0;
+  border-radius: var(--radius-default, 4px);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.tt-modal__close:hover {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-modal__close > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.tt-modal--mobile .tt-modal__close {
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+}
+.tt-modal--mobile .tt-modal__close > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tt-modal__illustration {
+  width: 100px;
+  height: 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.tt-modal__illustration > svg,
+.tt-modal__illustration > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tt-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+.tt-modal__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+.tt-modal__subtitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+.tt-modal--mobile .tt-modal__subtitle {
+  font-size: 16px;
+}
+
+.tt-modal__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tt-modal__footer {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+.tt-modal--mobile .tt-modal__footer {
+  gap: 12px;
+}
+
+.tt-modal__footer .tt-modal__action {
+  height: 40px;
+  padding: 9.5px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-default, 4px);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.tt-modal--mobile .tt-modal__footer .tt-modal__action {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.tt-modal__action--primary {
+  background-color: var(--action-primary-rest);
+  color: var(--text-on-action);
+}
+.tt-modal__action--primary:hover {
+  background-color: var(--action-primary-hover);
+}
+.tt-modal__action--secondary {
+  background-color: var(--action-secondary-rest);
+  color: var(--text-action);
+}
+.tt-modal__action--secondary:hover {
+  background-color: var(--action-secondary-hover);
+}

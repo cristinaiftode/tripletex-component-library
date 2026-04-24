@@ -1,0 +1,121 @@
+.tt-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-full);
+  background-color: var(--surface-background);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Sizes */
+.tt-chip--size-small { height: var(--element-height-small); }
+.tt-chip--size-medium { height: var(--element-height-medium); }
+.tt-chip--size-large { height: var(--element-height-large); }
+
+/* Interactive, Removable, Interactive+Removable all use border-muted */
+.tt-chip--variant-interactive,
+.tt-chip--variant-removable,
+.tt-chip--variant-interactive-removable {
+  border-color: var(--border-muted, #d5d7db);
+}
+
+/* Body (label + optional icon/avatar) */
+.tt-chip__body {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 8px;
+  color: inherit;
+  font: inherit;
+  background: transparent;
+  border: 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.tt-chip__body--button {
+  cursor: pointer;
+}
+.tt-chip__body--button:disabled {
+  cursor: not-allowed;
+}
+
+/* When chip is removable, body drops right padding so the close button sits flush */
+.tt-chip--variant-removable .tt-chip__body,
+.tt-chip--variant-interactive-removable .tt-chip__body {
+  padding-right: 0;
+}
+
+.tt-chip__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.tt-chip__icon,
+.tt-chip__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tt-chip--size-small .tt-chip__icon > svg { width: 20px; height: 20px; display: block; }
+.tt-chip--size-medium .tt-chip__icon > svg { width: 20px; height: 20px; display: block; }
+.tt-chip--size-large .tt-chip__icon > svg { width: 24px; height: 24px; display: block; }
+
+/* Remove button — size matches chip height so the X sits centered */
+.tt-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 100%;
+}
+.tt-chip--size-small .tt-chip__remove { width: var(--element-height-small); }
+.tt-chip--size-medium .tt-chip__remove { width: var(--element-height-medium); }
+.tt-chip--size-large .tt-chip__remove { width: var(--element-height-large); }
+.tt-chip__remove > svg {
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+  display: block;
+}
+.tt-chip__remove:disabled {
+  cursor: not-allowed;
+}
+
+/* Interactive hover / pressed — only applies when the body-button is hovered or active */
+.tt-chip--variant-interactive:has(.tt-chip__body--button:hover:not(:disabled)),
+.tt-chip--variant-interactive-removable:has(.tt-chip__body--button:hover:not(:disabled)) {
+  background-color: var(--action-neutral-hover);
+  border-color: var(--border-info);
+}
+.tt-chip--variant-interactive:has(.tt-chip__body--button:active:not(:disabled)),
+.tt-chip--variant-interactive-removable:has(.tt-chip__body--button:active:not(:disabled)) {
+  background-color: var(--action-neutral-active);
+  border-color: var(--border-info);
+}
+
+/* Disabled — applies to any variant */
+.tt-chip--disabled {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
+}
+.tt-chip--disabled .tt-chip__body--button,
+.tt-chip--disabled .tt-chip__remove {
+  cursor: not-allowed;
+}

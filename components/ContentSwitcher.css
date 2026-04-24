@@ -1,0 +1,73 @@
+.tt-content-switcher {
+  display: inline-flex;
+  align-items: stretch;
+  font-family: Rubik, sans-serif;
+}
+
+.tt-content-switcher__segment {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--element-height-large);
+  padding: 10px 12px;
+  background-color: var(--surface-background);
+  color: var(--text-primary);
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: 1px solid var(--border-muted);
+  margin: 0;
+}
+
+/* Shared borders — strip the left border on all but the first segment so
+   adjacent segments share a single 1px border. */
+.tt-content-switcher__segment--middle,
+.tt-content-switcher__segment--right {
+  border-left: 0;
+}
+
+.tt-content-switcher__segment--left {
+  border-top-left-radius: var(--radius-default);
+  border-bottom-left-radius: var(--radius-default);
+}
+.tt-content-switcher__segment--right {
+  border-top-right-radius: var(--radius-default);
+  border-bottom-right-radius: var(--radius-default);
+}
+
+.tt-content-switcher__segment:hover {
+  background-color: var(--action-secondary-hover);
+}
+.tt-content-switcher__segment:active {
+  background-color: var(--action-secondary-active);
+}
+
+/* Selected — active blue border on all 4 sides, raised above siblings so
+   the shared-border strip on the left edge does not clip it. */
+.tt-content-switcher__segment--selected {
+  border: 1px solid var(--border-active);
+  color: var(--text-active);
+  font-weight: 500;
+  z-index: 1;
+}
+
+.tt-content-switcher__segment--disabled,
+.tt-content-switcher__segment--disabled:hover,
+.tt-content-switcher__segment--disabled:active {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  font-weight: 400;
+}
+
+.tt-content-switcher__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}

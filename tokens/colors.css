@@ -1,0 +1,197 @@
+:root {
+  /* === Global palette (Light Mode) — raw values === */
+
+  /* Misc */
+  --global-misc-white: #ffffff;
+  --global-misc-background: #f7f8fc;
+  --global-misc-contrast: #010a59;
+  --global-misc-transparent: #ffffff00;
+
+  /* Grey */
+  --global-grey-05: #f4f5f6;
+  --global-grey-10: #e9eaed;
+  --global-grey-20: #d5d7db;
+  --global-grey-40: #abafb7;
+  --global-grey-60: #818794;
+  --global-grey-71: #6b7280;
+  --global-grey-80: #51596a;
+  --global-grey-100: #2e384d;
+  --global-grey-120: #0f131a;
+  --global-grey-100-30: #2e384d4d;
+
+  /* Blue */
+  --global-blue-05: #f2f5ff;
+  --global-blue-10: #e6ebff;
+  --global-blue-20: #ced9fe;
+  --global-blue-40: #9db3fd;
+  --global-blue-60: #6c8dfc;
+  --global-blue-80: #3b67fb;
+  --global-blue-100: #0a41fa;
+  --global-blue-120: #0834c7;
+  --global-blue-130: #002992;
+
+  /* Turquoise */
+  --global-turquoise-05: #f4fafa;
+  --global-turquoise-10: #e8f5f5;
+  --global-turquoise-20: #d4ebeb;
+  --global-turquoise-40: #abd6d6;
+  --global-turquoise-60: #80c1c2;
+  --global-turquoise-80: #57adae;
+  --global-turquoise-100: #30999b;
+  --global-turquoise-120: #206768;
+
+  /* Green */
+  --global-green-05: #f4fbf4;
+  --global-green-10: #eaf7e9;
+  --global-green-20: #d6eed5;
+  --global-green-40: #addeab;
+  --global-green-60: #84cd81;
+  --global-green-80: #5bbc57;
+  --global-green-100: #33ac2e;
+  --global-green-120: #247820;
+
+  /* Red */
+  --global-red-05: #fef4f5;
+  --global-red-10: #fdeaec;
+  --global-red-20: #fbd6da;
+  --global-red-40: #f6aeb4;
+  --global-red-60: #f1868f;
+  --global-red-80: #ec5e6a;
+  --global-red-100: #e83645;
+  --global-red-120: #b52a36;
+
+  /* Yellow */
+  --global-yellow-05: #fffcf5;
+  --global-yellow-10: #fff9ea;
+  --global-yellow-20: #fef3d7;
+  --global-yellow-40: #fce6af;
+  --global-yellow-60: #fada87;
+  --global-yellow-80: #f8cd5f;
+  --global-yellow-100: #f7c137;
+  --global-yellow-120: #c4992c;
+
+  /* Purple */
+  --global-purple-05: #f9f6ff;
+  --global-purple-10: #f3eeff;
+  --global-purple-20: #e8ddff;
+  --global-purple-40: #d1bbff;
+  --global-purple-60: #ba98ff;
+  --global-purple-80: #a376ff;
+  --global-purple-100: #8c54ff;
+  --global-purple-120: #7043cc;
+
+  /* === Tripletex Logo === */
+  --logo-navy: #010a59;
+  --logo-teal: #5bb3c0;
+  --logo-green: #1ab960;
+
+  /* === Sparcle — brand accent colors === */
+  --sparcle-blue: #6cbce6;
+  --sparcle-lavender: #cbc8fb;
+  --sparcle-sky: #cce9fd;
+  --sparcle-mint: #cff8e6;
+  --sparcle-lime: #ddf8d0;
+  --sparcle-yellow: #eff9d0;
+  --sparcle-cream: #f7f1d0;
+  --sparcle-peach: #f3dcce;
+  --sparcle-pink: #f0c9cc;
+
+  /* === Illustrations === */
+  --illustration-blue: #0a41fa;
+  --illustration-blue-mid: #6c90fc;
+  --illustration-blue-light: #90b3fd;
+  --illustration-green: #1ab960;
+  --illustration-green-light: #aae3c4;
+  --illustration-pink: #f6aed5;
+  --illustration-purple-light: #ccc7ff;
+
+  /* === Semantic color tokens === */
+
+  /* Text */
+  --text-primary: #2e384d;
+  --text-muted: #6b7280;
+  --text-disabled: #51596a;
+  --text-placeholder: #abafb7;
+  --text-link: #0a41fa;
+  --text-active: #0a41fa;
+  --text-action: #0a41fa;
+  --text-on-action: #ffffff;
+  --text-footer-primary: #f2f5ff;
+  --text-footer-link: #9db3fd;
+
+  /* Surface */
+  --surface-background: #f7f8fc;
+  --surface-default: #ffffff;
+  --surface-nav: #d4ebeb;
+  --surface-disabled: #e9eaed;
+  --surface-tooltip: #2e384d;
+  --surface-footer: #010a59;
+  --surface-modal: #2e384d4d;
+
+  --surface-info-rest: #f2f5ff;
+  --surface-info-hover: #e6ebff;
+  --surface-info-highlight: #ced9fe;
+  --surface-info-active: #0a41fa;
+
+  --surface-warning-rest: #fffcf5;
+  --surface-warning-hover: #fff9ea;
+  --surface-warning-highlight: #fef3d7;
+  --surface-warning-active: #f7c137;
+
+  --surface-error-rest: #fef4f5;
+  --surface-error-hover: #fdeaec;
+  --surface-error-highlight: #fbd6da;
+  --surface-error-active: #e83645;
+
+  --surface-success-rest: #f4fbf4;
+  --surface-success-hover: #eaf7e9;
+  --surface-success-highlight: #d6eed5;
+  --surface-success-active: #33ac2e;
+
+  --surface-automation-rest: #f9f6ff;
+  --surface-automation-hover: #f3eeff;
+  --surface-automation-highlight: #e8ddff;
+  --surface-automation-active: #7043cc;
+
+  --surface-neutral-active: #abafb7;
+
+  /* Border */
+  --border-primary: #818794;
+  --border-secondary: #abafb7;
+  --border-muted: #d5d7db;
+  --border-faint: #e9eaed;
+  --border-disabled: #abafb7;
+  --border-hover: #9db3fd;
+  --border-active: #0a41fa;
+  --border-info: #6c8dfc;
+  --border-warning: #f7c137;
+  --border-error: #ec5e6a;
+  --border-success: #5bbc57;
+  --border-automation: #a376ff;
+  --border-underline: #e6ebff;
+  --border-focus: #6c8dfc;
+
+  --border-error-hover: #f6aeb4;
+  --border-error-focus: #b52a36;
+  --border-warning-hover: #fce6af;
+  --border-warning-focus: #c4992c;
+  --border-automation-hover: #d1bbff;
+  --border-automation-focus: #7043cc;
+
+  /* Action */
+  --action-primary-rest: #0a41fa;
+  --action-primary-hover: #0834c7;
+  --action-primary-active: #002992;
+
+  --action-secondary-rest: #e6ebff;
+  --action-secondary-hover: #ced9fe;
+  --action-secondary-active: #9db3fd;
+
+  --action-tertiary-rest: #ffffff00;
+  --action-tertiary-hover: #ced9fe;
+  --action-tertiary-active: #9db3fd;
+
+  --action-neutral-rest: #f7f8fc;
+  --action-neutral-hover: #ced9fe;
+  --action-neutral-active: #9db3fd;
+}

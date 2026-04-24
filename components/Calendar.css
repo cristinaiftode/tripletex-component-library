@@ -1,0 +1,487 @@
+.tt-calendar {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background-color: var(--surface-default);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default, 6px);
+  box-sizing: border-box;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+/* Header with month/year title + prev/next chevrons */
+.tt-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 4px 0;
+}
+.tt-calendar__title {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+.tt-calendar__nav {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-default, 6px);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.tt-calendar__nav:hover:not(:disabled) {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-calendar__nav:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+.tt-calendar__nav > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Grid */
+.tt-calendar__grid {
+  display: grid;
+  grid-template-columns: 40px repeat(7, 40px);
+  gap: 0;
+  font-variant-numeric: tabular-nums;
+}
+.tt-calendar__grid--no-week {
+  grid-template-columns: repeat(7, 40px);
+}
+
+/* Weekday labels row */
+.tt-calendar__weekday {
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+.tt-calendar__weekday--wk {
+  color: var(--text-muted);
+}
+
+/* Week number pill */
+.tt-calendar__week {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.tt-calendar__week-inner {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background-color: var(--surface-background);
+}
+
+/* Day cell (DayButton) */
+.tt-calendar__day {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-default, 6px);
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+.tt-calendar__day:hover:not(:disabled):not(.tt-calendar__day--selected) {
+  background-color: var(--surface-info-hover);
+}
+.tt-calendar__day--outside {
+  color: var(--text-muted);
+}
+.tt-calendar__day--sunday {
+  background-color: var(--surface-error-rest);
+}
+.tt-calendar__day--sunday:hover:not(:disabled):not(.tt-calendar__day--selected) {
+  background-color: var(--surface-error-hover);
+}
+.tt-calendar__day--today {
+  border-color: var(--border-active);
+  font-weight: 500;
+}
+.tt-calendar__day--selected {
+  background-color: var(--action-primary-rest);
+  border-color: var(--action-primary-rest);
+  color: var(--text-on-action);
+  font-weight: 500;
+}
+.tt-calendar__day--in-range {
+  background-color: var(--action-secondary-rest);
+  border-radius: 0;
+}
+.tt-calendar__day--range-start {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.tt-calendar__day--range-end {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.tt-calendar__day:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Range picker — two months side-by-side */
+.tt-date-range {
+  display: inline-flex;
+  gap: 0;
+  padding: 12px;
+  background-color: var(--surface-default);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default, 6px);
+  box-sizing: border-box;
+  font-family: Rubik, sans-serif;
+}
+.tt-date-range__months {
+  display: flex;
+  gap: 16px;
+}
+.tt-date-range .tt-calendar {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* Month/Year picker */
+.tt-my-picker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--surface-default);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default, 6px);
+  box-sizing: border-box;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  width: 280px;
+}
+.tt-my-picker--large {
+  width: 376px;
+}
+.tt-my-picker__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tt-my-picker__year-select {
+  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 8px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-default, 6px);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.tt-my-picker__year-select:hover {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-my-picker__year-select > svg {
+  width: 16px;
+  height: 16px;
+}
+.tt-my-picker__nav {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-default, 6px);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.tt-my-picker__nav:hover {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-my-picker__nav > svg {
+  width: 20px;
+  height: 20px;
+}
+.tt-my-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.tt-my-picker--large .tt-my-picker__grid {
+  gap: 12px;
+}
+.tt-my-picker__month {
+  height: 42px;
+  padding: 12px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-default);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-default, 6px);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.tt-my-picker__month:hover:not(:disabled):not(.tt-my-picker__month--selected) {
+  background-color: var(--surface-info-hover);
+  border-color: var(--border-hover);
+}
+.tt-my-picker__month--selected {
+  background-color: var(--surface-info-rest);
+  border-color: var(--border-active);
+  color: var(--text-active);
+  font-weight: 500;
+}
+.tt-my-picker__month--selected-filled {
+  background-color: var(--surface-info-active);
+  border-color: var(--surface-info-active);
+  color: var(--text-on-action);
+  font-weight: 500;
+}
+.tt-my-picker__month:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Period selector */
+.tt-period-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: var(--surface-default);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default, 6px);
+  box-sizing: border-box;
+  font-family: Rubik, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  width: 720px;
+  max-width: 100%;
+}
+
+.tt-period-selector__timeline {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding: 20px 0 8px;
+}
+.tt-period-selector__labels {
+  flex-shrink: 0;
+  width: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 24px;
+}
+.tt-period-selector__timeline-track {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+}
+
+/* Drag markers layer */
+.tt-period-selector__markers {
+  position: relative;
+  height: 18px;
+  pointer-events: none;
+}
+.tt-period-selector__marker {
+  position: absolute;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  pointer-events: auto;
+  cursor: ew-resize;
+}
+.tt-period-selector__marker > svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.tt-period-selector__row {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: 0;
+  height: 28px;
+}
+.tt-period-selector__row-label {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.tt-period-selector__cell {
+  position: relative;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-primary);
+  border-right: 1px solid var(--border-faint);
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+}
+.tt-period-selector__cell:last-child {
+  border-right: 0;
+}
+.tt-period-selector__cell:hover {
+  background-color: var(--surface-info-hover);
+}
+.tt-period-selector__cell--in-range {
+  background-color: var(--action-secondary-rest);
+}
+.tt-period-selector__cell--range-start,
+.tt-period-selector__cell--range-end {
+  background-color: var(--action-primary-rest);
+  color: var(--text-on-action);
+  font-weight: 500;
+}
+
+.tt-period-selector__range-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 9px;
+  height: 2px;
+  background-color: var(--border-active);
+  pointer-events: none;
+}
+
+/* Gradient fade edges on the scrolling track only */
+.tt-period-selector__timeline-track::before,
+.tt-period-selector__timeline-track::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  pointer-events: none;
+  z-index: 2;
+}
+.tt-period-selector__timeline-track::before {
+  left: 0;
+  background: linear-gradient(to right, var(--surface-default), transparent);
+}
+.tt-period-selector__timeline-track::after {
+  right: 0;
+  background: linear-gradient(to left, var(--surface-default), transparent);
+}
+
+/* Quick ranges */
+.tt-period-selector__footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tt-period-selector__quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+.tt-period-selector__quick-btn {
+  height: 32px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--surface-default);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-default, 6px);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.tt-period-selector__quick-btn:hover {
+  background-color: var(--surface-info-hover);
+  border-color: var(--border-hover);
+}
+.tt-period-selector__quick-btn--active {
+  background-color: var(--surface-info-rest);
+  border-color: var(--border-active);
+  color: var(--text-active);
+  font-weight: 500;
+}
+.tt-period-selector__ok {
+  height: 36px;
+  padding: 0 16px;
+  background-color: var(--action-primary-rest);
+  border: 0;
+  border-radius: var(--radius-default, 6px);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-on-action);
+  cursor: pointer;
+}
+.tt-period-selector__ok:hover {
+  background-color: var(--action-primary-hover);
+}

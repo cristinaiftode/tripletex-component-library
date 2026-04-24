@@ -1,0 +1,116 @@
+.tt-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: var(--surface-tooltip, #2e384d);
+  color: var(--surface-tooltip, #2e384d);
+  border-radius: 4px;
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  box-sizing: border-box;
+  max-width: 320px;
+}
+
+.tt-tooltip__label {
+  color: var(--text-on-action, #ffffff);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.tt-tooltip__shortcut {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-placeholder, #abafb7);
+  flex-shrink: 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* --- Multiline --- */
+.tt-tooltip--multiline {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tt-tooltip__title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.tt-tooltip__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--text-on-action, #ffffff);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.tt-tooltip__description {
+  margin: 0;
+  color: var(--text-placeholder, #abafb7);
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* --- Arrow --- */
+.tt-tooltip__arrow {
+  position: absolute;
+  width: 14px;
+  height: 8px;
+  color: inherit;
+  display: block;
+  pointer-events: none;
+}
+.tt-tooltip__arrow svg {
+  display: block;
+}
+
+/* Bottom-side arrows point downward from the tooltip */
+.tt-tooltip__arrow--bottom,
+.tt-tooltip__arrow--bottom-left,
+.tt-tooltip__arrow--bottom-right {
+  bottom: -8px;
+}
+.tt-tooltip__arrow--bottom {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tt-tooltip__arrow--bottom-left {
+  left: 13px;
+}
+.tt-tooltip__arrow--bottom-right {
+  right: 13px;
+}
+
+/* Top-side arrows point upward from the tooltip */
+.tt-tooltip__arrow--top,
+.tt-tooltip__arrow--top-left,
+.tt-tooltip__arrow--top-right {
+  top: -8px;
+  transform: rotate(180deg);
+}
+.tt-tooltip__arrow--top {
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+}
+.tt-tooltip__arrow--top-left {
+  left: 13px;
+}
+.tt-tooltip__arrow--top-right {
+  right: 13px;
+}

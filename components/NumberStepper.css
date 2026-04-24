@@ -1,0 +1,95 @@
+.tt-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--element-height-large);
+  padding: 4px;
+  background-color: var(--surface-background);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default);
+  box-sizing: border-box;
+  font-family: Rubik, sans-serif;
+}
+
+.tt-stepper:hover {
+  border-color: var(--border-hover);
+}
+.tt-stepper:focus-within {
+  border-color: var(--border-active);
+}
+
+.tt-stepper--variant-automation {
+  background-color: var(--surface-automation-rest);
+  border-color: var(--border-automation);
+}
+.tt-stepper--variant-automation:hover {
+  border-color: var(--border-automation-hover);
+}
+.tt-stepper--variant-automation:focus-within {
+  border-color: var(--border-automation-focus);
+}
+
+.tt-stepper--disabled,
+.tt-stepper--disabled:hover,
+.tt-stepper--disabled:focus-within {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-primary);
+  cursor: not-allowed;
+}
+
+.tt-stepper__btn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background-color: var(--action-tertiary-rest);
+  border: 0;
+  border-radius: var(--radius-default);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.tt-stepper__btn:hover:not(:disabled) {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-stepper__btn:active:not(:disabled) {
+  background-color: var(--action-tertiary-active);
+}
+.tt-stepper__btn:disabled {
+  cursor: not-allowed;
+  color: var(--text-disabled);
+}
+.tt-stepper__btn > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.tt-stepper__value {
+  width: 42px;
+  min-width: 24px;
+  height: 32px;
+  padding: 0 8px;
+  margin: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.tt-stepper__value::-webkit-outer-spin-button,
+.tt-stepper__value::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.tt-stepper--disabled .tt-stepper__value {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}

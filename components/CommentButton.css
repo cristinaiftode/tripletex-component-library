@@ -1,0 +1,84 @@
+.tt-comment-button {
+  position: relative;
+  width: var(--element-height-large);
+  height: var(--element-height-large);
+  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--action-tertiary-rest);
+  border: 0;
+  border-radius: var(--radius-default);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.tt-comment-button:hover {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-comment-button:active {
+  background-color: var(--action-tertiary-active);
+}
+
+.tt-comment-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+.tt-comment-button__icon > svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Badge — blue when unread, dark when read. */
+.tt-comment-button__badge {
+  position: absolute;
+  background-color: var(--surface-info-active);
+  border: 2px solid var(--surface-default);
+  border-radius: var(--radius-full);
+  box-sizing: content-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-on-action);
+  font-family: Rubik, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+.tt-comment-button--read .tt-comment-button__badge {
+  background-color: #31384c;
+}
+
+/* Dot-only (count=1) */
+.tt-comment-button__badge:not(.tt-comment-button__badge--text) {
+  top: 5px;
+  left: 23px;
+  width: 12px;
+  height: 12px;
+}
+
+/* Pill with number (count>=2) */
+.tt-comment-button__badge--text {
+  top: 1px;
+  left: 19px;
+  min-width: 16px;
+  padding: 2px;
+  height: 16px;
+}
+/* Wider pill when showing 9+ */
+.tt-comment-button__badge--wide {
+  left: 16px;
+  min-width: 20px;
+}
+.tt-comment-button__badge-text {
+  display: inline-block;
+  min-width: 16px;
+  text-align: center;
+}
+.tt-comment-button__badge--wide .tt-comment-button__badge-text {
+  min-width: 20px;
+}

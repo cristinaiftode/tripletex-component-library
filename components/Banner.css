@@ -1,0 +1,260 @@
+.tt-banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: var(--radius-default);
+  border: 1px solid var(--border-faint);
+  background-color: var(--surface-default);
+  overflow: hidden;
+  min-width: 250px;
+  box-sizing: border-box;
+}
+
+/* Sizes — fixed widths match Figma Product Spotlight sizes */
+.tt-banner--size-small { width: 368px; }
+.tt-banner--size-medium { width: 520px; }
+.tt-banner--size-large { width: 1200px; }
+
+/* Variants — info-blue family (Info / Help / Tips / News / Get started) */
+.tt-banner--variant-info,
+.tt-banner--variant-help,
+.tt-banner--variant-tips,
+.tt-banner--variant-news,
+.tt-banner--variant-get-started {
+  background-color: var(--surface-info-rest);
+  border-color: var(--border-info);
+}
+.tt-banner--variant-info .tt-banner__chip,
+.tt-banner--variant-help .tt-banner__chip,
+.tt-banner--variant-tips .tt-banner__chip,
+.tt-banner--variant-news .tt-banner__chip,
+.tt-banner--variant-get-started .tt-banner__chip {
+  background-color: var(--surface-info-highlight);
+}
+
+.tt-banner--variant-automation {
+  background-color: var(--surface-automation-rest);
+  border-color: var(--border-automation);
+}
+.tt-banner--variant-automation .tt-banner__chip {
+  background-color: var(--surface-automation-highlight);
+}
+
+.tt-banner--variant-success {
+  background-color: var(--surface-success-rest);
+  border-color: var(--border-success);
+}
+.tt-banner--variant-success .tt-banner__chip {
+  background-color: var(--surface-success-highlight);
+}
+
+.tt-banner--variant-warning {
+  background-color: var(--surface-warning-rest);
+  border-color: var(--border-warning);
+}
+.tt-banner--variant-warning .tt-banner__chip {
+  background-color: var(--surface-warning-highlight);
+}
+
+.tt-banner--variant-error {
+  background-color: var(--surface-error-rest);
+  border-color: var(--border-error);
+}
+.tt-banner--variant-error .tt-banner__chip {
+  background-color: var(--surface-error-highlight);
+}
+
+/* Chip (Label) */
+.tt-banner__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--element-height-small);
+  padding: 0 8px 0 4px;
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  align-self: flex-start;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.tt-banner__chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--element-height-small);
+  height: var(--element-height-small);
+  color: var(--text-primary);
+}
+.tt-banner__chip-icon > svg {
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+  display: block;
+}
+.tt-banner__chip-label {
+  white-space: nowrap;
+}
+
+/* Content layout */
+.tt-banner__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.tt-banner--has-illustration .tt-banner__content {
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+.tt-banner__body-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.tt-banner__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  color: var(--text-primary);
+}
+.tt-banner__title {
+  margin: 0;
+  font-family: Rubik, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.tt-banner__body {
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* Actions */
+.tt-banner__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Illustration */
+.tt-banner__illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+/* Close button */
+.tt-banner__close {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: var(--element-height-medium);
+  height: var(--element-height-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--action-tertiary-rest);
+  border: none;
+  border-radius: var(--radius-default);
+  color: var(--text-primary);
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+}
+.tt-banner__close:hover {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-banner__close:active {
+  background-color: var(--action-tertiary-active);
+}
+.tt-banner__close > svg {
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+  display: block;
+}
+
+/* Decorative sparcle background — positioned per Figma Product Spotlight.
+   Figma spec: the product spotlight variant uses a muted gray border instead
+   of the variant-colored border, regardless of variant. */
+.tt-banner--has-decoration {
+  border-color: var(--global-grey-20);
+}
+.tt-banner__decoration {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.tt-banner__deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--surface-info-highlight);
+  opacity: 0.7;
+}
+.tt-banner--variant-automation .tt-banner__deco-circle {
+  background-color: var(--surface-automation-highlight);
+}
+.tt-banner--variant-success .tt-banner__deco-circle {
+  background-color: var(--surface-success-highlight);
+}
+.tt-banner--variant-warning .tt-banner__deco-circle {
+  background-color: var(--surface-warning-highlight);
+}
+.tt-banner--variant-error .tt-banner__deco-circle {
+  background-color: var(--surface-error-highlight);
+}
+
+.tt-banner--size-small .tt-banner__deco-circle--a {
+  right: -116px;
+  bottom: -52px;
+  width: 310px;
+  height: 310px;
+}
+.tt-banner--size-small .tt-banner__deco-circle--b {
+  left: -160px;
+  top: -160px;
+  width: 290px;
+  height: 290px;
+}
+.tt-banner--size-medium .tt-banner__deco-circle--a {
+  right: -152px;
+  bottom: 48px;
+  width: 417px;
+  height: 417px;
+}
+.tt-banner--size-medium .tt-banner__deco-circle--b {
+  left: -210px;
+  top: -180px;
+  width: 350px;
+  height: 350px;
+}
+.tt-banner--size-large .tt-banner__deco-circle--a {
+  right: -52px;
+  bottom: -425px;
+  width: 635px;
+  height: 635px;
+}
+.tt-banner--size-large .tt-banner__deco-circle--b {
+  left: -30px;
+  top: -290px;
+  width: 390px;
+  height: 390px;
+}

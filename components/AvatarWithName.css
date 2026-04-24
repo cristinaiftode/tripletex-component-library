@@ -1,0 +1,13 @@
+.tt-avatar-with-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tt-avatar-with-name__label {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  line-height: 1.4;
+  white-space: nowrap;
+}

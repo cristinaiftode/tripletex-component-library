@@ -1,0 +1,150 @@
+.tt-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Rubik, sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+.tt-toggle--disabled {
+  cursor: not-allowed;
+}
+
+.tt-toggle__control {
+  position: relative;
+  display: inline-flex;
+  padding: 1px 0;
+  flex-shrink: 0;
+}
+
+.tt-toggle__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.tt-toggle__pill {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 18px;
+  border-radius: 999px;
+  background-color: var(--surface-neutral-active);
+  transition: background-color 0.15s ease;
+  overflow: hidden;
+}
+
+.tt-toggle__handle {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background-color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition: left 0.15s ease, width 0.15s ease, height 0.15s ease, top 0.15s ease;
+}
+
+.tt-toggle__handle-icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* Hover (unchecked) */
+.tt-toggle:hover .tt-toggle__pill {
+  background-color: var(--global-grey-80);
+}
+.tt-toggle:hover .tt-toggle__handle {
+  width: 14px;
+  height: 14px;
+  left: 2px;
+  top: 2px;
+}
+
+/* Checked */
+.tt-toggle__input:checked ~ .tt-toggle__pill {
+  background-color: var(--surface-info-active);
+}
+.tt-toggle__input:checked ~ .tt-toggle__pill .tt-toggle__handle {
+  left: 21px;
+  color: var(--surface-info-active);
+}
+.tt-toggle:hover .tt-toggle__input:checked ~ .tt-toggle__pill {
+  background-color: var(--global-blue-60);
+}
+.tt-toggle:hover .tt-toggle__input:checked ~ .tt-toggle__pill .tt-toggle__handle {
+  left: 20px;
+  width: 14px;
+  height: 14px;
+  top: 2px;
+  color: var(--global-blue-60);
+}
+
+/* Focus */
+.tt-toggle__input:focus-visible ~ .tt-toggle__pill {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Disabled — overrides everything above */
+.tt-toggle--disabled .tt-toggle__input ~ .tt-toggle__pill,
+.tt-toggle--disabled:hover .tt-toggle__input ~ .tt-toggle__pill,
+.tt-toggle--disabled .tt-toggle__input:checked ~ .tt-toggle__pill,
+.tt-toggle--disabled:hover .tt-toggle__input:checked ~ .tt-toggle__pill {
+  background-color: var(--surface-disabled);
+}
+.tt-toggle--disabled .tt-toggle__input ~ .tt-toggle__pill .tt-toggle__handle,
+.tt-toggle--disabled:hover .tt-toggle__input ~ .tt-toggle__pill .tt-toggle__handle {
+  background-color: var(--global-grey-40);
+  left: 3px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  color: transparent;
+}
+.tt-toggle--disabled .tt-toggle__input:checked ~ .tt-toggle__pill .tt-toggle__handle,
+.tt-toggle--disabled:hover .tt-toggle__input:checked ~ .tt-toggle__pill .tt-toggle__handle {
+  background-color: #fff;
+  left: 21px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  color: var(--global-grey-40);
+}
+
+.tt-toggle__label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+.tt-toggle--disabled .tt-toggle__label {
+  color: var(--text-disabled);
+}
+
+/* Group */
+.tt-toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: Rubik, sans-serif;
+}
+.tt-toggle-group__label {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+.tt-toggle-group__items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

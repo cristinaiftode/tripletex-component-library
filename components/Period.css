@@ -1,0 +1,139 @@
+.tt-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: 160px;
+  height: var(--element-height-large);
+  padding: 4px 4px 4px 16px;
+  background-color: var(--surface-background);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-default);
+  box-sizing: border-box;
+  font-family: Rubik, sans-serif;
+  overflow: hidden;
+}
+
+.tt-period:hover {
+  border-color: var(--border-hover);
+}
+.tt-period:focus-within {
+  border-color: var(--border-active);
+}
+
+.tt-period--disabled,
+.tt-period--disabled:hover,
+.tt-period--disabled:focus-within {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-disabled);
+  cursor: not-allowed;
+}
+
+.tt-period__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tt-period--disabled .tt-period__value {
+  color: var(--text-disabled);
+}
+
+.tt-period__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--text-primary);
+}
+.tt-period__icon > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.tt-period__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.tt-period__btn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background-color: var(--action-tertiary-rest);
+  border: 0;
+  border-radius: var(--radius-default);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.tt-period__btn:hover:not(:disabled) {
+  background-color: var(--action-tertiary-hover);
+}
+.tt-period__btn:active:not(:disabled) {
+  background-color: var(--action-tertiary-active);
+}
+.tt-period__btn:disabled {
+  cursor: not-allowed;
+  color: var(--text-disabled);
+}
+.tt-period__btn > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Semantic variants */
+
+.tt-period--variant-automation {
+  background-color: var(--surface-automation-rest);
+  border-color: var(--border-automation);
+}
+.tt-period--variant-automation:hover {
+  border-color: var(--border-automation-hover);
+}
+.tt-period--variant-automation:focus-within {
+  border-color: var(--border-automation-focus);
+}
+.tt-period--variant-automation .tt-period__icon {
+  color: var(--border-automation-focus);
+}
+
+.tt-period--variant-warning {
+  background-color: var(--surface-warning-rest);
+  border-color: var(--border-warning);
+}
+.tt-period--variant-warning:hover {
+  border-color: var(--border-warning-hover);
+}
+.tt-period--variant-warning:focus-within {
+  border-color: var(--border-warning-focus);
+}
+.tt-period--variant-warning .tt-period__icon {
+  color: var(--border-warning-focus);
+}
+
+.tt-period--variant-error {
+  background-color: var(--surface-error-rest);
+  border-color: var(--border-error);
+}
+.tt-period--variant-error:hover {
+  border-color: var(--border-error-hover);
+}
+.tt-period--variant-error:focus-within {
+  border-color: var(--border-error-focus);
+}
+.tt-period--variant-error .tt-period__icon {
+  color: var(--border-error-focus);
+}
