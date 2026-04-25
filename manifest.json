@@ -1,0 +1,1527 @@
+{
+  "$schema": "https://ai-component-manifest.org/v1",
+  "$description": "Component manifest for the Tripletex Atlas component library — designed to be consumed by AI tools (Claude Code, Claude.ai, Figma Make, v0, Lovable, etc.) for prototyping. Pair with tokens/*.css and CLAUDE.md for full context.",
+  "library": {
+    "name": "Tripletex Atlas Library",
+    "package": "tripletex-component-library",
+    "repo": "https://github.com/cristinaiftode/tripletex-component-library",
+    "framework": "React 18 + TypeScript (Vite)",
+    "styling": "css-variables",
+    "figmaFileKey": "4WZWeGkM9pNR8Y0c3X8z3H",
+    "figmaLibraryKey": "lk-7c7e58e347fc69a0e6119bc6175e28d8a30a1a6f84acaf098fd9627b3af1c5631355e19621e577ed7259c6ccab4284e2936dc4c1ace7da2316045749b7d881bf",
+    "tokenFiles": ["tokens/colors.css", "tokens/spacing.css", "tokens/typography.css", "tokens/index.css"],
+    "barrelExport": "components/index.ts",
+    "fontFamily": "Rubik, sans-serif",
+    "baseFontSize": "14px",
+    "baseLineHeight": 1.4,
+    "baseFontWeight": 400
+  },
+  "tokens": {
+    "colors": {
+      "global": {
+        "white": "#FFFFFF",
+        "background": "#F7F8FC",
+        "contrast": "#010A59",
+        "transparent": "rgba(255,255,255,0)"
+      },
+      "grey": {
+        "05": "#F4F5F6", "10": "#E9EAED", "20": "#D5D7DB", "40": "#ABAFB7",
+        "60": "#818794", "71": "#6B7280", "80": "#51596A", "100": "#2E384D", "120": "#0F131A"
+      },
+      "blue": {
+        "05": "#F2F5FF", "10": "#E6EBFF", "20": "#CED9FE", "40": "#9DB3FD",
+        "60": "#6C8DFC", "80": "#3B67FB", "100": "#0A41FA", "120": "#0834C7", "130": "#002992"
+      },
+      "turquoise": {
+        "05": "#F4FAFA", "10": "#E8F5F5", "20": "#D4EBEB", "40": "#ABD6D6",
+        "60": "#80C1C2", "80": "#57ADAE", "100": "#30999B", "120": "#206768"
+      },
+      "green": {
+        "05": "#F4FBF4", "10": "#EAF7E9", "20": "#D6EED5", "40": "#ADDEAB",
+        "60": "#84CD81", "80": "#5BBC57", "100": "#33AC2E", "120": "#247820"
+      },
+      "red": {
+        "05": "#FEF4F5", "10": "#FDEAEC", "20": "#FBD6DA", "40": "#F6AEB4",
+        "60": "#F1868F", "80": "#EC5E6A", "100": "#E83645", "120": "#B52A36"
+      },
+      "yellow": {
+        "05": "#FFFCF5", "10": "#FFF9EA", "20": "#FEF3D7", "40": "#FCE6AF",
+        "60": "#FADA87", "80": "#F8CD5F", "100": "#F7C137", "120": "#C4992C"
+      },
+      "purple": {
+        "05": "#F9F6FF", "10": "#F3EEFF", "20": "#E8DDFF", "40": "#D1BBFF",
+        "60": "#BA98FF", "80": "#A376FF", "100": "#8C54FF", "120": "#7043CC"
+      },
+      "logo": {
+        "navy": "#010A59", "teal": "#5BB3C0", "green": "#1AB960"
+      },
+      "sparcle": {
+        "blue": "#6CBCE6", "lavender": "#CBC8FB", "sky": "#CCE9FD", "mint": "#CFF8E6",
+        "lime": "#DDF8D0", "yellow": "#EFF9D0", "cream": "#F7F1D0", "peach": "#F3DCCE", "pink": "#F0C9CC"
+      },
+      "illustration": {
+        "blue": "#0A41FA", "blueMid": "#6C90FC", "blueLight": "#90B3FD",
+        "green": "#1AB960", "greenLight": "#AAE3C4",
+        "pink": "#F6AED5", "purpleLight": "#CCC7FF"
+      },
+      "semantic": {
+        "text": {
+          "primary": "var(--text-primary) / #2E384D",
+          "muted": "var(--text-muted) / #6B7280",
+          "disabled": "var(--text-disabled) / #51596A",
+          "placeholder": "var(--text-placeholder) / #ABAFB7",
+          "link": "var(--text-link) / #0A41FA",
+          "active": "var(--text-active) / #0A41FA",
+          "action": "var(--text-action) / #0A41FA",
+          "onAction": "var(--text-on-action) / #FFFFFF",
+          "footerPrimary": "#F2F5FF",
+          "footerLink": "#9DB3FD"
+        },
+        "surface": {
+          "background": "var(--surface-background) / #F7F8FC",
+          "default": "var(--surface-default) / #FFFFFF",
+          "nav": "var(--surface-nav) / #D4EBEB",
+          "disabled": "var(--surface-disabled) / #E9EAED",
+          "tooltip": "var(--surface-tooltip) / #2E384D",
+          "footer": "var(--surface-footer) / #010A59",
+          "modal": "var(--surface-modal) / rgba(46,56,77,0.3)",
+          "info": { "rest": "#F2F5FF", "hover": "#E6EBFF", "highlight": "#CED9FE", "active": "#0A41FA" },
+          "warning": { "rest": "#FFFCF5", "hover": "#FFF9EA", "highlight": "#FEF3D7", "active": "#F7C137" },
+          "error": { "rest": "#FEF4F5", "hover": "#FDEAEC", "highlight": "#FBD6DA", "active": "#E83645" },
+          "success": { "rest": "#F4FBF4", "hover": "#EAF7E9", "highlight": "#D6EED5", "active": "#33AC2E" },
+          "automation": { "rest": "#F9F6FF", "hover": "#F3EEFF", "highlight": "#E8DDFF", "active": "#7043CC" }
+        },
+        "border": {
+          "primary": "#818794", "secondary": "#ABAFB7", "muted": "#D5D7DB", "faint": "#E9EAED",
+          "disabled": "#ABAFB7", "hover": "#9DB3FD", "active": "#0A41FA",
+          "info": "#6C8DFC", "warning": "#F7C137", "error": "#EC5E6A",
+          "success": "#5BBC57", "automation": "#A376FF",
+          "underline": "#E6EBFF", "focus": "#6C8DFC"
+        },
+        "action": {
+          "primary": { "rest": "#0A41FA", "hover": "#0834C7", "active": "#002992" },
+          "secondary": { "rest": "#E6EBFF", "hover": "#CED9FE", "active": "#9DB3FD" },
+          "tertiary": { "rest": "transparent", "hover": "#CED9FE", "active": "#9DB3FD" },
+          "neutral": { "rest": "#F7F8FC", "hover": "#CED9FE", "active": "#9DB3FD" }
+        }
+      }
+    },
+    "spacing": {
+      "elementHeight": { "tiny": "20px", "small": "24px", "medium": "32px", "large": "40px" },
+      "radius": { "default": "4px", "full": "99999px" },
+      "iconSize": { "small": "20px", "medium": "24px" }
+    },
+    "typography": {
+      "fontFamily": "Rubik, sans-serif",
+      "fontSizeBase": "14px",
+      "fontWeightRegular": 400,
+      "lineHeightBase": 1.4,
+      "letterSpacingBase": 0
+    }
+  },
+  "components": {
+    "Button": {
+      "description": "Primary CTA component for triggering actions with configurable variants and sizes.",
+      "import": "import { Button } from \"./components\";",
+      "props": {
+        "variant": { "type": "enum", "values": ["primary", "secondary", "tertiary", "icon"], "default": "primary", "description": "Visual style: primary=blue bg, secondary=light blue, tertiary=transparent, icon=icon only" },
+        "size": { "type": "enum", "values": ["medium", "small"], "default": "medium", "description": "Button height: medium=40px, small=32px" },
+        "icon": { "type": "ReactNode", "description": "Icon before/instead of text" },
+        "children": { "type": "ReactNode", "description": "Button label" },
+        "htmlType": { "type": "enum", "values": ["button", "submit", "reset"], "default": "button" },
+        "disabled": { "type": "boolean", "default": false },
+        "onClick": { "type": "function", "description": "Click handler" }
+      },
+      "colorMapping": {
+        "primary": { "bg": "var(--action-primary-rest) / #0A41FA", "hoverBg": "var(--action-primary-hover) / #0834C7", "activeBg": "var(--action-primary-active) / #002992", "text": "var(--text-on-action) / #FFFFFF" },
+        "secondary": { "bg": "var(--action-secondary-rest) / #E6EBFF", "hoverBg": "var(--action-secondary-hover) / #CED9FE", "activeBg": "var(--action-secondary-active) / #9DB3FD", "text": "var(--text-action) / #0A41FA" },
+        "tertiary": { "bg": "transparent", "hoverBg": "var(--action-tertiary-hover) / #CED9FE", "activeBg": "var(--action-tertiary-active) / #9DB3FD", "text": "var(--text-action) / #0A41FA" },
+        "disabled": { "bg": "var(--surface-disabled) / #E9EAED", "text": "var(--text-disabled) / #51596A" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px (medium) / 32px (small)", "paddingX": "12px", "paddingY": "0", "gap": "8px", "iconSize": "20px" },
+        "border": { "width": "0" },
+        "radius": "4px",
+        "typography": { "fontFamily": "Rubik, sans-serif", "fontSize": "14px", "lineHeight": 1.4, "fontWeight": 400 },
+        "focusRing": { "width": "2px", "color": "var(--border-focus) / #6C8DFC", "offset": "-4px" }
+      },
+      "usage": "<Button variant=\"primary\" onClick={handleClick}>Save</Button>"
+    },
+    "ActionButton": {
+      "description": "Button with automatic state indicators (loading, success, error) that manages visual feedback during async actions.",
+      "import": "import { ActionButton } from \"./components\";",
+      "props": {
+        "variant": { "type": "enum", "values": ["primary", "secondary", "tertiary", "icon"], "default": "primary" },
+        "size": { "type": "enum", "values": ["medium", "small"], "default": "medium" },
+        "status": { "type": "enum", "values": ["default", "loading", "success", "error"], "default": "default", "description": "Action state: shows spinner, checkmark, or warning icon" },
+        "icon": { "type": "ReactNode", "description": "Custom icon (overridden by status icon when status != default)" },
+        "children": { "type": "ReactNode" },
+        "disabled": { "type": "boolean", "default": false },
+        "onClick": { "type": "function", "description": "Click handler; prevented when loading" }
+      },
+      "colorMapping": {
+        "success": { "bg": "var(--surface-success-active) / #33AC2E", "text": "#FFFFFF" },
+        "error": { "bg": "var(--surface-error-active) / #E83645", "text": "#FFFFFF" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px (medium) / 32px (small)" },
+        "radius": "4px",
+        "states": { "loading": "cursor: progress; spinner animation: 0.8s linear infinite" }
+      },
+      "usage": "<ActionButton status=\"loading\" onClick={handleSubmit}>Submit</ActionButton>"
+    },
+    "Alert": {
+      "description": "Dismissible inline notification with semantic color variants (info/success/warning/error/automation).",
+      "import": "import { Alert } from \"./components\";",
+      "props": {
+        "variant": { "type": "enum", "values": ["info", "success", "warning", "error", "automation"], "default": "info" },
+        "size": { "type": "enum", "values": ["desktop", "mobile"], "default": "desktop", "description": "desktop=horizontal, mobile=stacked" },
+        "onClose": { "type": "function", "description": "If omitted, close button not shown" },
+        "children": { "type": "ReactNode" },
+        "role": { "type": "enum", "values": ["status", "alert"], "description": "ARIA role; auto-set to alert for error/warning" }
+      },
+      "colorMapping": {
+        "info": { "bg": "#F2F5FF", "border": "#6C8DFC", "icon": "#2E384D" },
+        "success": { "bg": "#F4FBF4", "border": "#5BBC57" },
+        "warning": { "bg": "#FFFCF5", "border": "#F7C137" },
+        "error": { "bg": "#FEF4F5", "border": "#EC5E6A" },
+        "automation": { "bg": "#F9F6FF", "border": "#A376FF" }
+      },
+      "styling": {
+        "dimensions": { "paddingDesktop": "12px 24px 12px 12px", "paddingMobile": "8px 8px 12px 12px", "gap": "12px (desktop) / 4px (mobile)" },
+        "border": { "width": "1px", "style": "solid" },
+        "radius": "4px",
+        "typography": { "fontSize": "14px", "lineHeight": 1.4 }
+      },
+      "usage": "<Alert variant=\"success\" onClose={handleClose}>Saved successfully</Alert>"
+    },
+    "Avatar": {
+      "description": "Circular profile image or initials badge; supports an online status indicator.",
+      "import": "import { Avatar } from \"./components\";",
+      "props": {
+        "src": { "type": "string", "description": "Image URL; if omitted, shows initials" },
+        "alt": { "type": "string", "default": "" },
+        "initials": { "type": "string", "description": "1-2 character initials" },
+        "size": { "type": "enum", "values": ["tiny", "small", "medium", "large"], "default": "small", "description": "Diameter: 20/24/32/40px" },
+        "online": { "type": "boolean", "default": false, "description": "Shows green status dot" }
+      },
+      "colorMapping": {
+        "initials": { "bg": "var(--surface-nav) / #D4EBEB", "text": "var(--text-primary) / #2E384D" },
+        "onlineStatus": { "bg": "var(--surface-success-active) / #33AC2E" }
+      },
+      "styling": {
+        "dimensions": { "width": "20/24/32/40px (tiny/small/medium/large)", "height": "matches width" },
+        "radius": "99999px",
+        "typography": { "fontSize": "10px (tiny) / 12px (small) / 16px (medium/large)" }
+      },
+      "usage": "<Avatar src=\"https://...\" size=\"medium\" online={true} />"
+    },
+    "AvatarGroup": {
+      "description": "Stacked or spaced layout of multiple avatars with overflow indicator showing count of hidden users.",
+      "import": "import { AvatarGroup } from \"./components\";",
+      "props": {
+        "users": { "type": "array", "description": "Array of {src?, initials?, alt?, online?}" },
+        "max": { "type": "number", "default": 3 },
+        "size": { "type": "enum", "values": ["tiny", "small", "medium", "large"], "default": "small" },
+        "showStatus": { "type": "boolean", "default": false, "description": "Spaced layout if true (shows online dots), stacked otherwise" }
+      },
+      "styling": {
+        "dimensions": { "gap": "2px (spaced) / -8px margin (stacked)" },
+        "border": { "width": "2px", "color": "var(--surface-default) / #FFFFFF" }
+      },
+      "usage": "<AvatarGroup users={[{initials: 'AB'}, {initials: 'CD'}]} max={3} />"
+    },
+    "AvatarWithName": {
+      "description": "Avatar paired with user name label, typically used in presence indicators or author bylines.",
+      "import": "import { AvatarWithName } from \"./components\";",
+      "props": {
+        "name": { "type": "string", "required": true },
+        "src": { "type": "string" },
+        "initials": { "type": "string", "description": "Defaults to first 2 chars of name" },
+        "online": { "type": "boolean" },
+        "showName": { "type": "boolean", "default": true },
+        "size": { "type": "enum", "values": ["tiny", "small", "medium", "large"], "default": "small" }
+      },
+      "styling": {
+        "dimensions": { "gap": "8px", "display": "inline-flex" },
+        "typography": { "fontSize": "14px", "lineHeight": 1.4 }
+      },
+      "usage": "<AvatarWithName name=\"John Doe\" initials=\"JD\" online={true} />"
+    },
+    "Banner": {
+      "description": "Prominent hero message with chip label, title, body, optional illustration, action buttons, decorative background, and close button.",
+      "import": "import { Banner } from \"./components\";",
+      "props": {
+        "variant": { "type": "enum", "values": ["info", "help", "tips", "news", "get-started", "automation", "success", "warning", "error"], "default": "info" },
+        "size": { "type": "enum", "values": ["small", "medium", "large"], "default": "medium", "description": "Fixed widths: 368/520/1200px" },
+        "label": { "type": "string", "description": "Chip label; defaults to variant name" },
+        "title": { "type": "string" },
+        "children": { "type": "ReactNode", "description": "Body text/content" },
+        "primaryAction": { "type": "object", "description": "{label, onClick?}" },
+        "secondaryAction": { "type": "object", "description": "{label, onClick?}" },
+        "illustration": { "type": "ReactNode", "description": "Right-aligned illustration" },
+        "decorativeBackground": { "type": "boolean", "default": false, "description": "Animated background circles" },
+        "onClose": { "type": "function" }
+      },
+      "colorMapping": {
+        "info": { "bg": "#F2F5FF", "chipBg": "#CED9FE", "border": "#6C8DFC" },
+        "automation": { "bg": "#F9F6FF", "chipBg": "#E8DDFF", "border": "#A376FF" },
+        "success": { "bg": "#F4FBF4", "chipBg": "#D6EED5", "border": "#5BBC57" },
+        "warning": { "bg": "#FFFCF5", "chipBg": "#FEF3D7", "border": "#F7C137" },
+        "error": { "bg": "#FEF4F5", "chipBg": "#FBD6DA", "border": "#EC5E6A" }
+      },
+      "styling": {
+        "dimensions": { "width": "368/520/1200px (small/medium/large)", "padding": "24px", "gap": "12px" },
+        "border": { "width": "1px" },
+        "radius": "4px",
+        "typography": { "titleSize": "16px", "titleWeight": 500, "bodySize": "14px" }
+      },
+      "usage": "<Banner variant=\"success\" title=\"Saved\" primaryAction={{label: 'View'}} />"
+    },
+    "Chip": {
+      "description": "Compact label or filter token with optional icon/avatar; supports static, clickable, and removable variants.",
+      "import": "import { Chip } from \"./components\";",
+      "props": {
+        "label": { "type": "string", "required": true },
+        "size": { "type": "enum", "values": ["small", "medium", "large"], "default": "medium", "description": "Height: 24/32/40px" },
+        "variant": { "type": "enum", "values": ["static", "interactive", "removable", "interactive-removable"], "default": "static" },
+        "icon": { "type": "ReactNode" },
+        "avatar": { "type": "ReactNode", "description": "Takes precedence over icon" },
+        "onClick": { "type": "function" },
+        "onRemove": { "type": "function" },
+        "disabled": { "type": "boolean", "default": false }
+      },
+      "colorMapping": {
+        "static": { "bg": "#F7F8FC", "border": "#E9EAED", "text": "#2E384D" },
+        "interactiveHover": { "bg": "#CED9FE", "border": "#6C8DFC" },
+        "disabled": { "bg": "#E9EAED", "border": "#ABAFB7", "text": "#51596A" }
+      },
+      "styling": {
+        "dimensions": { "height": "24/32/40px (small/medium/large)", "paddingX": "8px", "gap": "4px" },
+        "border": { "width": "1px" },
+        "radius": "99999px",
+        "typography": { "fontSize": "14px", "fontWeight": 400 }
+      },
+      "usage": "<Chip label=\"React\" variant=\"removable\" onRemove={handleRemove} />"
+    },
+    "MessageButton": {
+      "description": "Icon button with badge showing unread message count; dot for count=1, pill for count>=2, '9+' for count>9.",
+      "import": "import { MessageButton } from \"./components\";",
+      "props": {
+        "count": { "type": "number", "default": 0, "description": "0 hides badge" },
+        "onClick": { "type": "function" },
+        "aria-label": { "type": "string", "default": "Messages" }
+      },
+      "colorMapping": {
+        "button": { "bg": "transparent", "hoverBg": "#CED9FE", "text": "#2E384D" },
+        "badge": { "bg": "#0A41FA", "text": "#FFFFFF", "border": "#FFFFFF" }
+      },
+      "styling": {
+        "dimensions": { "width": "40px", "height": "40px", "padding": "10px", "badgeDotSize": "12px", "badgePillHeight": "16px" },
+        "radius": "4px",
+        "badge": { "fontSize": "12px", "fontWeight": 500 }
+      },
+      "usage": "<MessageButton count={3} onClick={openMessages} />"
+    },
+    "CommentButton": {
+      "description": "Icon button with badge for unread comments; toggles between outline and filled icon based on read state.",
+      "import": "import { CommentButton } from \"./components\";",
+      "props": {
+        "count": { "type": "number", "default": 0 },
+        "read": { "type": "boolean", "default": false, "description": "If true, badge dark instead of blue; icon switches to filled" },
+        "onClick": { "type": "function" },
+        "aria-label": { "type": "string", "default": "Comments" }
+      },
+      "colorMapping": {
+        "badge": { "unreadBg": "#0A41FA", "readBg": "#31384C", "text": "#FFFFFF" }
+      },
+      "styling": {
+        "dimensions": { "width": "40px", "height": "40px", "padding": "10px" },
+        "radius": "4px"
+      },
+      "usage": "<CommentButton count={2} read={false} onClick={openComments} />"
+    },
+    "CommentView": {
+      "description": "Dedicated panel for displaying, reading, and composing comments with states for empty, loading, comments, and locked.",
+      "import": "import { CommentView } from \"./components\";",
+      "props": {
+        "state": { "type": "enum", "values": ["empty", "loading", "comments", "locked"], "default": "empty" },
+        "comments": { "type": "array", "description": "Array of {id?, authorName, authorAvatar?, timestamp, body, unread?}" },
+        "value": { "type": "string", "default": "" },
+        "onChange": { "type": "function" },
+        "onAddComment": { "type": "function" },
+        "onClose": { "type": "function" },
+        "maxLength": { "type": "number", "default": 250 },
+        "showMaxLength": { "type": "boolean", "default": true }
+      },
+      "styling": {
+        "dimensions": { "width": "640px", "height": "520px", "padding": "32px", "gap": "24px" },
+        "border": { "width": "1px" },
+        "radius": "4px",
+        "titleSize": "20px",
+        "textareaHeight": "90px",
+        "skeletonAnimation": "shimmer 1.4s ease-in-out infinite"
+      },
+      "usage": "<CommentView state=\"comments\" comments={msgs} value={input} onChange={setInput} onAddComment={add} />"
+    },
+    "ContentSwitcher": {
+      "description": "Single-selection segmented control; exactly one option is always selected.",
+      "import": "import { ContentSwitcher } from \"./components\";",
+      "props": {
+        "options": { "type": "array", "required": true, "description": "Array of {value, label, disabled?}" },
+        "value": { "type": "string", "description": "Controlled" },
+        "defaultValue": { "type": "string", "description": "Defaults to first option" },
+        "onChange": { "type": "function" },
+        "aria-label": { "type": "string", "default": "Content switcher" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#F7F8FC", "border": "#D5D7DB", "text": "#2E384D" },
+        "selected": { "border": "#0A41FA", "text": "#0A41FA", "fontWeight": 500 },
+        "hover": { "bg": "#CED9FE" },
+        "disabled": { "bg": "#E9EAED", "border": "#ABAFB7", "text": "#51596A" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "paddingX": "12px", "paddingY": "10px" },
+        "border": { "width": "1px", "style": "shared (segments merge borders)" },
+        "radius": "4px (left/right segments only)",
+        "typography": { "fontSize": "14px", "fontWeight": 400 }
+      },
+      "usage": "<ContentSwitcher options={[{value: 'a', label: 'Tab A'}, {value: 'b', label: 'Tab B'}]} value={selected} onChange={setSelected} />"
+    },
+    "MultiContentSwitcher": {
+      "description": "Multi-selection segmented control allowing zero or more options to be active simultaneously.",
+      "import": "import { MultiContentSwitcher } from \"./components\";",
+      "props": {
+        "options": { "type": "array", "required": true },
+        "value": { "type": "array" },
+        "defaultValue": { "type": "array", "description": "Defaults to []" },
+        "onChange": { "type": "function" },
+        "aria-label": { "type": "string", "default": "Content switcher" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#F7F8FC", "border": "#D5D7DB", "text": "#2E384D" },
+        "selected": { "border": "#0A41FA", "text": "#0A41FA", "fontWeight": 500 },
+        "hover": { "bg": "#CED9FE" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "paddingX": "12px", "paddingY": "10px", "gap": "4px" },
+        "border": { "width": "1px", "style": "individual segments" },
+        "radius": "4px"
+      },
+      "usage": "<MultiContentSwitcher options={opts} value={selected} onChange={setSelected} />"
+    },
+    "Label": {
+      "description": "Inline semantic label with icon and background color; used for tagging content with predefined categories.",
+      "import": "import { Label } from \"./components\";",
+      "props": {
+        "category": { "type": "enum", "values": ["info", "help", "tips", "news", "get-started", "automated", "done", "attention", "error"], "default": "info" }
+      },
+      "colorMapping": {
+        "info": { "bg": "#CED9FE", "text": "#2E384D" },
+        "help": { "bg": "#CED9FE" },
+        "tips": { "bg": "#CED9FE" },
+        "news": { "bg": "#CED9FE" },
+        "get-started": { "bg": "#CED9FE" },
+        "automated": { "bg": "#E8DDFF" },
+        "done": { "bg": "#D6EED5" },
+        "attention": { "bg": "#FEF3D7" },
+        "error": { "bg": "#FBD6DA" }
+      },
+      "styling": {
+        "dimensions": { "height": "24px", "paddingX": "8px (label) / 4px (icon)", "iconSize": "20px" },
+        "radius": "99999px",
+        "typography": { "fontSize": "14px", "fontWeight": 400, "lineHeight": 1.4, "whiteSpace": "nowrap" }
+      },
+      "usage": "<Label category=\"done\" />"
+    },
+    "Input": {
+      "description": "Text input field with optional icon affixes and semantic variants for form data entry.",
+      "import": "import { Input } from \"./components\";",
+      "props": {
+        "type": { "type": "enum", "values": ["text", "number", "currency", "percentage", "date", "search", "password"], "default": "text" },
+        "variant": { "type": "enum", "values": ["default", "info", "automation", "warning", "error"], "default": "default" },
+        "value": { "type": "string" },
+        "defaultValue": { "type": "string" },
+        "onChange": { "type": "function" },
+        "placeholder": { "type": "string" },
+        "disabled": { "type": "boolean", "default": false },
+        "currencySymbol": { "type": "string", "default": "kr", "description": "For type=currency" },
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "aria-label": { "type": "string" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#F7F8FC", "border": "#818794", "text": "#2E384D", "hoverBorder": "#9DB3FD", "activeBorder": "#0A41FA" },
+        "automation": { "bg": "#F9F6FF", "border": "#A376FF", "iconColor": "#7043CC" },
+        "warning": { "bg": "#FFFCF5", "border": "#F7C137", "iconColor": "#C4992C" },
+        "error": { "bg": "#FEF4F5", "border": "#EC5E6A", "iconColor": "#B52A36" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "minWidth": "160px", "paddingX": "16px", "paddingY": "10px", "gap": "8px" },
+        "border": { "width": "1px", "style": "solid" },
+        "radius": "4px",
+        "typography": { "fontFamily": "Rubik, sans-serif", "fontSize": "14px", "lineHeight": 1.4, "fontWeight": 400 },
+        "states": { "disabled": "background #E9EAED, text #51596A, cursor not-allowed" }
+      },
+      "usage": "<Input type=\"text\" placeholder=\"Enter text\" />"
+    },
+    "NumberStepper": {
+      "description": "Numeric input with increment/decrement buttons for controlled value adjustment.",
+      "import": "import { NumberStepper } from \"./components\";",
+      "props": {
+        "value": { "type": "number" },
+        "defaultValue": { "type": "number", "default": 1 },
+        "onChange": { "type": "function" },
+        "min": { "type": "number", "default": "Number.MIN_SAFE_INTEGER" },
+        "max": { "type": "number", "default": "Number.MAX_SAFE_INTEGER" },
+        "step": { "type": "number", "default": 1 },
+        "variant": { "type": "enum", "values": ["default", "automation"], "default": "default" },
+        "disabled": { "type": "boolean", "default": false },
+        "aria-label": { "type": "string", "default": "Number stepper" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#F7F8FC", "border": "#818794", "buttonBg": "transparent", "buttonHover": "#CED9FE" },
+        "automation": { "bg": "#F9F6FF", "border": "#A376FF" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "padding": "4px", "gap": "4px", "buttonSize": "32px", "inputWidth": "42px", "iconSize": "20px" },
+        "border": { "width": "1px", "style": "solid" },
+        "radius": "4px"
+      },
+      "usage": "<NumberStepper value={5} onChange={setVal} min={0} max={100} />"
+    },
+    "Textarea": {
+      "description": "Multi-line text input with optional resize control and semantic variants.",
+      "import": "import { Textarea } from \"./components\";",
+      "props": {
+        "variant": { "type": "enum", "values": ["default", "info", "automation", "warning", "error"], "default": "default" },
+        "value": { "type": "string" },
+        "defaultValue": { "type": "string" },
+        "onChange": { "type": "function" },
+        "placeholder": { "type": "string" },
+        "disabled": { "type": "boolean", "default": false },
+        "resizable": { "type": "boolean", "default": true },
+        "rows": { "type": "number" },
+        "id": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#F7F8FC", "border": "#818794" },
+        "automation": { "bg": "#F9F6FF", "border": "#A376FF" },
+        "warning": { "bg": "#FFFCF5", "border": "#F7C137" },
+        "error": { "bg": "#FEF4F5", "border": "#EC5E6A" }
+      },
+      "styling": {
+        "dimensions": { "width": "240px", "height": "80px", "paddingX": "16px", "paddingY": "10px" },
+        "border": { "width": "1px", "style": "solid" },
+        "radius": "4px"
+      },
+      "usage": "<Textarea placeholder=\"Enter description\" rows={4} />"
+    },
+    "Select": {
+      "description": "Dropdown select field with options list and semantic variant support.",
+      "import": "import { Select } from \"./components\";",
+      "props": {
+        "options": { "type": "array", "required": true, "description": "Array of {value, label, disabled?}" },
+        "variant": { "type": "enum", "values": ["default", "info", "automation", "warning", "error"], "default": "default" },
+        "value": { "type": "string" },
+        "defaultValue": { "type": "string" },
+        "onChange": { "type": "function" },
+        "placeholder": { "type": "string", "default": "Placeholder" },
+        "disabled": { "type": "boolean", "default": false }
+      },
+      "colorMapping": {
+        "default": { "bg": "#F7F8FC", "border": "#818794", "text": "#2E384D" },
+        "automation": { "bg": "#F9F6FF", "border": "#A376FF" },
+        "error": { "bg": "#FEF4F5", "border": "#EC5E6A" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "width": "160px", "paddingX": "16px 38px", "paddingY": "10px" },
+        "border": { "width": "1px", "style": "solid" },
+        "radius": "4px"
+      },
+      "usage": "<Select options={[{value: 'a', label: 'Option A'}]} onChange={setVal} />"
+    },
+    "Period": {
+      "description": "Period display with prev/next navigation buttons for date range or time period selection.",
+      "import": "import { Period } from \"./components\";",
+      "props": {
+        "value": { "type": "string", "required": true, "description": "Current period text" },
+        "variant": { "type": "enum", "values": ["default", "info", "automation", "warning", "error"], "default": "default" },
+        "onPrev": { "type": "function" },
+        "onNext": { "type": "function" },
+        "disabled": { "type": "boolean", "default": false },
+        "disablePrev": { "type": "boolean", "default": false },
+        "disableNext": { "type": "boolean", "default": false }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "width": "160px", "paddingX": "16px 4px", "paddingY": "4px", "gap": "4px", "buttonSize": "32px" },
+        "border": { "width": "1px", "style": "solid" },
+        "radius": "4px"
+      },
+      "usage": "<Period value=\"Q1 2024\" onPrev={() => {}} onNext={() => {}} />"
+    },
+    "InputGroup": {
+      "description": "Wrapper combining label, control input, and optional helper text for form field grouping.",
+      "import": "import { InputGroup } from \"./components\";",
+      "props": {
+        "label": { "type": "ReactNode", "required": true },
+        "required": { "type": "boolean", "default": false, "description": "Adds asterisk indicator" },
+        "variant": { "type": "enum", "values": ["default", "info", "warning", "error"], "default": "default" },
+        "helperText": { "type": "ReactNode" },
+        "htmlFor": { "type": "string" },
+        "children": { "type": "ReactNode", "required": true }
+      },
+      "styling": {
+        "dimensions": { "width": "240px", "gap": "8px" }
+      },
+      "usage": "<InputGroup label=\"Email\" required htmlFor=\"email\"><Input id=\"email\" /></InputGroup>"
+    },
+    "DecorativeIcon": {
+      "description": "Circular container for displaying an icon with semantic background color and sizing.",
+      "import": "import { DecorativeIcon } from \"./components\";",
+      "props": {
+        "icon": { "type": "ReactNode", "required": true },
+        "size": { "type": "enum", "values": ["small", "medium", "large"], "default": "small" },
+        "aria-label": { "type": "string" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#D4EBEB", "text": "#2E384D" }
+      },
+      "styling": {
+        "dimensions": { "small": "24px", "medium": "32px", "large": "40px", "iconSizeSmallMedium": "20px", "iconSizeLarge": "24px" },
+        "border": { "radius": "99999px" }
+      },
+      "usage": "<DecorativeIcon icon={<CheckIcon />} size=\"medium\" />"
+    },
+    "Checkbox": {
+      "description": "Single checkbox input with optional label and indeterminate state support.",
+      "import": "import { Checkbox } from \"./components\";",
+      "props": {
+        "checked": { "type": "boolean" },
+        "defaultChecked": { "type": "boolean" },
+        "indeterminate": { "type": "boolean", "default": false },
+        "disabled": { "type": "boolean", "default": false },
+        "label": { "type": "ReactNode" },
+        "onChange": { "type": "function" },
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "colorMapping": {
+        "unchecked": { "bg": "#F7F8FC", "border": "#818794" },
+        "checked": { "bg": "#0A41FA", "border": "#0A41FA", "checkColor": "#FFFFFF" },
+        "disabled": { "bg": "#E9EAED", "border": "#818794" }
+      },
+      "styling": {
+        "dimensions": { "boxSize": "18px", "padding": "1px", "gap": "8px" },
+        "border": { "width": "1px", "style": "solid", "radius": "2px" },
+        "focusRing": { "width": "2px", "offset": "2px", "color": "#6C8DFC" }
+      },
+      "usage": "<Checkbox label=\"I agree\" onChange={(v) => console.log(v)} />"
+    },
+    "CheckboxGroup": {
+      "description": "Group container for multiple checkbox inputs with vertical or horizontal layout.",
+      "import": "import { CheckboxGroup } from \"./components\";",
+      "props": {
+        "label": { "type": "ReactNode" },
+        "layoutDirection": { "type": "enum", "values": ["vertical", "horizontal"], "default": "vertical" },
+        "children": { "type": "ReactNode", "required": true }
+      },
+      "styling": {
+        "dimensions": { "gap": "8px (vertical) / 16px (horizontal)" }
+      },
+      "usage": "<CheckboxGroup label=\"Choices\"><Checkbox label=\"A\" /><Checkbox label=\"B\" /></CheckboxGroup>"
+    },
+    "Radio": {
+      "description": "Single radio input with optional label for exclusive selection within a group.",
+      "import": "import { Radio } from \"./components\";",
+      "props": {
+        "checked": { "type": "boolean" },
+        "defaultChecked": { "type": "boolean" },
+        "disabled": { "type": "boolean", "default": false },
+        "label": { "type": "ReactNode" },
+        "onChange": { "type": "function" },
+        "id": { "type": "string" },
+        "name": { "type": "string", "description": "Groups related radios" },
+        "value": { "type": "string" }
+      },
+      "colorMapping": {
+        "unchecked": { "bg": "#F7F8FC", "border": "#818794" },
+        "checked": { "border": "#0A41FA", "dotColor": "#0A41FA" },
+        "disabled": { "bg": "#E9EAED", "border": "#ABAFB7" }
+      },
+      "styling": {
+        "dimensions": { "circleSize": "18px", "dotSize": "10px", "padding": "1px", "gap": "8px" },
+        "border": { "width": "1px", "style": "solid", "radius": "999px" },
+        "focusRing": { "width": "2px", "offset": "2px", "color": "#6C8DFC" }
+      },
+      "usage": "<Radio name=\"option\" value=\"a\" label=\"Option A\" />"
+    },
+    "RadioGroup": {
+      "description": "Group container managing multiple radio inputs with automatic exclusive selection and layout options.",
+      "import": "import { RadioGroup } from \"./components\";",
+      "props": {
+        "name": { "type": "string", "required": true },
+        "label": { "type": "ReactNode" },
+        "options": { "type": "array", "description": "Array of {value, label, disabled?} for auto-generation" },
+        "value": { "type": "string" },
+        "defaultValue": { "type": "string" },
+        "onChange": { "type": "function" },
+        "layoutDirection": { "type": "enum", "values": ["vertical", "horizontal"], "default": "vertical" },
+        "children": { "type": "ReactNode", "description": "Manual Radio children (alternative to options)" }
+      },
+      "styling": {
+        "dimensions": { "gap": "8px (vertical) / 16px (horizontal)" }
+      },
+      "usage": "<RadioGroup name=\"group\" options={[{value: 'a', label: 'A'}, {value: 'b', label: 'B'}]} onChange={setVal} />"
+    },
+    "Toggle": {
+      "description": "Switch-style input for binary on/off state with optional label.",
+      "import": "import { Toggle } from \"./components\";",
+      "props": {
+        "checked": { "type": "boolean" },
+        "defaultChecked": { "type": "boolean" },
+        "disabled": { "type": "boolean", "default": false },
+        "label": { "type": "ReactNode" },
+        "onChange": { "type": "function" },
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "colorMapping": {
+        "off": { "pillBg": "#ABAFB7", "handleBg": "#FFFFFF", "hoverPillBg": "#51596A" },
+        "on": { "pillBg": "#0A41FA", "handleBg": "#FFFFFF", "checkColor": "#0A41FA", "hoverPillBg": "#6C8DFC" },
+        "disabled": { "pillBg": "#E9EAED", "handleBg": "#ABAFB7" }
+      },
+      "styling": {
+        "dimensions": { "pillWidth": "36px", "pillHeight": "18px", "handleSize": "12px", "handleOffset": "3px", "gap": "8px" },
+        "border": { "radius": "999px" },
+        "focusRing": { "width": "2px", "offset": "2px", "color": "#6C8DFC" }
+      },
+      "usage": "<Toggle label=\"Enable notifications\" onChange={(v) => console.log(v)} />"
+    },
+    "ToggleGroup": {
+      "description": "Group container for multiple toggle switches with vertical layout and optional label.",
+      "import": "import { ToggleGroup } from \"./components\";",
+      "props": {
+        "label": { "type": "ReactNode" },
+        "children": { "type": "ReactNode", "required": true }
+      },
+      "styling": {
+        "dimensions": { "gap": "8px" }
+      },
+      "usage": "<ToggleGroup label=\"Preferences\"><Toggle label=\"Option 1\" /><Toggle label=\"Option 2\" /></ToggleGroup>"
+    },
+    "Dropdown": {
+      "description": "Searchable dropdown menu for single or multi selection with filterable options and chip display.",
+      "import": "import { Dropdown } from \"./components\";",
+      "props": {
+        "label": { "type": "ReactNode" },
+        "placeholder": { "type": "string", "default": "Select" },
+        "options": { "type": "array", "required": true, "description": "Array of {value, label, disabled?}" },
+        "searchable": { "type": "boolean", "default": false },
+        "disabled": { "type": "boolean", "default": false },
+        "multiple": { "type": "boolean", "default": false },
+        "value": { "type": "string | string[] | null" },
+        "defaultValue": { "type": "string | string[]" },
+        "onChange": { "type": "function" },
+        "width": { "type": "number | string", "default": 310 }
+      },
+      "colorMapping": {
+        "trigger": { "bg": "#F7F8FC", "border": "#818794", "text": "#2E384D", "hoverBorder": "#9DB3FD", "activeBorder": "#0A41FA" },
+        "drawer": { "bg": "#F7F8FC", "border": "#818794", "shadow": "0 4px 16px rgba(46,56,77,0.08)" },
+        "option": { "hoverBg": "#F2F5FF", "selectedWeight": 500, "checkBg": "#0A41FA", "checkColor": "#FFFFFF" }
+      },
+      "styling": {
+        "dimensions": { "triggerHeight": "40px", "defaultWidth": "310px", "maxHeight": "280px", "padding": "10px 10px 10px 16px", "gap": "8px", "searchHeight": "40px" },
+        "border": { "width": "1px", "style": "solid", "radius": "4px" }
+      },
+      "usage": "<Dropdown options={[{value: '1', label: 'Item 1'}]} searchable multiple onChange={setVals} />"
+    },
+    "Calendar": {
+      "description": "Interactive calendar for selecting a single date, with month navigation, ISO week numbers, and min/max date constraints.",
+      "import": "import { Calendar } from \"./components\";",
+      "props": {
+        "value": { "type": "Date | null", "default": null },
+        "defaultValue": { "type": "Date | null", "default": null },
+        "month": { "type": "Date", "description": "Controlled displayed month" },
+        "defaultMonth": { "type": "Date" },
+        "onChange": { "type": "function" },
+        "onMonthChange": { "type": "function" },
+        "showWeekNumbers": { "type": "boolean", "default": true },
+        "minDate": { "type": "Date" },
+        "maxDate": { "type": "Date" },
+        "rangeStart": { "type": "Date | null", "description": "Internal — used by DateRangePicker" },
+        "rangeEnd": { "type": "Date | null", "description": "Internal — used by DateRangePicker" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#FFFFFF", "text": "#2E384D", "border": "#818794" },
+        "dayHover": { "bg": "#E6EBFF" },
+        "daySelected": { "bg": "#0A41FA", "text": "#FFFFFF" },
+        "dayInRange": { "bg": "#E6EBFF" },
+        "sunday": { "bg": "#FEF4F5" },
+        "today": { "border": "#0A41FA" }
+      },
+      "styling": {
+        "dimensions": { "cellSize": "40px", "navHeight": "32px", "navWidth": "32px", "paddingX": "12px", "paddingY": "12px", "gap": "8px" },
+        "border": { "width": "1px", "style": "solid", "color": "#818794" },
+        "radius": "4px"
+      },
+      "usage": "<Calendar value={date} onChange={setDate} />"
+    },
+    "DateRangePicker": {
+      "description": "Dual-calendar date range picker for selecting start and end dates, displaying two adjacent months.",
+      "import": "import { DateRangePicker } from \"./components\";",
+      "props": {
+        "value": { "type": "object", "description": "{start: Date|null, end: Date|null}" },
+        "defaultValue": { "type": "object" },
+        "onChange": { "type": "function" },
+        "defaultMonth": { "type": "Date" },
+        "minDate": { "type": "Date" },
+        "maxDate": { "type": "Date" }
+      },
+      "styling": {
+        "dimensions": { "gap": "16px", "paddingX": "12px", "paddingY": "12px" },
+        "border": { "width": "1px", "style": "solid", "color": "#818794" },
+        "radius": "4px"
+      },
+      "usage": "<DateRangePicker value={range} onChange={setRange} />"
+    },
+    "MonthYearPicker": {
+      "description": "Compact month/year selector with year navigation and a 3x4 month grid; supports filled or outlined selection.",
+      "import": "import { MonthYearPicker } from \"./components\";",
+      "props": {
+        "value": { "type": "object", "description": "{year: number, month: number|null}" },
+        "defaultValue": { "type": "object" },
+        "onChange": { "type": "function" },
+        "size": { "type": "enum", "values": ["default", "large"], "default": "default", "description": "Width: 280px (default) / 376px (large)" },
+        "filledSelection": { "type": "boolean", "default": false }
+      },
+      "colorMapping": {
+        "monthSelected": { "bg": "#F2F5FF", "text": "#0A41FA", "border": "#0A41FA" },
+        "monthSelectedFilled": { "bg": "#0A41FA", "text": "#FFFFFF", "border": "#0A41FA" },
+        "monthHover": { "bg": "#E6EBFF", "border": "#9DB3FD" }
+      },
+      "styling": {
+        "dimensions": { "width": "280px (default) / 376px (large)", "monthHeight": "42px", "gap": "8px (default) / 12px (large)", "paddingY": "12px", "paddingX": "18px" },
+        "border": { "width": "1px", "style": "solid", "color": "#D5D7DB" },
+        "radius": "4px"
+      },
+      "usage": "<MonthYearPicker value={{year: 2024, month: 0}} onChange={handleChange} />"
+    },
+    "PeriodSelector": {
+      "description": "Timeline-based period selector with horizontal scrolling rows (year/quarters/months/weeks), quick-range buttons and confirm.",
+      "import": "import { PeriodSelector } from \"./components\";",
+      "props": {
+        "value": { "type": "object", "description": "{start: Date, end: Date}" },
+        "defaultValue": { "type": "object", "description": "Defaults to this month" },
+        "onChange": { "type": "function" },
+        "onConfirm": { "type": "function", "description": "Called when OK clicked" },
+        "year": { "type": "number", "default": "current year" }
+      },
+      "colorMapping": {
+        "cellInRange": { "bg": "#E6EBFF" },
+        "cellRangeStart": { "bg": "#0A41FA", "text": "#FFFFFF" },
+        "cellRangeEnd": { "bg": "#0A41FA", "text": "#FFFFFF" },
+        "quickBtnActive": { "bg": "#F2F5FF", "border": "#0A41FA", "text": "#0A41FA" }
+      },
+      "styling": {
+        "dimensions": { "width": "720px", "maxWidth": "100%", "cellHeight": "28px", "padding": "16px", "gap": "12px" },
+        "border": { "width": "1px", "style": "solid", "color": "#818794" },
+        "radius": "4px",
+        "typography": { "fontSize": "13px" },
+        "rangeLine": { "height": "2px", "color": "#0A41FA" }
+      },
+      "usage": "<PeriodSelector onConfirm={handleConfirm} />"
+    },
+    "Modal": {
+      "description": "Dialog with optional illustration, title, subtitle, content area, and primary/secondary actions; supports desktop and mobile (bottom-sheet) variants.",
+      "import": "import { Modal, SuccessIllustration } from \"./components\";",
+      "props": {
+        "isOpen": { "type": "boolean", "required": true },
+        "onClose": { "type": "function", "description": "Called on Esc, backdrop click, or close button" },
+        "title": { "type": "ReactNode", "required": true },
+        "subtitle": { "type": "ReactNode" },
+        "children": { "type": "ReactNode", "description": "Scrollable content area" },
+        "illustration": { "type": "ReactNode", "description": "Leading illustration (desktop only)" },
+        "primaryAction": { "type": "object", "description": "{label, onClick?}" },
+        "secondaryAction": { "type": "object", "description": "{label, onClick?}" },
+        "variant": { "type": "enum", "values": ["desktop", "mobile"], "default": "desktop" },
+        "showCloseButton": { "type": "boolean", "default": true }
+      },
+      "colorMapping": {
+        "backdrop": { "bg": "rgba(46,56,77,0.3)" },
+        "surface": { "bg": "#FFFFFF" },
+        "actionPrimary": { "bg": "#0A41FA", "text": "#FFFFFF", "hoverBg": "#0834C7" },
+        "actionSecondary": { "bg": "#E6EBFF", "text": "#0A41FA", "hoverBg": "#CED9FE" }
+      },
+      "styling": {
+        "dimensions": { "minWidth": "520px (desktop)", "maxWidth": "calc(100vw - 32px)", "maxHeight": "calc(100vh - 32px)", "paddingDesktop": "32px", "paddingMobile": "24px", "gap": "24px", "actionHeight": "40px (desktop) / 48px (mobile)" },
+        "radius": "4px (desktop) / 16px 16px 0 0 (mobile bottom-sheet)",
+        "typography": { "titleSize": "20px", "titleWeight": 500, "titleLineHeight": 1.3, "subtitleSize": "14px (desktop) / 16px (mobile)", "bodySize": "14px" }
+      },
+      "usage": "<Modal isOpen={true} title=\"Success\" primaryAction={{label: 'Continue', onClick: handleContinue}} onClose={handleClose} />"
+    },
+    "SuccessIllustration": {
+      "description": "Decorative SVG illustration for success-themed modals, featuring geometric shapes in Tripletex colors.",
+      "import": "import { SuccessIllustration } from \"./components\";",
+      "props": {},
+      "colorMapping": {
+        "fills": { "white": "#FFFFFF", "blue": "#0A41FA", "green": "#1AB960", "greenLight": "#AAE3C4", "pink": "#F6AED5", "blueMid": "#6C90FC", "purpleLight": "#CCC7FF" }
+      },
+      "styling": {
+        "dimensions": { "width": "100px", "height": "100px" }
+      },
+      "usage": "<Modal illustration={<SuccessIllustration />} />"
+    },
+    "Pagination": {
+      "description": "Simple pagination with Previous/Next buttons and centered page number display.",
+      "import": "import { Pagination } from \"./components\";",
+      "props": {
+        "page": { "type": "number" },
+        "defaultPage": { "type": "number", "default": 1 },
+        "totalPages": { "type": "number", "required": true },
+        "onPageChange": { "type": "function" }
+      },
+      "colorMapping": {
+        "buttonDefault": { "bg": "transparent", "text": "#0A41FA" },
+        "buttonHover": { "bg": "#CED9FE" },
+        "buttonDisabled": { "text": "#51596A" }
+      },
+      "styling": {
+        "dimensions": { "width": "182px", "height": "40px", "gap": "4px" }
+      },
+      "usage": "<Pagination totalPages={10} page={current} onPageChange={setPage} />"
+    },
+    "TablePagination": {
+      "description": "Table-optimized pagination displaying item range (e.g. '1-10 of 45') with icon navigation buttons.",
+      "import": "import { TablePagination } from \"./components\";",
+      "props": {
+        "page": { "type": "number" },
+        "defaultPage": { "type": "number", "default": 1 },
+        "pageSize": { "type": "number", "required": true },
+        "total": { "type": "number", "required": true },
+        "onPageChange": { "type": "function" },
+        "onRangeClick": { "type": "function" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "gap": "4px", "iconSize": "20px" }
+      },
+      "usage": "<TablePagination page={current} pageSize={10} total={100} onPageChange={setPage} />"
+    },
+    "Popover": {
+      "description": "Informational popover with title, body, optional link, label chip, and directional arrow pointing to its trigger.",
+      "import": "import { Popover } from \"./components\";",
+      "props": {
+        "title": { "type": "string" },
+        "body": { "type": "ReactNode" },
+        "link": { "type": "object", "description": "{label, href?, onClick?}" },
+        "label": { "type": "object", "description": "{icon?, text}" },
+        "arrow": { "type": "enum", "values": ["none", "top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right"], "default": "bottom" },
+        "variant": { "type": "enum", "values": ["desktop", "mobile"], "default": "desktop" },
+        "onClose": { "type": "function" },
+        "children": { "type": "ReactNode", "description": "Custom content (overrides title/body/link)" },
+        "role": { "type": "enum", "values": ["dialog", "tooltip"], "default": "dialog" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#FFFFFF", "text": "#2E384D", "border": "#818794" },
+        "labelChip": { "bg": "#CED9FE" },
+        "link": { "text": "#0A41FA", "hoverDecoration": "underline" },
+        "mobile": { "shadow": "0 8px 24px rgba(46,56,77,0.16)" }
+      },
+      "styling": {
+        "dimensions": { "minWidth": "150px", "desktopPadding": "16px", "desktopGap": "12px", "desktopMinHeight": "40px", "mobilePadding": "24px", "mobileGap": "16px", "mobileMaxHeight": "400px", "mobileWidth": "320px", "labelHeight": "24px" },
+        "border": { "width": "1px", "style": "solid", "color": "#818794" },
+        "radius": "4px (desktop) / 16px (mobile)",
+        "arrow": { "width": "14px", "height": "8px", "offset": "-8px" }
+      },
+      "usage": "<Popover title=\"Info\" body=\"This is helpful context\" arrow=\"bottom\" />"
+    },
+    "PopoverOpener": {
+      "description": "Interactive label with an info icon that opens/triggers a popover; sizes and weights are customizable.",
+      "import": "import { PopoverOpener } from \"./components\";",
+      "props": {
+        "children": { "type": "ReactNode", "required": true },
+        "size": { "type": "enum", "values": ["base", "lg", "xl", "2xl"], "default": "base", "description": "14/16/20/30px" },
+        "weight": { "type": "enum", "values": ["regular", "medium"], "default": "regular" },
+        "onClick": { "type": "function", "description": "Omit to render as <span>" }
+      },
+      "styling": {
+        "dimensions": { "baseSize": "14px", "lgSize": "16px", "xlSize": "20px", "2xlSize": "30px", "iconSize": "14/16/19/23px (matching)", "gap": "2px (base/lg) / 3px (xl) / 4px (2xl)" },
+        "typography": { "lineHeight": "1.4 (base/lg) / 1.3 (xl/2xl)" }
+      },
+      "usage": "<PopoverOpener size=\"lg\">Help</PopoverOpener>"
+    },
+    "PopupMenu": {
+      "description": "Context menu container with vertically stacked menu items and optional group headers/dividers.",
+      "import": "import { PopupMenu, PopupMenuItem, PopupGroupHeader } from \"./components\";",
+      "props": {
+        "children": { "type": "ReactNode", "required": true },
+        "width": { "type": "number | string" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#F7F8FC", "border": "#818794" },
+        "itemHover": { "bg": "#E6EBFF" },
+        "itemFocused": { "bg": "#E6EBFF", "border": "#6C8DFC" },
+        "itemSelected": { "bg": "#E6EBFF", "fontWeight": 500 }
+      },
+      "styling": {
+        "dimensions": { "padding": "4px", "itemPadding": "10px 12px 10px 8px", "itemGap": "8px", "iconSize": "20px" },
+        "border": { "width": "1px", "style": "solid", "color": "#818794" },
+        "radius": "4px",
+        "divider": { "color": "#D5D7DB" }
+      },
+      "usage": "<PopupMenu><PopupMenuItem onClick={edit}>Edit</PopupMenuItem><PopupMenuItem onClick={del}>Delete</PopupMenuItem></PopupMenu>"
+    },
+    "PopupMenuItem": {
+      "description": "Individual menu item for use within PopupMenu, supporting icon, selection state, focus ring, and disabled state.",
+      "import": "import { PopupMenuItem } from \"./components\";",
+      "props": {
+        "children": { "type": "ReactNode", "required": true },
+        "icon": { "type": "ReactNode" },
+        "onClick": { "type": "function" },
+        "disabled": { "type": "boolean" },
+        "selected": { "type": "boolean" },
+        "focused": { "type": "boolean" }
+      },
+      "styling": {
+        "dimensions": { "padding": "10px 12px 10px 8px", "gap": "8px", "iconSize": "20px" },
+        "radius": "4px"
+      },
+      "usage": "<PopupMenuItem onClick={handleClick} selected={true}>Delete</PopupMenuItem>"
+    },
+    "PopupGroupHeader": {
+      "description": "Separator and optional label for grouping menu items in a PopupMenu, with optional divider line.",
+      "import": "import { PopupGroupHeader } from \"./components\";",
+      "props": {
+        "label": { "type": "string" },
+        "divider": { "type": "boolean", "default": false }
+      },
+      "styling": {
+        "dimensions": { "minHeight": "32px (with-label)", "padding": "4px 0 (container) / 0 8px (label)" },
+        "typography": { "color": "#6B7280" }
+      },
+      "usage": "<PopupGroupHeader label=\"Actions\" divider={true} />"
+    },
+    "Spinner": {
+      "description": "Rotating multi-color loading spinner with configurable size and speed; optionally displays a label.",
+      "import": "import { Spinner } from \"./components\";",
+      "props": {
+        "size": { "type": "enum", "values": ["tiny", "small", "medium", "large"], "default": "medium", "description": "12/16/32/64px" },
+        "speed": { "type": "enum", "values": ["slow", "normal", "fast"], "default": "normal", "description": "1.8s/0.9s/0.45s" },
+        "paused": { "type": "boolean", "default": false },
+        "label": { "type": "string" }
+      },
+      "colorMapping": {
+        "primary": "#0A41FA",
+        "success": "#33AC2E",
+        "info": "#8FC5D3",
+        "warning": "#F7C137"
+      },
+      "styling": {
+        "dimensions": { "tiny": "12px", "small": "16px", "medium": "32px", "large": "64px", "padding": "2/2/4/8px", "inlineGap": "4px" },
+        "animation": { "duration": "0.9s/1.8s/0.45s (normal/slow/fast)", "type": "linear rotate", "strokeWidth": "6/5/4/3.5px" }
+      },
+      "usage": "<Spinner size=\"medium\" speed=\"normal\" label=\"Loading...\" />"
+    },
+    "InlineSpinner": {
+      "description": "Compact inline spinner variant for buttons or inline text; defaults to tiny size with 'Loading' label.",
+      "import": "import { InlineSpinner } from \"./components\";",
+      "props": {
+        "size": { "type": "enum", "values": ["tiny", "small", "medium", "large"], "default": "tiny" },
+        "speed": { "type": "enum", "values": ["slow", "normal", "fast"], "default": "normal" },
+        "paused": { "type": "boolean", "default": false },
+        "label": { "type": "string", "default": "Loading" }
+      },
+      "styling": {
+        "dimensions": { "defaultSize": "12px (tiny)", "inlineGap": "4px" }
+      },
+      "usage": "<InlineSpinner label=\"Processing...\" />"
+    },
+    "ModifierKey": {
+      "description": "SVG glyph for a keyboard modifier key (Cmd/Option/Shift/etc.), with platform-specific (Mac/Win) variants.",
+      "import": "import { ModifierKey } from \"./components\";",
+      "props": {
+        "name": { "type": "enum", "values": ["primary", "secondary", "shift", "control", "enter", "tab", "backspace", "delete", "space", "arrow-up", "arrow-down", "arrow-left", "arrow-right", "home", "end", "escape"], "required": true },
+        "os": { "type": "enum", "values": ["mac", "win"], "default": "mac" }
+      },
+      "styling": {
+        "dimensions": { "height": "20px", "width": "auto" }
+      },
+      "usage": "<ModifierKey name=\"primary\" os=\"mac\" />"
+    },
+    "Shortcut": {
+      "description": "Keyboard shortcut display combining one or more modifier keys plus an optional letter, with visual separation.",
+      "import": "import { Shortcut } from \"./components\";",
+      "props": {
+        "keys": { "type": "array", "required": true, "description": "Array of ModifierKeyName" },
+        "letter": { "type": "string", "description": "Optional final letter (auto-uppercased)" },
+        "os": { "type": "enum", "values": ["mac", "win"], "default": "mac" },
+        "children": { "type": "ReactNode", "description": "Optional content after keys/letter" }
+      },
+      "styling": {
+        "dimensions": { "height": "20px", "letterPadding": "0 2px" },
+        "typography": { "fontSize": "12px", "lineHeight": "16px", "color": "#ABAFB7" }
+      },
+      "usage": "<Shortcut keys={['primary', 'shift']} letter=\"s\" />"
+    },
+    "Tooltip": {
+      "description": "Single-line tooltip with label and optional keyboard shortcut, displayed with a triangular arrow pointing to the trigger.",
+      "import": "import { Tooltip } from \"./components\";",
+      "props": {
+        "label": { "type": "ReactNode", "required": true },
+        "shortcut": { "type": "ReactNode" },
+        "arrow": { "type": "enum", "values": ["top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right"], "default": "bottom" }
+      },
+      "colorMapping": {
+        "default": { "bg": "#2E384D", "text": "#FFFFFF" },
+        "shortcut": { "text": "#ABAFB7" }
+      },
+      "styling": {
+        "dimensions": { "padding": "8px", "gap": "8px", "maxWidth": "320px", "arrowWidth": "14px", "arrowHeight": "8px", "arrowOffset": "-8px" },
+        "radius": "4px"
+      },
+      "usage": "<Tooltip label=\"Save document\" shortcut={<Shortcut keys={['primary']} letter=\"s\" />} />"
+    },
+    "MultilineTooltip": {
+      "description": "Multi-line tooltip with bold title, description text, optional shortcut, and customizable max-width.",
+      "import": "import { MultilineTooltip } from \"./components\";",
+      "props": {
+        "title": { "type": "ReactNode", "required": true },
+        "description": { "type": "ReactNode", "required": true },
+        "shortcut": { "type": "ReactNode" },
+        "arrow": { "type": "enum", "values": ["top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right"], "default": "bottom" },
+        "maxWidth": { "type": "number", "default": 600 }
+      },
+      "colorMapping": {
+        "default": { "bg": "#2E384D", "text": "#FFFFFF" },
+        "description": { "text": "#ABAFB7" }
+      },
+      "styling": {
+        "dimensions": { "padding": "8px", "titleRowGap": "10px", "arrowWidth": "14px", "arrowHeight": "8px" },
+        "radius": "4px",
+        "typography": { "descriptionFontSize": "14px", "descriptionLineHeight": 1.4 }
+      },
+      "usage": "<MultilineTooltip title=\"Keyboard Shortcut\" description=\"Press Cmd+S to save your work\" shortcut={<Shortcut keys={['primary']} letter=\"s\" />} />"
+    },
+    "Topbar": {
+      "description": "Top navigation bar with menu, logo, company picker, search, assistant/favorites/notifications/messages icons, and profile avatar.",
+      "import": "import { Topbar } from \"./components\";",
+      "props": {
+        "companyName": { "type": "string", "default": "Tripletex AS" },
+        "companyInitial": { "type": "string", "description": "Single letter for company avatar" },
+        "searchPlaceholder": { "type": "string", "default": "Søk" },
+        "messageCount": { "type": "number", "default": 0 },
+        "onMenuClick": { "type": "function" },
+        "onLogoClick": { "type": "function" },
+        "onCompanyClick": { "type": "function" },
+        "onSearchClick": { "type": "function" },
+        "onAssistantClick": { "type": "function" },
+        "onFavoriteClick": { "type": "function" },
+        "onDownloadClick": { "type": "function" },
+        "onNotificationClick": { "type": "function" },
+        "onMessageClick": { "type": "function" },
+        "onWarningClick": { "type": "function" },
+        "onFailClick": { "type": "function" },
+        "onOpenNewClick": { "type": "function" },
+        "onProfileClick": { "type": "function" }
+      },
+      "colorMapping": {
+        "background": { "bg": "#D8EAEB", "text": "#2E384D" }
+      },
+      "styling": {
+        "dimensions": { "height": "50px", "width": "100%", "paddingX": "16px" },
+        "radius": "4px",
+        "states": { "hover": "background: rgba(46,56,77,0.08)" }
+      },
+      "usage": "<Topbar companyName=\"Acme Inc.\" onMenuClick={openSidebar} />"
+    },
+    "AppShell": {
+      "description": "Top-level layout component wrapping topbar, sidebar, and main content area.",
+      "import": "import { AppShell } from \"./components\";",
+      "props": {
+        "topbar": { "type": "ReactNode", "description": "Defaults to <Topbar />" },
+        "sidebar": { "type": "ReactNode", "description": "Defaults to <Sidebar />" },
+        "children": { "type": "ReactNode", "description": "Main content" }
+      },
+      "colorMapping": {
+        "surface": { "bg": "#FFFFFF", "borderRight": "#D5D7DB", "contentBg": "#F7F8FC" }
+      },
+      "styling": {
+        "dimensions": { "height": "100%", "minHeight": "600px", "width": "100%" },
+        "radius": "4px",
+        "shadow": "0 10px 50px 0 rgba(15,41,127,0.2)"
+      },
+      "usage": "<AppShell topbar={<Topbar />} sidebar={<Sidebar />}><Page /></AppShell>"
+    },
+    "Sidebar": {
+      "description": "Vertical navigation panel with icon-labeled items; supports collapse mode (compact icon-only).",
+      "import": "import { Sidebar, SidebarIcons, DEFAULT_SIDEBAR_ITEMS } from \"./components\";",
+      "props": {
+        "items": { "type": "SidebarNavItem[]", "default": "DEFAULT_SIDEBAR_ITEMS", "description": "Array of {label, icon, subItems?}" },
+        "collapsed": { "type": "boolean", "default": false }
+      },
+      "colorMapping": {
+        "default": { "bg": "transparent", "text": "#2E384D" },
+        "selectedIcon": { "iconBg": "#0A41FA", "iconText": "#FFFFFF" },
+        "hover": { "bg": "#E6EBFF" }
+      },
+      "styling": {
+        "dimensions": { "width": "240px", "collapsedWidth": "65px" }
+      },
+      "usage": "<Sidebar items={DEFAULT_SIDEBAR_ITEMS} collapsed={false} />"
+    },
+    "SidebarHeader": {
+      "description": "Expandable navigation item with optional submenu in the sidebar.",
+      "import": "import { SidebarHeader } from \"./components\";",
+      "props": {
+        "label": { "type": "string", "required": true },
+        "icon": { "type": "ReactNode" },
+        "selected": { "type": "boolean", "default": false },
+        "collapsed": { "type": "boolean", "default": false },
+        "subItems": { "type": "SidebarHeaderSubItem[]" },
+        "showSubmenu": { "type": "boolean", "default": false },
+        "onClick": { "type": "function" }
+      },
+      "colorMapping": {
+        "default": { "bg": "transparent", "text": "#2E384D" },
+        "selectedIcon": { "iconBg": "#0A41FA", "iconText": "#FFFFFF" },
+        "hover": { "bg": "#E6EBFF" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "iconSize": "32px" },
+        "radius": "4px"
+      },
+      "usage": "<SidebarHeader label=\"Home\" icon={<HomeIcon />} selected={true} />"
+    },
+    "SidebarItem": {
+      "description": "Submenu item within an expanded SidebarHeader.",
+      "import": "import { SidebarItem } from \"./components\";",
+      "props": {
+        "label": { "type": "string", "required": true },
+        "selected": { "type": "boolean", "default": false },
+        "onClick": { "type": "function" }
+      },
+      "colorMapping": {
+        "default": { "text": "#2E384D" },
+        "hover": { "bg": "#E6EBFF" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px" },
+        "radius": "4px"
+      },
+      "usage": "<SidebarItem label=\"Invoices\" selected={false} />"
+    },
+    "SubitemIcons": {
+      "description": "Visual indicator for sidebar submenu state (dot, mini-dot, expandable/expanded chevron).",
+      "import": "import { SubitemIcons } from \"./components\";",
+      "props": {
+        "type": { "type": "enum", "values": ["disk", "mini-disk", "expandable", "expanded"], "default": "disk" }
+      },
+      "styling": {
+        "dimensions": { "width": "32px", "height": "32px" },
+        "radius": "4px"
+      },
+      "usage": "<SubitemIcons type=\"expandable\" />"
+    },
+    "Status": {
+      "description": "Inline status badge with colored dot or count and label.",
+      "import": "import { Status } from \"./components\";",
+      "props": {
+        "variant": { "type": "enum", "values": ["success", "warning", "error", "neutral", "new"], "default": "success" },
+        "label": { "type": "string", "required": true },
+        "count": { "type": "number", "description": "If provided, shows count badge instead of dot" },
+        "showMarker": { "type": "boolean", "default": true }
+      },
+      "colorMapping": {
+        "success": { "dot": "#33AC2E" },
+        "warning": { "dot": "#F7C137", "count": "#E6A80A" },
+        "error": { "dot": "#E83645" },
+        "neutral": { "dot": "#818794" },
+        "new": { "dot": "#0A41FA" }
+      },
+      "styling": {
+        "dimensions": { "gap": "4px", "dotSize": "8px", "countHeight": "16px", "countMinWidth": "16px" },
+        "typography": { "fontSize": "14px", "lineHeight": 1.4 }
+      },
+      "usage": "<Status variant=\"success\" label=\"Active\" count={5} />"
+    },
+    "Table": {
+      "description": "Data table with sorting, selection (checkboxes), row expansion, and tone-based row coloring.",
+      "import": "import { Table } from \"./components\";",
+      "props": {
+        "columns": { "type": "TableColumn<T>[]", "required": true, "description": "Array of {id, label, align?, sortable?, width?, render?}" },
+        "rows": { "type": "T[]", "required": true },
+        "getRowId": { "type": "function" },
+        "sort": { "type": "object", "description": "{columnId, direction: 'asc'|'desc'}" },
+        "onSortChange": { "type": "function" },
+        "activeRowId": { "type": "string" },
+        "onRowClick": { "type": "function" },
+        "getRowTone": { "type": "function", "description": "Return: 'default'|'info'|'success'|'warning'|'error'|'automation'" },
+        "selectable": { "type": "boolean", "default": false },
+        "selectedRowIds": { "type": "string[]" },
+        "onSelectionChange": { "type": "function" },
+        "expandable": { "type": "boolean", "default": false },
+        "expandedRowIds": { "type": "string[]" },
+        "onExpandedChange": { "type": "function" },
+        "renderExpanded": { "type": "function" },
+        "emptyMessage": { "type": "string", "default": "No data" }
+      },
+      "colorMapping": {
+        "header": { "bg": "#F2F5FF", "text": "#2E384D" },
+        "rowDefault": { "bg": "#FFFFFF" },
+        "rowInfo": { "bg": "#F2F5FF" },
+        "rowSuccess": { "bg": "#F4FBF4" },
+        "rowWarning": { "bg": "#FFFCF5" },
+        "rowError": { "bg": "#FEF4F5" }
+      },
+      "styling": {
+        "dimensions": { "width": "100%", "headerHeight": "52px" },
+        "border": { "width": "1px", "style": "solid", "color": "#D5D7DB" },
+        "typography": { "fontSize": "14px", "lineHeight": 1.4, "headerWeight": 500 }
+      },
+      "usage": "<Table columns={[{id: 'name', label: 'Name', sortable: true}]} rows={data} onSortChange={setSort} />"
+    },
+    "TableView": {
+      "description": "Settings panel for table density (compact/standard/detailed) and column visibility toggling.",
+      "import": "import { TableView } from \"./components\";",
+      "props": {
+        "title": { "type": "string", "default": "View" },
+        "density": { "type": "enum", "values": ["compact", "standard", "detailed"] },
+        "defaultDensity": { "type": "enum", "values": ["compact", "standard", "detailed"], "default": "standard" },
+        "onDensityChange": { "type": "function" },
+        "columns": { "type": "TableViewColumn[]", "required": true, "description": "Array of {id, label, visible}" },
+        "onColumnToggle": { "type": "function" },
+        "onReset": { "type": "function" },
+        "resetLabel": { "type": "string", "default": "Reset all" },
+        "displaySettingsLabel": { "type": "string", "default": "Display settings" },
+        "columnsLabel": { "type": "string", "default": "Columns" }
+      },
+      "styling": {
+        "dimensions": { "width": "320px", "minHeight": "32px" },
+        "border": { "width": "1px", "style": "solid", "color": "#818794" },
+        "radius": "4px"
+      },
+      "usage": "<TableView columns={cols} density=\"standard\" onDensityChange={setDensity} />"
+    },
+    "TableFilter": {
+      "description": "Toolbar combining filter button, search input, and action buttons for tables.",
+      "import": "import { TableFilter } from \"./components\";",
+      "props": {
+        "filterButton": { "type": "ReactNode" },
+        "search": { "type": "ReactNode" },
+        "actions": { "type": "ReactNode" },
+        "children": { "type": "ReactNode" }
+      },
+      "styling": {
+        "dimensions": { "width": "100%", "padding": "12px", "gap": "12px" },
+        "border": { "width": "1px", "style": "solid", "color": "#D5D7DB" },
+        "radius": "4px"
+      },
+      "usage": "<TableFilter filterButton={<FilterButton />} search={<Input type=\"search\" />} />"
+    },
+    "FilterButton": {
+      "description": "Toggle button for filter panel with optional count badge for active filters.",
+      "import": "import { FilterButton } from \"./components\";",
+      "props": {
+        "label": { "type": "string", "default": "Filter" },
+        "active": { "type": "boolean", "default": false },
+        "count": { "type": "number" }
+      },
+      "colorMapping": {
+        "rest": { "bg": "#E6EBFF" }
+      },
+      "styling": {
+        "dimensions": { "height": "40px", "padding": "0 12px", "gap": "8px" },
+        "radius": "4px"
+      },
+      "usage": "<FilterButton active={hasFilters} count={3} />"
+    },
+    "TableFilterIconButton": {
+      "description": "Icon button for table toolbar (column settings, print, refresh, etc.).",
+      "import": "import { TableFilterIconButton } from \"./components\";",
+      "props": {
+        "icon": { "type": "ReactNode", "required": true },
+        "aria-label": { "type": "string", "required": true },
+        "active": { "type": "boolean", "default": false }
+      },
+      "styling": {
+        "dimensions": { "width": "32px", "height": "32px" },
+        "radius": "4px"
+      },
+      "usage": "<TableFilterIconButton icon={<ColumnsIcon />} aria-label=\"Columns\" />"
+    },
+    "FilterDialog": {
+      "description": "Modal/dropdown dialog containing filter controls, saved filter list, and save/reset actions.",
+      "import": "import { FilterDialog, SavedFilterItem } from \"./components\";",
+      "props": {
+        "savedFilters": { "type": "SavedFilter[]" },
+        "savedFiltersCollapsible": { "type": "boolean", "default": true },
+        "savedFiltersDefaultOpen": { "type": "boolean", "default": true },
+        "children": { "type": "ReactNode" },
+        "onSaveFilter": { "type": "function" },
+        "onResetFilters": { "type": "function" },
+        "saveFilterDisabled": { "type": "boolean" },
+        "resetFiltersDisabled": { "type": "boolean" },
+        "onClose": { "type": "function" }
+      },
+      "styling": {
+        "dimensions": { "width": "375px", "maxWidth": "100%" },
+        "border": { "width": "1px", "style": "solid", "color": "#D5D7DB" },
+        "radius": "8px",
+        "shadow": "0 8px 24px rgba(46,56,77,0.08)"
+      },
+      "usage": "<FilterDialog savedFilters={filters} onSaveFilter={save}><FilterControls /></FilterDialog>"
+    },
+    "SavedFilterItem": {
+      "description": "Individual saved filter entry with name and menu trigger button.",
+      "import": "import { SavedFilterItem } from \"./components\";",
+      "props": {
+        "name": { "type": "string", "required": true },
+        "active": { "type": "boolean", "default": false },
+        "onSelect": { "type": "function" },
+        "onMenuClick": { "type": "function" },
+        "id": { "type": "string" }
+      },
+      "styling": {
+        "dimensions": { "minHeight": "32px", "gap": "8px" }
+      },
+      "usage": "<SavedFilterItem name=\"Active Invoices\" active={true} onSelect={apply} />"
+    },
+    "ProgressStepper": {
+      "description": "Multi-step progress indicator with vertical or horizontal orientation; supports bullet/number/icon styles.",
+      "import": "import { ProgressStepper } from \"./components\";",
+      "props": {
+        "steps": { "type": "ProgressStep[]", "required": true, "description": "Array of {label, description?, icon?}" },
+        "currentStep": { "type": "number", "required": true, "description": "0-based index" },
+        "direction": { "type": "enum", "values": ["vertical", "horizontal"], "default": "vertical" },
+        "type": { "type": "enum", "values": ["bullet", "number", "icon"], "default": "bullet" }
+      },
+      "colorMapping": {
+        "completed": { "bg": "#0A41FA", "text": "#FFFFFF" },
+        "current": { "bg": "#0A41FA", "shadow": "0 0 0 2px rgba(10,65,250,0.2)" },
+        "upcoming": { "bg": "#F7F8FC", "border": "#D5D7DB" }
+      },
+      "styling": {
+        "dimensions": { "bulletSize": "16px", "numberSize": "24px", "connectorWidth": "2px" },
+        "border": { "radius": "9999px" },
+        "typography": { "fontSize": "14px" }
+      },
+      "usage": "<ProgressStepper steps={steps} currentStep={1} direction=\"vertical\" type=\"number\" />"
+    },
+    "PageHeader": {
+      "description": "Page title row with breadcrumb, autosave status, status marker, subheading, and primary/secondary action buttons.",
+      "import": "import { PageHeader, Breadcrumb, Autosave, StatusMarker } from \"./components\";",
+      "props": {
+        "title": { "type": "string", "required": true },
+        "variant": { "type": "enum", "values": ["default", "compact"], "default": "default", "description": "default=30px title/24px gap, compact=20px/12px" },
+        "breadcrumb": { "type": "object", "description": "{parent, current, onParentClick?}" },
+        "autosave": { "type": "boolean | enum", "values": ["saved", "saving"], "description": "Show autosave indicator" },
+        "subheading": { "type": "ReactNode" },
+        "alert": { "type": "ReactNode", "description": "Alert below breadcrumb/title" },
+        "primaryAction": { "type": "object", "description": "{label, onClick?, disabled?}" },
+        "secondaryAction": { "type": "object", "description": "{label, onClick?, disabled?}" },
+        "onMenuClick": { "type": "function", "description": "More-actions menu" },
+        "menuLabel": { "type": "string", "default": "More actions" }
+      },
+      "styling": {
+        "dimensions": { "defaultGap": "24px", "compactGap": "12px", "titleRowMinHeight": "40px" },
+        "typography": { "defaultTitleSize": "30px", "compactTitleSize": "20px", "titleLineHeight": 1.2 }
+      },
+      "usage": "<PageHeader title=\"Invoice #123\" primaryAction={{label: 'Save'}} breadcrumb={{parent: 'Invoices', current: '#123'}} />"
+    },
+    "Breadcrumb": {
+      "description": "Breadcrumb navigation link (parent > current).",
+      "import": "import { Breadcrumb } from \"./components\";",
+      "props": {
+        "parent": { "type": "string", "required": true },
+        "current": { "type": "string", "required": true },
+        "onParentClick": { "type": "function" }
+      },
+      "usage": "<Breadcrumb parent=\"Invoices\" current=\"#123\" onParentClick={goBack} />"
+    },
+    "Autosave": {
+      "description": "Autosave status indicator with cloud icon (saved or saving state).",
+      "import": "import { Autosave } from \"./components\";",
+      "props": {
+        "state": { "type": "enum", "values": ["saved", "saving"], "default": "saved" },
+        "label": { "type": "string", "description": "Custom label; defaults to state text" }
+      },
+      "styling": {
+        "dimensions": { "gap": "8px" },
+        "typography": { "fontSize": "14px" }
+      },
+      "usage": "<Autosave state=\"saving\" />"
+    },
+    "StatusMarker": {
+      "description": "Inline status indicator with colored dot and label (warning or success variants).",
+      "import": "import { StatusMarker } from \"./components\";",
+      "props": {
+        "variant": { "type": "enum", "values": ["warning", "success"], "required": true },
+        "label": { "type": "string", "required": true }
+      },
+      "styling": {
+        "dimensions": { "dotSize": "8px" }
+      },
+      "usage": "<StatusMarker variant=\"success\" label=\"Published\" />"
+    },
+    "Icon": {
+      "description": "Individual SVG icon, exported as <KebabName>Icon (e.g. ChevronDownIcon, SearchIcon). Three sizes available: 20, 24, 48px.",
+      "import": "import { ChevronDownIcon, SearchIcon } from \"./components\"; // or: import { Icons } from \"./components\"; const Cmp = Icons[\"chevron-down\"];",
+      "props": {
+        "size": { "type": "enum", "values": [20, 24, 48], "default": 20, "description": "Icon size in pixels" },
+        "className": { "type": "string" },
+        "aria-label": { "type": "string", "description": "Required if icon is semantic (not decorative)" }
+      },
+      "styling": {
+        "dimensions": { "sizes": [20, 24, 48] },
+        "typography": { "color": "currentColor" }
+      },
+      "usage": "<ChevronDownIcon size={24} aria-label=\"More options\" />"
+    }
+  },
+  "icons": {
+    "$description": "Icon library — each name resolves to an exported component <NameInPascalCase>Icon, plus a dynamic Icons[name] map. Sizes: 20, 24, 48px.",
+    "import": "import { Icons, [Name]Icon } from \"./components\";",
+    "sizes": [20, 24, 48],
+    "defaultSize": 20,
+    "names": [
+      "clipboard", "airplane", "link-off", "link", "user-minus", "users", "apps", "block",
+      "unlock", "lock", "trash", "alarm", "restore", "history", "clock", "eye-off", "eye",
+      "card", "calendar", "list", "search", "edit", "refresh", "magic-wand", "check", "sort",
+      "close", "user-plus", "plus", "external-link", "layout", "minus", "hierarchy", "download",
+      "copy", "dashboard", "settings", "arrow-left", "arrow-right", "chevron-left", "chevron-right",
+      "chevron-up", "chevron-down", "chevrons-out", "mail", "chat", "note", "send", "edit-square",
+      "phone", "feedback", "alert-triangle", "info", "warning", "help", "check-circle", "error",
+      "trend-up", "trend-down", "tip", "megaphone", "rocket", "sparkle", "gauge-high", "gauge-mid",
+      "gauge-low", "zoom-in", "zoom-out", "print", "sync", "columns", "page-layout", "pdf",
+      "chevrons-collapse-y", "move", "chevrons-expand-y", "drag-handle", "checkbox", "sort-caret",
+      "caret-down", "caret-up", "close-square", "rows", "table-2-rows", "frame", "more-vertical",
+      "insights", "filter", "minimize", "home", "tag", "order", "invoice", "file", "document",
+      "equals", "credit-card", "edit-document", "bank", "building", "activity-log", "archive",
+      "phone-sync", "cloud-upload", "cloud-check", "cloud", "folder-open", "folder", "cloud-off",
+      "attachment"
+    ],
+    "componentNamingRule": "kebab-case → PascalCase + 'Icon' suffix. Examples: 'chevron-down' → ChevronDownIcon, 'arrow-left' → ArrowLeftIcon, 'check-circle' → CheckCircleIcon, 'magic-wand' → MagicWandIcon."
+  },
+  "illustrations": {
+    "$description": "Decorative SVGs for empty states, success screens, onboarding, and confirmations. Located in assets/illustrations/.",
+    "directory": "assets/illustrations/",
+    "usage": "<img src=\"./assets/illustrations/[name].svg\" alt=\"...\" /> or import as React component",
+    "items": [
+      { "filename": "celebration.svg", "name": "celebration", "description": "Confetti and balloons; for milestones, achievements, sign-up completions, account upgrades." },
+      { "filename": "cloud-check.svg", "name": "cloud-check", "description": "Cloud with checkmark; for sync confirmation, save success, backup completed states." },
+      { "filename": "coins.svg", "name": "coins", "description": "Stacked coins; for finance-related screens, transactions, payments, savings." },
+      { "filename": "error.svg", "name": "error", "description": "Error/warning visual; for failure states, broken pages, critical errors." },
+      { "filename": "ghost-sad.svg", "name": "ghost-sad", "description": "Sad ghost; for 404 pages, not-found states, deleted item screens." },
+      { "filename": "ghost.svg", "name": "ghost", "description": "Friendly ghost; for empty states, no-data screens, light onboarding." },
+      { "filename": "reject.svg", "name": "reject", "description": "Rejection/blocked visual; for declined actions, denied access, invalid input." },
+      { "filename": "rocket.svg", "name": "rocket", "description": "Rocket launching; for getting-started screens, new feature intros, onboarding." },
+      { "filename": "send.svg", "name": "send", "description": "Paper airplane; for submission confirmations, message sent, email delivered." },
+      { "filename": "success.svg", "name": "success", "description": "Success checkmark visual; for completed actions, payment success, task done." },
+      { "filename": "trash.svg", "name": "trash", "description": "Trash/wastebin; for deletion confirmations, archive screens." },
+      { "filename": "user.svg", "name": "user", "description": "Generic user silhouette; placeholder avatar, profile screens, no-photo fallback." }
+    ]
+  }
+}
