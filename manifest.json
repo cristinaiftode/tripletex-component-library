@@ -1505,6 +1505,35 @@
     ],
     "componentNamingRule": "kebab-case → PascalCase + 'Icon' suffix. Examples: 'chevron-down' → ChevronDownIcon, 'arrow-left' → ArrowLeftIcon, 'check-circle' → CheckCircleIcon, 'magic-wand' → MagicWandIcon."
   },
+  "sidebarIcons": {
+    "$description": "Brand-specific colored icons used ONLY in the Tripletex left sidebar. These are different from the regular icon library: 32×32 viewBox (vs. 20/24/48), each carries a baked-in brand color (NOT currentColor), and each maps to a top-level navigation route. Use these — not the generic monochrome icons — when prototyping the Tripletex sidebar so the visual identity is correct.",
+    "import": "import { BRAND_SIDEBAR_ICONS, BrandSidebar[Name]Icon, BrandSidebarIconComponents } from \"./components\";",
+    "viewBox": "0 0 32 32",
+    "defaultSize": 32,
+    "componentNamingRule": "kebab-case → 'BrandSidebar' + PascalCase + 'Icon'. Special cases: 'lønn' → 'lonn' (BrandSidebarLonnIcon), 'årsoppgjør' → 'arsoppgjor' (BrandSidebarArsoppgjorIcon). Examples: 'hjem' → BrandSidebarHjemIcon, 'reiser-og-utlegg' → BrandSidebarReiserOgUtleggIcon.",
+    "selectionPattern": "When an item is selected the sidebar wrapper applies a blue background pill (--action-primary-rest #0a41fa). The icon stays its brand color OR is overridden to white via the `color` prop on the icon component — depending on contrast. The brand-color icons themselves do NOT have a separate selected variant.",
+    "items": [
+      { "name": "favoritter", "label": "Favoritter", "color": "#FAB300", "route": "/favoritter", "component": "BrandSidebarFavoritterIcon", "description": "Yellow star — favorites/starred shortcuts." },
+      { "name": "hjem", "label": "Hjem", "color": "#0A41FA", "route": "/", "component": "BrandSidebarHjemIcon", "description": "Blue house with pillars — home/dashboard landing." },
+      { "name": "klient", "label": "Klient", "color": "#2E7A0B", "route": "/klient", "component": "BrandSidebarKlientIcon", "description": "Green person + checkmark — accountant's client list." },
+      { "name": "timeliste", "label": "Timeliste", "color": "#2B9A9C", "route": "/timeliste", "component": "BrandSidebarTimelisteIcon", "description": "Teal clock — timesheet entry." },
+      { "name": "reiser-og-utlegg", "label": "Reiser og utlegg", "color": "#3B84D9", "route": "/reiser-og-utlegg", "component": "BrandSidebarReiserOgUtleggIcon", "description": "Blue paper airplane — travel and expense reports." },
+      { "name": "bilag", "label": "Bilag", "color": "#4B64DE", "route": "/bilag", "component": "BrandSidebarBilagIcon", "description": "Indigo receipt — vouchers/source documents." },
+      { "name": "bank", "label": "Bank", "color": "#128CCA", "route": "/bank", "component": "BrandSidebarBankIcon", "description": "Cyan bank columns — banking and reconciliation." },
+      { "name": "regnskap", "label": "Regnskap", "color": "#2B8494", "route": "/regnskap", "component": "BrandSidebarRegnskapIcon", "description": "Teal open book — accounting and ledger." },
+      { "name": "rapporter", "label": "Rapporter", "color": "#2B8494", "route": "/rapporter", "component": "BrandSidebarRapporterIcon", "description": "Teal grid — reports." },
+      { "name": "prosjekt", "label": "Prosjekt", "color": "#8339A3", "route": "/prosjekt", "component": "BrandSidebarProsjektIcon", "description": "Purple briefcase — projects." },
+      { "name": "faktura", "label": "Faktura", "color": "#D9452B", "route": "/faktura", "component": "BrandSidebarFakturaIcon", "description": "Red document with lines — invoicing." },
+      { "name": "kunde", "label": "Kunde", "color": "#58A316", "route": "/kunde", "component": "BrandSidebarKundeIcon", "description": "Green people — customers." },
+      { "name": "lonn", "label": "Lønn", "color": "#DB5C35", "route": "/lonn", "component": "BrandSidebarLonnIcon", "description": "Orange credit card — payroll." },
+      { "name": "oppgave", "label": "Oppgave", "color": "#D63862", "route": "/oppgave", "component": "BrandSidebarOppgaveIcon", "description": "Pink/red checkmark circle — tasks/to-dos." },
+      { "name": "produkt", "label": "Produkt", "color": "#8166C4", "route": "/produkt", "component": "BrandSidebarProduktIcon", "description": "Purple folder — products." },
+      { "name": "dokument", "label": "Dokument", "color": "#B334A2", "route": "/dokument", "component": "BrandSidebarDokumentIcon", "description": "Magenta document — document storage." },
+      { "name": "integrasjoner", "label": "Integrasjoner", "color": "#2E384D", "route": "/integrasjoner", "component": "BrandSidebarIntegrasjonerIcon", "description": "Dark grey puzzle piece — third-party integrations." },
+      { "name": "arsoppgjor", "label": "Årsoppgjør", "color": "#2E384D", "route": "/arsoppgjor", "component": "BrandSidebarArsoppgjorIcon", "description": "Dark grey clock+arrow — annual report/year-end." },
+      { "name": "selskap", "label": "Selskap", "color": "#4C9B4C", "route": "/selskap", "component": "BrandSidebarSelskapIcon", "description": "Green building — company settings." }
+    ]
+  },
   "illustrations": {
     "$description": "Decorative SVGs for empty states, success screens, onboarding, and confirmations. Located in assets/illustrations/.",
     "directory": "assets/illustrations/",

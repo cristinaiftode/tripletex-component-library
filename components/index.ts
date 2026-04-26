@@ -202,6 +202,36 @@ export * from "./Icons";
 export { Icons, LIBRARY_ICON_NAMES } from "./Icons";
 export type { IconProps, IconSize, IconName } from "./Icons";
 
+export {
+  BRAND_SIDEBAR_ICONS,
+  BRAND_SIDEBAR_ICON_NAMES,
+  BrandSidebarIconComponents,
+  BrandSidebarHjemIcon,
+  BrandSidebarFavoritterIcon,
+  BrandSidebarKlientIcon,
+  BrandSidebarTimelisteIcon,
+  BrandSidebarReiserOgUtleggIcon,
+  BrandSidebarBilagIcon,
+  BrandSidebarBankIcon,
+  BrandSidebarRegnskapIcon,
+  BrandSidebarRapporterIcon,
+  BrandSidebarProsjektIcon,
+  BrandSidebarFakturaIcon,
+  BrandSidebarKundeIcon,
+  BrandSidebarLonnIcon,
+  BrandSidebarOppgaveIcon,
+  BrandSidebarProduktIcon,
+  BrandSidebarDokumentIcon,
+  BrandSidebarIntegrasjonerIcon,
+  BrandSidebarArsoppgjorIcon,
+  BrandSidebarSelskapIcon,
+} from "./BrandSidebarIcons";
+export type {
+  BrandSidebarIconName,
+  BrandSidebarIconEntry,
+  BrandSidebarIconProps,
+} from "./BrandSidebarIcons";
+
 export { PageHeader, Breadcrumb, Autosave, StatusMarker } from "./PageHeader";
 export type {
   PageHeaderProps,

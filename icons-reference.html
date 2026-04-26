@@ -70,6 +70,24 @@
       font-size: 12px; color: var(--text-link);
       user-select: all;
     }
+    .icon-card--brand .icon-card__preview {
+      width: 48px; height: 48px;
+    }
+    .icon-card__route {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 11px; color: var(--text-muted);
+      user-select: all;
+    }
+    .icon-card__swatch {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 11px; color: var(--text-muted);
+    }
+    .icon-card__swatch::before {
+      content: ""; width: 10px; height: 10px;
+      border-radius: 2px; background: var(--swatch, #ccc);
+      border: 1px solid rgba(0,0,0,0.08);
+    }
     .ill-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -121,13 +139,14 @@
 <body>
   <header class="header">
     <h1>Tripletex Atlas — Icons & Illustrations Reference</h1>
-    <p class="lede">50 most-used icons (out of 110 total) and all 12 illustrations from the Atlas design system. Use this file to give AI prototyping tools real Tripletex SVG path data instead of guessed-from-training-data icons.</p>
+    <p class="lede">50 most-used icons (out of 110 total), 19 brand-colored sidebar icons, and all 12 illustrations from the Atlas design system. Use this file to give AI prototyping tools real Tripletex SVG path data instead of guessed-from-training-data icons.</p>
     <div class="note">
       <p><strong>How to use:</strong></p>
       <p>1. Each icon card shows the kebab-case name (e.g. <code>chevron-down</code>) and the React component name (e.g. <code>ChevronDownIcon</code>).</p>
-      <p>2. View source on this file to copy the exact SVG path data — every icon below uses 20×20 viewBox and <code>fill="currentColor"</code> so it inherits your CSS color.</p>
+      <p>2. View source on this file to copy the exact SVG path data — most icons use a 20×20 viewBox and <code>fill="currentColor"</code> so they inherit your CSS color. The brand sidebar icons use a 32×32 viewBox and a baked-in brand color.</p>
       <p>3. Default icon colors should come from <code>color: var(--text-primary)</code>. For status colors use the global palette: info <code>#0A41FA</code>, success <code>#33AC2E</code>, warning <code>#F7C137</code>, error <code>#E83645</code>.</p>
-      <p>4. The remaining 60 icons are listed by name only in <code>manifest.json</code> → <code>icons.names</code>. If you need one not shown here, ask before inventing SVG path data.</p>
+      <p>4. <strong>Sidebar icons are special:</strong> the 19 icons in the Brand sidebar icons section below ship with their own brand colors (e.g. teal for Timeliste, red for Faktura). Use these — not generic monochrome icons — when prototyping the Tripletex left sidebar.</p>
+      <p>5. The remaining 60 icons are listed by name only in <code>manifest.json</code> → <code>icons.names</code>. If you need one not shown here, ask before inventing SVG path data.</p>
     </div>
   </header>
 
@@ -533,6 +552,188 @@
     </svg></div>
         <div class="icon-card__name">cloud-check</div>
         <div class="icon-card__pascal">CloudCheckIcon</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Brand sidebar icons (all 19)</h2>
+    <p style="color: var(--text-muted); margin: -4px 0 12px; font-size: 13px;">
+      Colored icons used in the Tripletex left sidebar. Each ships with a baked-in brand color and a 32×32 viewBox.
+      Import the React component <code>BrandSidebar[Name]Icon</code>, or pull the path + color from <code>BRAND_SIDEBAR_ICONS["[name]"]</code>.
+      For prototypes: copy the inline SVG below and keep the <code>fill</code> color as-is.
+    </p>
+    <div class="icon-grid">
+      <div class="icon-card icon-card--brand" data-name="favoritter" style="--swatch: #FAB300;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M26.625 13.0675L18.9856 12.4088L16 5.375L13.0144 12.4194L5.375 13.0675L11.1762 18.0931L9.43375 25.5625L16 21.5994L22.5662 25.5625L20.8344 18.0931L26.625 13.0675Z" fill="#FAB300"/>
+        </svg></div>
+        <div class="icon-card__name">favoritter</div>
+        <div class="icon-card__pascal">BrandSidebarFavoritterIcon</div>
+        <div class="icon-card__swatch">#FAB300</div>
+        <div class="icon-card__route">/favoritter</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="hjem" style="--swatch: #0A41FA;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M15.9999 10.1879L20.7058 14.6352V22.3539H18.8234V16.4241H13.1764V22.3539H11.294V14.6352L15.9999 10.1879ZM15.9999 7.5293L6.58813 16.4241H9.41166V24.3306H15.0587V18.4007H16.9411V24.3306H22.5881V16.4241H25.4117L15.9999 7.5293Z" fill="#0A41FA"/>
+        </svg></div>
+        <div class="icon-card__name">hjem</div>
+        <div class="icon-card__pascal">BrandSidebarHjemIcon</div>
+        <div class="icon-card__swatch">#0A41FA</div>
+        <div class="icon-card__route">/</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="klient" style="--swatch: #2E7A0B;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M6 23V20.2C6 19.65 6.14167 19.1333 6.425 18.65C6.70833 18.1667 7.1 17.8 7.6 17.55C8.45 17.1167 9.40833 16.75 10.475 16.45C11.5417 16.15 12.7167 16 14 16C14.5 16 14.9875 16.025 15.4625 16.075C15.9375 16.125 16.4 16.2 16.85 16.3L15.1 18.05C14.9167 18.0167 14.7375 18 14.5625 18H14C12.8167 18 11.7542 18.1417 10.8125 18.425C9.87083 18.7083 9.1 19.0167 8.5 19.35C8.35 19.4333 8.22917 19.55 8.1375 19.7C8.04583 19.85 8 20.0167 8 20.2V21H14.25L16.25 23H6ZM19.55 23.4L16.1 19.95L17.5 18.55L19.55 20.6L24.6 15.55L26 16.95L19.55 23.4ZM14 15C12.9 15 11.9583 14.6083 11.175 13.825C10.3917 13.0417 10 12.1 10 11C10 9.9 10.3917 8.95833 11.175 8.175C11.9583 7.39167 12.9 7 14 7C15.1 7 16.0417 7.39167 16.825 8.175C17.6083 8.95833 18 9.9 18 11C18 12.1 17.6083 13.0417 16.825 13.825C16.0417 14.6083 15.1 15 14 15ZM14 13C14.55 13 15.0208 12.8042 15.4125 12.4125C15.8042 12.0208 16 11.55 16 11C16 10.45 15.8042 9.97917 15.4125 9.5875C15.0208 9.19583 14.55 9 14 9C13.45 9 12.9792 9.19583 12.5875 9.5875C12.1958 9.97917 12 10.45 12 11C12 11.55 12.1958 12.0208 12.5875 12.4125C12.9792 12.8042 13.45 13 14 13Z" fill="#2E7A0B"/>
+        </svg></div>
+        <div class="icon-card__name">klient</div>
+        <div class="icon-card__pascal">BrandSidebarKlientIcon</div>
+        <div class="icon-card__swatch">#2E7A0B</div>
+        <div class="icon-card__route">/klient</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="timeliste" style="--swatch: #2B9A9C;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M18.3333 5H12.6667V6.90567H18.3333V5ZM14.5556 17.3869H16.4444V11.6698H14.5556V17.3869ZM22.1394 11.0791L23.4806 9.72606C23.0744 9.24011 22.6306 8.78275 22.1489 8.38256L20.8078 9.73559C19.3439 8.55407 17.5022 7.84898 15.5 7.84898C10.8061 7.84898 7 11.6889 7 16.4245C7 21.1601 10.7967 25 15.5 25C20.2033 25 24 21.1601 24 16.4245C24 14.414 23.3011 12.556 22.1394 11.0791ZM15.5 23.1039C11.845 23.1039 8.88889 20.1215 8.88889 16.434C8.88889 12.7465 11.845 9.76417 15.5 9.76417C19.155 9.76417 22.1111 12.7465 22.1111 16.434C22.1111 20.1215 19.155 23.1039 15.5 23.1039Z" fill="#2B9A9C"/>
+        </svg></div>
+        <div class="icon-card__name">timeliste</div>
+        <div class="icon-card__pascal">BrandSidebarTimelisteIcon</div>
+        <div class="icon-card__swatch">#2B9A9C</div>
+        <div class="icon-card__route">/timeliste</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="reiser-og-utlegg" style="--swatch: #3B84D9;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M5.66 22.2027H24.66V24.3029H5.66V22.2027ZM25.23 12.374C25.179 12.1739 25.0909 11.9864 24.9707 11.8221C24.8506 11.6579 24.7008 11.5201 24.5299 11.4167C24.3589 11.3133 24.1703 11.2463 23.9747 11.2196C23.7791 11.1929 23.5804 11.2069 23.39 11.2609L18.08 12.752L11.18 6L9.25 6.53554L13.39 14.0646L8.42 15.4612L6.45 13.8441L5 14.2536L7.59 18.9685L24.16 14.3166C24.5456 14.2054 24.8741 13.9392 25.0743 13.5757C25.2745 13.2122 25.3305 12.7805 25.23 12.374Z" fill="#3B84D9"/>
+        </svg></div>
+        <div class="icon-card__name">reiser-og-utlegg</div>
+        <div class="icon-card__pascal">BrandSidebarReiserOgUtleggIcon</div>
+        <div class="icon-card__swatch">#3B84D9</div>
+        <div class="icon-card__route">/reiser-og-utlegg</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="bilag" style="--swatch: #4B64DE;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M22.5 6.57512L21 5L19.5 6.57512L18 5L16.5 6.57512L15 5L13.5 6.57512L12 5L10.5 6.57512L9 5L7.5 6.57512L6 5V26.0016L7.5 24.4265L9 26.0016L10.5 24.4265L12 26.0016L13.5 24.4265L15 26.0016L16.5 24.4265L18 26.0016L19.5 24.4265L21 26.0016L22.5 24.4265L24 26.0016V5L22.5 6.57512ZM22 22.9459H8V8.05573H22V22.9459ZM9 18.651H21V20.7512H9V18.651ZM9 14.4507H21V16.5509H9V14.4507ZM9 10.2504H21V12.3506H9V10.2504Z" fill="#4B64DE"/>
+        </svg></div>
+        <div class="icon-card__name">bilag</div>
+        <div class="icon-card__pascal">BrandSidebarBilagIcon</div>
+        <div class="icon-card__swatch">#4B64DE</div>
+        <div class="icon-card__route">/bilag</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="bank" style="--swatch: #128CCA;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M10.5 14.4507H8.5V21.8013H10.5V14.4507ZM16.5 14.4507H14.5V21.8013H16.5V14.4507ZM25 23.9014H6V26.0016H25V23.9014ZM22.5 14.4507H20.5V21.8013H22.5V14.4507ZM15.5 7.37318L20.71 10.2504H10.29L15.5 7.37318ZM15.5 5L6 10.2504V12.3506H25V10.2504L15.5 5Z" fill="#128CCA"/>
+        </svg></div>
+        <div class="icon-card__name">bank</div>
+        <div class="icon-card__pascal">BrandSidebarBankIcon</div>
+        <div class="icon-card__swatch">#128CCA</div>
+        <div class="icon-card__route">/bank</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="regnskap" style="--swatch: #2B8494;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M25 7.53504C23.8651 7.17645 22.6852 6.99945 21.5 7.01C19.5548 6.91749 17.6311 7.46843 16 8.58512C14.3689 7.46843 12.4452 6.91749 10.5 7.01C8.55484 6.91749 6.6311 7.46843 5 8.58512V23.9688C5.00888 24.105 5.06441 24.2332 5.15632 24.3297C5.24823 24.4262 5.37032 24.4845 5.5 24.4938C5.6 24.4938 5.65 24.4413 5.75 24.4413C7.24323 23.7247 8.8588 23.3319 10.5 23.2862C12.4452 23.1937 14.3689 23.7447 16 24.8614C17.6869 23.8817 19.5731 23.3416 21.5 23.2862C23.1449 23.2452 24.7748 23.6235 26.25 24.3888C26.3268 24.4312 26.4136 24.4494 26.5 24.4413C26.6297 24.432 26.7518 24.3737 26.8437 24.2772C26.9356 24.1807 26.9911 24.0525 27 23.9163V8.58512C26.3929 8.12195 25.7171 7.76716 25 7.53504ZM25 21.7111C23.8657 21.3497 22.6853 21.1726 21.5 21.1861C19.5731 21.2414 17.6869 21.7816 16 22.7612V10.6853C17.6869 9.70566 19.5731 9.16549 21.5 9.11016C22.6853 9.09669 23.8657 9.27375 25 9.6352V21.7111Z" fill="#2B8494"/>
+        </svg></div>
+        <div class="icon-card__name">regnskap</div>
+        <div class="icon-card__pascal">BrandSidebarRegnskapIcon</div>
+        <div class="icon-card__swatch">#2B8494</div>
+        <div class="icon-card__route">/regnskap</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="rapporter" style="--swatch: #2B8494;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M23 8.10016V10.2003H19V8.10016H23ZM13 8.10016V14.4006H9V8.10016H13ZM23 16.5008V22.8013H19V16.5008H23ZM13 20.7011V22.8013H9V20.7011H13ZM25 6H17V12.3005H25V6ZM15 6H7V16.5008H15V6ZM25 14.4006H17V24.9014H25V14.4006ZM15 18.601H7V24.9014H15V18.601Z" fill="#2B8494"/>
+        </svg></div>
+        <div class="icon-card__name">rapporter</div>
+        <div class="icon-card__pascal">BrandSidebarRapporterIcon</div>
+        <div class="icon-card__swatch">#2B8494</div>
+        <div class="icon-card__route">/rapporter</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="prosjekt" style="--swatch: #8339A3;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M24 10.2003H20V8.10016L18 6H14L12 8.10016V10.2003H8.00001C7.47007 10.202 6.96228 10.4238 6.58755 10.8173C6.21282 11.2108 6.0016 11.744 6.00001 12.3005V17.5509C5.99874 17.9195 6.09063 18.2819 6.26631 18.601C6.442 18.9202 6.69518 19.1847 7.00001 19.3675V22.8013C6.99909 23.0773 7.05019 23.3509 7.15037 23.6061C7.25055 23.8614 7.39784 24.0933 7.58374 24.2885C7.76964 24.4837 7.99048 24.6383 8.23355 24.7435C8.47662 24.8487 8.73711 24.9024 9.00001 24.9014H23C23.2629 24.9024 23.5234 24.8487 23.7665 24.7435C24.0095 24.6383 24.2304 24.4837 24.4163 24.2885C24.6022 24.0933 24.7495 23.8614 24.8497 23.6061C24.9498 23.3509 25.0009 23.0773 25 22.8013V19.357C25.3014 19.1727 25.5521 18.9094 25.7274 18.5927C25.9027 18.2761 25.9966 17.9171 26 17.5509V12.3005C25.9984 11.744 25.7872 11.2108 25.4125 10.8173C25.0377 10.4238 24.53 10.202 24 10.2003ZM14 8.10016H18V10.2003H14V8.10016ZM8.00001 12.3005H24V17.5509H19V14.4006H13V17.5509H8.00001V12.3005ZM17 18.601H15V16.5008H17V18.601ZM23 22.8013H9.00001V19.651H13V20.7011H19V19.651H23V22.8013Z" fill="#8339A3"/>
+        </svg></div>
+        <div class="icon-card__name">prosjekt</div>
+        <div class="icon-card__pascal">BrandSidebarProsjektIcon</div>
+        <div class="icon-card__swatch">#8339A3</div>
+        <div class="icon-card__route">/prosjekt</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="faktura" style="--swatch: #D9452B;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M12 19.7011H20V21.8013H12V19.7011ZM12 15.5008H20V17.601H12V15.5008ZM18 5H10C9.47005 5.00166 8.96227 5.22346 8.58753 5.61696C8.2128 6.01045 8.00158 6.54367 8 7.10016V23.9014C7.99999 24.4566 8.20933 24.9892 8.58225 25.3828C8.95516 25.7763 9.4613 25.9988 9.99 26.0016H22C22.5299 25.9999 23.0377 25.7781 23.4125 25.3846C23.7872 24.9911 23.9984 24.4579 24 23.9014V11.3005L18 5ZM22 23.9014H10V7.10016H17V12.3506H22V23.9014Z" fill="#D9452B"/>
+        </svg></div>
+        <div class="icon-card__name">faktura</div>
+        <div class="icon-card__pascal">BrandSidebarFakturaIcon</div>
+        <div class="icon-card__swatch">#D9452B</div>
+        <div class="icon-card__route">/faktura</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="kunde" style="--swatch: #58A316;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M13 18.1882C10.66 18.1882 6 19.4168 6 21.8635V23.7011H20V21.8635C20 19.4168 15.34 18.1882 13 18.1882ZM8.34 21.601C9.7623 20.7558 11.3658 20.3041 13 20.2884C14.6342 20.3041 16.2377 20.7558 17.66 21.601H8.34ZM13 16.3506C13.6922 16.3506 14.3689 16.135 14.9445 15.7312C15.5201 15.3273 15.9687 14.7533 16.2336 14.0817C16.4985 13.4102 16.5678 12.6712 16.4327 11.9583C16.2977 11.2453 15.9644 10.5905 15.4749 10.0765C14.9854 9.56247 14.3617 9.21243 13.6828 9.07062C13.0039 8.92881 12.3001 9.00159 11.6606 9.27977C11.0211 9.55794 10.4744 10.029 10.0899 10.6334C9.70527 11.2378 9.5 11.9484 9.5 12.6753C9.5 13.65 9.86875 14.5848 10.5251 15.2741C11.1815 15.9633 12.0717 16.3506 13 16.3506ZM13 11.1002C13.2967 11.1002 13.5867 11.1925 13.8334 11.3656C14.08 11.5387 14.2723 11.7847 14.3858 12.0725C14.4994 12.3603 14.5291 12.677 14.4712 12.9826C14.4133 13.2881 14.2704 13.5688 14.0607 13.7891C13.8509 14.0093 13.5836 14.1594 13.2926 14.2201C13.0017 14.2809 12.7001 14.2497 12.426 14.1305C12.1519 14.0113 11.9176 13.8094 11.7528 13.5504C11.588 13.2913 11.5 12.9868 11.5 12.6753C11.5 12.2575 11.658 11.8569 11.9393 11.5615C12.2206 11.2661 12.6022 11.1002 13 11.1002ZM20.04 18.2512C20.6248 18.6372 21.1097 19.1689 21.4516 19.7991C21.7935 20.4293 21.9819 21.1384 22 21.8635V23.7011H26V21.8635C26 19.7423 22.5 18.5347 20.04 18.2512ZM19 16.3506C19.9283 16.3506 20.8185 15.9633 21.4749 15.2741C22.1313 14.5848 22.5 13.65 22.5 12.6753C22.5 11.7005 22.1313 10.7657 21.4749 10.0765C20.8185 9.38722 19.9283 9 19 9C18.48 9.0021 17.9672 9.12775 17.5 9.36753C18.1507 10.3352 18.5001 11.4907 18.5001 12.6753C18.5001 13.8599 18.1507 15.0154 17.5 15.983C17.9672 16.2228 18.48 16.3485 19 16.3506Z" fill="#58A316"/>
+        </svg></div>
+        <div class="icon-card__name">kunde</div>
+        <div class="icon-card__pascal">BrandSidebarKundeIcon</div>
+        <div class="icon-card__swatch">#58A316</div>
+        <div class="icon-card__route">/kunde</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="lonn" style="--swatch: #DB5C35;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M24 8.00001H8.00001C7.73765 7.99931 7.47776 8.05323 7.23537 8.15866C6.99297 8.26408 6.77289 8.41892 6.58784 8.61421C6.40278 8.80951 6.25644 9.04139 6.15725 9.29645C6.05807 9.55151 6.00803 9.82468 6.01001 10.1002L6.00001 22.7011C5.99909 22.9772 6.05019 23.2507 6.15037 23.506C6.25055 23.7612 6.39783 23.9931 6.58374 24.1883C6.76964 24.3835 6.99048 24.5382 7.23355 24.6434C7.47662 24.7486 7.73711 24.8023 8.00001 24.8013H24C24.2629 24.8023 24.5234 24.7486 24.7665 24.6434C25.0095 24.5382 25.2304 24.3835 25.4163 24.1883C25.6022 23.9931 25.7495 23.7612 25.8497 23.506C25.9498 23.2507 26.0009 22.9772 26 22.7011V10.1002C26.0009 9.8241 25.9498 9.55057 25.8497 9.29533C25.7495 9.04009 25.6022 8.80818 25.4163 8.61297C25.2304 8.41776 25.0095 8.2631 24.7665 8.1579C24.5234 8.0527 24.2629 7.99904 24 8.00001ZM24 22.7011H8.00001V16.4006H24V22.7011ZM24 12.2003H8.00001V10.1002H24V12.2003Z" fill="#DB5C35"/>
+        </svg></div>
+        <div class="icon-card__name">lonn</div>
+        <div class="icon-card__pascal">BrandSidebarLonnIcon</div>
+        <div class="icon-card__swatch">#DB5C35</div>
+        <div class="icon-card__route">/lonn</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="oppgave" style="--swatch: #D63862;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 6C14.0222 6 12.0888 6.58649 10.4443 7.6853C8.79981 8.78412 7.51809 10.3459 6.76121 12.1732C6.00433 14.0004 5.8063 16.0111 6.19215 17.9509C6.578 19.8907 7.53041 21.6725 8.92894 23.0711C10.3275 24.4696 12.1093 25.422 14.0491 25.8078C15.9889 26.1937 17.9996 25.9957 19.8268 25.2388C21.6541 24.4819 23.2159 23.2002 24.3147 21.5557C25.4135 19.9112 26 17.9778 26 16C26 14.6868 25.7413 13.3864 25.2388 12.1732C24.7363 10.9599 23.9997 9.85752 23.0711 8.92893C22.1425 8.00035 21.0401 7.26375 19.8268 6.7612C18.6136 6.25866 17.3132 6 16 6ZM16 24C14.4178 24 12.871 23.5308 11.5554 22.6518C10.2398 21.7727 9.21447 20.5233 8.60897 19.0615C8.00347 17.5997 7.84504 15.9911 8.15372 14.4393C8.4624 12.8874 9.22433 11.462 10.3432 10.3431C11.462 9.22432 12.8874 8.4624 14.4393 8.15372C15.9911 7.84504 17.5997 8.00346 19.0615 8.60896C20.5233 9.21446 21.7727 10.2398 22.6518 11.5554C23.5308 12.871 24 14.4177 24 16C23.9971 18.1208 23.1533 20.154 21.6536 21.6536C20.154 23.1533 18.1208 23.9971 16 24ZM20.59 11.58L14 18.17L11.41 15.59L10 17L14 21L22 13L20.59 11.58Z" fill="#D63862"/>
+        </svg></div>
+        <div class="icon-card__name">oppgave</div>
+        <div class="icon-card__pascal">BrandSidebarOppgaveIcon</div>
+        <div class="icon-card__swatch">#D63862</div>
+        <div class="icon-card__route">/oppgave</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="produkt" style="--swatch: #8166C4;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M13.17 10.1002L15.17 12.2003H24V22.7011H8V10.1002H13.17ZM14 8H8C7.4713 8.00278 6.96516 8.22527 6.59225 8.61882C6.21933 9.01238 6.00999 9.54498 6.01 10.1002L6 22.7011C6.00158 23.2576 6.2128 23.7908 6.58753 24.1843C6.96227 24.5778 7.47005 24.7996 8 24.8013H24C24.5299 24.7996 25.0377 24.5778 25.4125 24.1843C25.7872 23.7908 25.9984 23.2576 26 22.7011V12.2003C25.9984 11.6438 25.7872 11.1106 25.4125 10.7171C25.0377 10.3236 24.5299 10.1018 24 10.1002H16L14 8Z" fill="#8166C4"/>
+        </svg></div>
+        <div class="icon-card__name">produkt</div>
+        <div class="icon-card__pascal">BrandSidebarProduktIcon</div>
+        <div class="icon-card__swatch">#8166C4</div>
+        <div class="icon-card__route">/produkt</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="dokument" style="--swatch: #B334A2;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M18 5H10C9.4713 5.00278 8.96516 5.22527 8.59225 5.61882C8.21933 6.01238 8.00999 6.54498 8.01 7.10016L8 23.9014C7.99999 24.4566 8.20933 24.9892 8.58225 25.3828C8.95516 25.7763 9.4613 25.9988 9.99 26.0016H22C22.5299 25.9999 23.0377 25.7781 23.4125 25.3846C23.7872 24.9911 23.9984 24.4579 24 23.9014V11.3005L18 5ZM10 23.9014V7.10016H17V12.3506H22V23.9014H10Z" fill="#B334A2"/>
+        </svg></div>
+        <div class="icon-card__name">dokument</div>
+        <div class="icon-card__pascal">BrandSidebarDokumentIcon</div>
+        <div class="icon-card__swatch">#B334A2</div>
+        <div class="icon-card__route">/dokument</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="integrasjoner" style="--swatch: #2E384D;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M11.8 26H8C7.45 26 6.97917 25.8042 6.5875 25.4125C6.19583 25.0208 6 24.55 6 24V20.2C6.8 20.2 7.5 19.9458 8.1 19.4375C8.7 18.9292 9 18.2833 9 17.5C9 16.7167 8.7 16.0708 8.1 15.5625C7.5 15.0542 6.8 14.8 6 14.8V11C6 10.45 6.19583 9.97917 6.5875 9.5875C6.97917 9.19583 7.45 9 8 9H12C12 8.3 12.2417 7.70833 12.725 7.225C13.2083 6.74167 13.8 6.5 14.5 6.5C15.2 6.5 15.7917 6.74167 16.275 7.225C16.7583 7.70833 17 8.3 17 9H21C21.55 9 22.0208 9.19583 22.4125 9.5875C22.8042 9.97917 23 10.45 23 11V15C23.7 15 24.2917 15.2417 24.775 15.725C25.2583 16.2083 25.5 16.8 25.5 17.5C25.5 18.2 25.2583 18.7917 24.775 19.275C24.2917 19.7583 23.7 20 23 20V24C23 24.55 22.8042 25.0208 22.4125 25.4125C22.0208 25.8042 21.55 26 21 26H17.2C17.2 25.1667 16.9375 24.4583 16.4125 23.875C15.8875 23.2917 15.25 23 14.5 23C13.75 23 13.1125 23.2917 12.5875 23.875C12.0625 24.4583 11.8 25.1667 11.8 26ZM8 24H10.125C10.525 22.9 11.1667 22.125 12.05 21.675C12.9333 21.225 13.75 21 14.5 21C15.25 21 16.0667 21.225 16.95 21.675C17.8333 22.125 18.475 22.9 18.875 24H21V18H23C23.1333 18 23.25 17.95 23.35 17.85C23.45 17.75 23.5 17.6333 23.5 17.5C23.5 17.3667 23.45 17.25 23.35 17.15C23.25 17.05 23.1333 17 23 17H21V11H15V9C15 8.86667 14.95 8.75 14.85 8.65C14.75 8.55 14.6333 8.5 14.5 8.5C14.3667 8.5 14.25 8.55 14.15 8.65C14.05 8.75 14 8.86667 14 9V11H8V13.2C8.9 13.5333 9.625 14.0917 10.175 14.875C10.725 15.6583 11 16.5333 11 17.5C11 18.45 10.725 19.3167 10.175 20.1C9.625 20.8833 8.9 21.45 8 21.8V24Z" fill="#2E384D"/>
+        </svg></div>
+        <div class="icon-card__name">integrasjoner</div>
+        <div class="icon-card__pascal">BrandSidebarIntegrasjonerIcon</div>
+        <div class="icon-card__swatch">#2E384D</div>
+        <div class="icon-card__route">/integrasjoner</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="arsoppgjor" style="--swatch: #2E384D;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M6.38281 23.1094V7.10938L20.6828 13.1094H20.3828C19.7995 13.1094 19.2495 13.176 18.7328 13.3094C18.2161 13.4427 17.7161 13.626 17.2328 13.8594L8.38281 10.1094V13.6094L14.3828 15.1094L8.38281 16.6094V20.1094L13.7828 17.8094C13.6495 18.1927 13.5495 18.5717 13.4828 18.9464C13.4161 19.3217 13.3828 19.7094 13.3828 20.1094V20.1594L6.38281 23.1094ZM20.3828 25.1094C18.9995 25.1094 17.8205 24.622 16.8458 23.6474C15.8705 22.672 15.3828 21.4927 15.3828 20.1094C15.3828 18.726 15.8705 17.5467 16.8458 16.5714C17.8205 15.5967 18.9995 15.1094 20.3828 15.1094C21.7661 15.1094 22.9455 15.5967 23.9208 16.5714C24.8955 17.5467 25.3828 18.726 25.3828 20.1094C25.3828 21.4927 24.8955 22.672 23.9208 23.6474C22.9455 24.622 21.7661 25.1094 20.3828 25.1094ZM22.0328 22.4594L22.7328 21.7594L20.8828 19.9094V17.1094H19.8828V20.3094L22.0328 22.4594Z" fill="#2E384D"/>
+        </svg></div>
+        <div class="icon-card__name">arsoppgjor</div>
+        <div class="icon-card__pascal">BrandSidebarArsoppgjorIcon</div>
+        <div class="icon-card__swatch">#2E384D</div>
+        <div class="icon-card__route">/arsoppgjor</div>
+      </div>
+      <div class="icon-card icon-card--brand" data-name="selskap" style="--swatch: #4C9B4C;">
+        <div class="icon-card__preview"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M22 19H20V21H22M22 15H20V17H22M24 23H16V21H18V19H16V17H18V15H16V13H24M14 11H12V9H14M14 15H12V13H14M14 19H12V17H14M14 23H12V21H14M10 11H8V9H10M10 15H8V13H10M10 19H8V17H10M10 23H8V21H10M16 11V7H6V25H26V11H16Z" fill="#4C9B4C"/>
+        </svg></div>
+        <div class="icon-card__name">selskap</div>
+        <div class="icon-card__pascal">BrandSidebarSelskapIcon</div>
+        <div class="icon-card__swatch">#4C9B4C</div>
+        <div class="icon-card__route">/selskap</div>
       </div>
     </div>
   </section>

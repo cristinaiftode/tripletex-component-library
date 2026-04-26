@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tripletex-tavla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       ATLAS TOKENS — semantic + global (subset used in this page)
+       Source: tokens/colors.css, tokens/spacing.css, tokens/typography.css
+    ============================================================ */
+    :root {
+      /* Surfaces */
+      --surface-default: #ffffff;
+      --surface-background: #f7f8fc;
+      --surface-nav: #d4ebeb;
+      --surface-info-rest: #f2f5ff;
+      --surface-info-highlight: #e6ebff;
+      --surface-disabled: #e9eaed;
+
+      /* Text */
+      --text-primary: #2e384d;
+      --text-muted: #6b7280;
+      --text-disabled: #51596a;
+      --text-link: #0a41fa;
+      --text-action: #0a41fa;
+      --text-on-action: #ffffff;
+      --text-success: #0d6132;
+      --text-danger: #c41a4a;
+
+      /* Borders */
+      --border-rest: #d5d7db;
+      --border-strong: #abafb7;
+      --border-focus: #0a41fa;
+
+      /* Actions */
+      --action-primary-rest: #0a41fa;
+
+      /* Global palette */
+      --global-blue-05: #f2f5ff;
+      --global-blue-10: #e6ebff;
+      --global-blue-20: #ced9fe;
+      --global-blue-40: #9db3fd;
+      --global-blue-60: #6c8dfc;
+      --global-blue-100: #0a41fa;
+      --global-grey-10: #e9eaed;
+      --global-grey-40: #abafb7;
+      --global-grey-60: #818794;
+      --global-grey-100: #2e384d;
+      --global-green-100: #1f9c4d;
+      --global-yellow-100: #f5b324;
+      --global-red-100: #e3173e;
+      --global-purple-60: #a98edb;
+      --global-purple-100: #7048b9;
+      --global-pink-60: #f4a4c8;
+
+      /* Sizing */
+      --element-height-large: 40px;
+      --element-height-medium: 32px;
+      --element-height-small: 24px;
+      --radius-default: 4px;
+      --radius-full: 99999px;
+      --icon-size-small: 20px;
+      --icon-size-medium: 24px;
+
+      /* Layout */
+      --topbar-height: 50px;
+      --sidebar-width: 200px;
+      --sidebar-width-collapsed: 52px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-primary);
+      background: var(--surface-background);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    button { font-family: inherit; }
+
+    /* ============================================================
+       APP SHELL — full-height grid
+       Row 1: topbar (50px)
+       Row 2: sidebar (200px) + content (1fr)
+       The sidebar fills the full remaining height — that's the bug fix.
+
+       Collapsed state: when .app--sidebar-collapsed is set, the
+       sidebar column shrinks to --sidebar-width-collapsed (52px) and
+       individual items hide their text labels.
+    ============================================================ */
+    .app {
+      display: grid;
+      grid-template-rows: var(--topbar-height) 1fr;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-areas:
+        "topbar topbar"
+        "sidebar main";
+      min-height: 100vh;
+      transition: grid-template-columns 0.2s ease;
+    }
+    .app--sidebar-collapsed {
+      grid-template-columns: var(--sidebar-width-collapsed) 1fr;
+    }
+
+    /* ============================================================
+       TOPBAR
+    ============================================================ */
+    .tt-topbar {
+      grid-area: topbar;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--topbar-height);
+      padding: 0 16px 0 8px;
+      background: var(--surface-nav);
+      border-bottom: 1px solid rgba(46, 56, 77, 0.08);
+    }
+    .tt-topbar__left { display: flex; align-items: center; gap: 8px; }
+    .tt-topbar__icon-btn {
+      width: 40px; height: 40px; padding: 10px;
+      background: transparent; border: none; border-radius: var(--radius-default);
+      color: var(--text-primary); cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background-color 0.15s ease;
+    }
+    .tt-topbar__icon-btn:hover { background: rgba(46, 56, 77, 0.08); }
+    .tt-topbar__wordmark {
+      font-weight: 500; font-size: 20px; letter-spacing: -0.02em;
+      color: var(--text-primary); padding: 0 4px;
+    }
+    .tt-topbar__wordmark::first-letter { color: var(--action-primary-rest); }
+    .tt-topbar__company {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 8px 4px 4px; background: transparent; border: none;
+      border-radius: var(--radius-default); cursor: pointer; margin-left: 8px;
+    }
+    .tt-topbar__company:hover { background: rgba(46, 56, 77, 0.06); }
+    .tt-avatar {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #d8d2e9; color: var(--text-primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 500;
+    }
+    .tt-topbar__right { display: flex; align-items: center; gap: 12px; }
+    .tt-topbar__search {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 32px; padding: 6px 12px;
+      background: var(--surface-default); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-full); color: var(--global-grey-60);
+      cursor: text; min-width: 160px;
+    }
+    .tt-topbar__assistant {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; background: #e9f5f5; border: none;
+      border-radius: var(--radius-default); cursor: pointer;
+      font-size: 14px; font-weight: 500; color: var(--text-primary);
+    }
+    .tt-topbar__assistant:hover { background: #d4ecec; }
+    .tt-topbar__actions { display: inline-flex; align-items: center; gap: 4px; }
+    .tt-topbar__actions .tt-topbar__icon-btn { width: 32px; height: 32px; padding: 6px; }
+
+    /* ============================================================
+       SIDEBAR
+       grid-area: sidebar — fills full height under topbar
+
+       Items are 32x32 brand-coloured SVGs (BRAND_SIDEBAR_ICONS).
+       The selected state paints a blue pill behind the icon and
+       label and switches the icon path fill to white via CSS.
+    ============================================================ */
+    .tt-sidebar {
+      grid-area: sidebar;
+      background: var(--surface-default);
+      border-right: 1px solid rgba(46, 56, 77, 0.06);
+      padding: 8px 6px 16px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      transition: padding 0.2s ease;
+    }
+    .tt-sidebar__list {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .tt-sidebar-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 4px 6px; height: 40px;
+      border-radius: var(--radius-default);
+      background: transparent; border: none; width: 100%;
+      cursor: pointer; text-align: left;
+      color: var(--text-primary); font-size: 14px; font-weight: 400;
+      transition: background-color 0.15s ease;
+      white-space: nowrap;
+    }
+    .tt-sidebar-item:hover { background: var(--surface-info-highlight); }
+    .tt-sidebar-item--selected {
+      background: var(--action-primary-rest);
+      color: var(--text-on-action);
+      font-weight: 500;
+    }
+    /* In selected state, force every brand-icon path to render white */
+    .tt-sidebar-item--selected .tt-sidebar-item__icon svg path {
+      fill: var(--text-on-action) !important;
+    }
+    .tt-sidebar-item__icon {
+      flex-shrink: 0; width: 32px; height: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .tt-sidebar-item__icon svg { width: 32px; height: 32px; display: block; }
+    .tt-sidebar-item__label {
+      flex: 1; min-width: 0;
+      overflow: hidden; text-overflow: ellipsis;
+      transition: opacity 0.15s ease;
+    }
+
+    /* Collapsed sidebar — icons only */
+    .app--sidebar-collapsed .tt-sidebar { padding: 8px 4px 16px; }
+    .app--sidebar-collapsed .tt-sidebar-item {
+      justify-content: center;
+      padding: 4px;
+    }
+    .app--sidebar-collapsed .tt-sidebar-item__label {
+      width: 0; opacity: 0; pointer-events: none;
+    }
+
+    /* ============================================================
+       MAIN CONTENT
+    ============================================================ */
+    .main {
+      grid-area: main;
+      padding: 24px 32px 48px;
+      overflow-y: auto;
+      background: var(--surface-background);
+    }
+    .page-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .page-header__title {
+      font-size: 24px; font-weight: 500; margin: 0;
+    }
+    .page-header__edit {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; background: transparent;
+      border: 1px solid var(--border-rest); border-radius: var(--radius-default);
+      color: var(--text-primary); font-size: 14px; cursor: pointer;
+    }
+    .page-header__edit:hover { background: rgba(46, 56, 77, 0.04); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* --- Cards --- */
+    .tt-card {
+      background: var(--surface-default);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid rgba(46, 56, 77, 0.06);
+    }
+    .tt-card + .tt-card { margin-top: 16px; }
+    .tt-card__head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .tt-card__title { font-size: 16px; font-weight: 500; margin: 0; }
+    .tt-card__meta {
+      display: inline-flex; align-items: center; gap: 12px;
+      color: var(--text-link); font-size: 14px;
+    }
+    .tt-card__link {
+      display: inline-flex; align-items: center; gap: 4px;
+      color: var(--text-link); text-decoration: none; font-size: 14px;
+    }
+    .tt-card__date {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-primary); font-size: 14px;
+      padding: 4px 8px; border: 1px solid var(--border-rest);
+      border-radius: var(--radius-default); cursor: pointer;
+    }
+
+    /* --- Stat cards row --- */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat {
+      background: var(--surface-default);
+      border-radius: 8px; padding: 14px 16px;
+      border: 1px solid rgba(46, 56, 77, 0.06);
+      display: flex; flex-direction: column; gap: 4px;
+      cursor: pointer;
+      transition: box-shadow 0.15s ease;
+    }
+    .stat:hover { box-shadow: 0 1px 4px rgba(46, 56, 77, 0.08); }
+    .stat__top {
+      display: flex; align-items: center; justify-content: space-between;
+      color: var(--text-muted); font-size: 13px;
+    }
+    .stat__value { font-size: 22px; font-weight: 500; color: var(--text-primary); }
+
+    /* --- Donut chart wrapper --- */
+    .donut-wrap {
+      display: grid; grid-template-columns: 180px 1fr;
+      align-items: center; gap: 24px;
+    }
+    .legend { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+    .legend__row { display: flex; align-items: baseline; gap: 8px; }
+    .legend__dot {
+      width: 8px; height: 8px; border-radius: 50%; display: inline-block;
+      flex-shrink: 0; margin-top: 4px;
+    }
+    .legend__label { color: var(--text-muted); }
+    .legend__value { color: var(--text-primary); font-weight: 500; }
+
+    /* --- Salary bars --- */
+    .salary-bar {
+      display: flex; height: 12px; border-radius: var(--radius-full);
+      overflow: hidden; margin: 12px 0 8px;
+    }
+    .salary-bar > span { display: block; }
+    .salary-info {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      font-size: 13px; color: var(--text-muted);
+    }
+    .salary-info b { color: var(--text-primary); font-weight: 500; }
+
+    /* --- Side rail --- */
+    .rail { display: flex; flex-direction: column; gap: 16px; }
+    .rail .tt-card + .tt-card { margin-top: 0; }
+    .rail .tt-card__title { font-size: 14px; font-weight: 500; }
+    .rail-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .rail-item {
+      display: flex; gap: 8px; padding: 8px;
+      border-radius: var(--radius-default);
+      background: var(--surface-info-rest);
+    }
+    .rail-item__icon {
+      width: 20px; height: 20px; flex-shrink: 0; color: var(--text-action);
+    }
+    .rail-item__title { font-size: 13px; font-weight: 500; }
+    .rail-item__sub { font-size: 12px; color: var(--text-muted); }
+    .rail-card-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 12px; color: var(--text-link); font-size: 13px;
+      text-decoration: none;
+    }
+    .tip-card {
+      background: linear-gradient(135deg, #f2f5ff 0%, #e6ebff 100%);
+      border-radius: 8px; padding: 16px;
+      position: relative; overflow: hidden;
+    }
+    .tip-card__badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--surface-default); padding: 2px 8px;
+      border-radius: var(--radius-full); font-size: 11px; font-weight: 500;
+      color: var(--text-action); margin-bottom: 8px;
+    }
+    .tip-card__title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .tip-card__body { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+    .tip-card__cta {
+      display: inline-block; padding: 6px 12px;
+      background: var(--action-primary-rest); color: var(--text-on-action);
+      font-size: 13px; font-weight: 500;
+      border: none; border-radius: var(--radius-default); cursor: pointer;
+    }
+
+    /* --- Bar chart --- */
+    .barchart {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+    }
+    .barchart__y {
+      display: flex; flex-direction: column-reverse; justify-content: space-between;
+      font-size: 11px; color: var(--text-muted);
+      padding: 0 0 24px;
+    }
+    .barchart__plot {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px;
+      align-items: end; height: 220px; padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-rest);
+      position: relative;
+    }
+    .barchart__zero {
+      position: absolute; left: 0; right: 0; bottom: 24px;
+      border-top: 1px dashed var(--border-rest);
+      pointer-events: none;
+    }
+    .barchart__bar {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 2px; position: relative; height: 100%;
+      justify-content: end;
+    }
+    .barchart__pos { background: var(--global-blue-100); width: 100%; border-radius: 2px 2px 0 0; }
+    .barchart__neg { background: var(--global-pink-60); width: 100%; border-radius: 0 0 2px 2px; }
+    .barchart__label {
+      position: absolute; bottom: -22px; font-size: 11px; color: var(--text-muted);
+    }
+    .chart-summary {
+      display: flex; gap: 24px; align-items: baseline;
+      margin: 8px 0 16px;
+    }
+    .chart-summary__num { font-size: 22px; font-weight: 500; }
+    .chart-summary__delta {
+      display: inline-flex; align-items: center; gap: 4px;
+      color: var(--text-success); font-size: 14px; font-weight: 500;
+    }
+    .chart-totals {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      margin: 16px 0 8px; font-size: 13px;
+    }
+
+    /* --- Line chart --- */
+    .linechart {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 8px;
+    }
+    .linechart__plot { height: 220px; position: relative; }
+    .linechart__plot svg { width: 100%; height: 100%; display: block; }
+
+    /* --- Misc --- */
+    .small-link {
+      color: var(--text-muted); font-size: 12px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .arrow { color: var(--text-action); }
+
+    /* ============================================================
+       MODAL — "Moduler til Tripletex-tavla"
+    ============================================================ */
+    .tt-modal {
+      position: fixed; inset: 0;
+      background: rgba(46, 56, 77, 0.4);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 100;
+      padding: 32px;
+    }
+    .tt-modal--open { display: flex; }
+    .tt-modal__panel {
+      background: var(--surface-default);
+      border-radius: 12px;
+      width: min(1100px, 100%);
+      max-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(46, 56, 77, 0.18);
+    }
+
+    /* Modal sidebar (Menu) */
+    .tt-modal__sidebar {
+      padding: 20px 12px;
+      background: var(--surface-default);
+      border-right: 1px solid rgba(46, 56, 77, 0.08);
+    }
+    .tt-modal__sidebar-title {
+      font-size: 13px; font-weight: 500; color: var(--text-primary);
+      padding: 0 8px; margin: 0 0 12px;
+    }
+    .tt-modal__menu {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .tt-modal__menu-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 8px 8px; height: 36px;
+      border-radius: var(--radius-default);
+      background: transparent; border: none; width: 100%;
+      cursor: pointer; text-align: left;
+      color: var(--text-primary); font-size: 14px;
+      transition: background-color 0.15s ease;
+    }
+    .tt-modal__menu-item:hover { background: var(--surface-info-highlight); }
+    .tt-modal__menu-item--selected {
+      background: var(--surface-info-rest);
+      font-weight: 500;
+    }
+    .tt-modal__menu-item svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-muted); }
+
+    /* Modal main */
+    .tt-modal__main {
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .tt-modal__header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 24px 28px 12px;
+      gap: 16px;
+    }
+    .tt-modal__header h2 {
+      font-size: 20px; font-weight: 500; margin: 0 0 4px;
+    }
+    .tt-modal__header p {
+      margin: 0; font-size: 13px; color: var(--text-muted); max-width: 640px;
+    }
+    .tt-modal__close {
+      width: 32px; height: 32px; padding: 0;
+      background: transparent; border: none; border-radius: var(--radius-default);
+      cursor: pointer; color: var(--text-primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .tt-modal__close:hover { background: rgba(46, 56, 77, 0.08); }
+
+    /* Filter row */
+    .tt-modal__filters {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 28px 16px;
+      gap: 16px;
+    }
+    .tt-modal__filter-group { display: flex; align-items: center; gap: 8px; }
+    .tt-modal__filter-label { font-size: 13px; color: var(--text-primary); margin-right: 4px; }
+    .tt-chip {
+      display: inline-flex; align-items: center;
+      padding: 4px 12px; height: 28px;
+      background: var(--surface-default);
+      border: 1px solid var(--border-rest);
+      border-radius: var(--radius-full);
+      font-size: 13px; color: var(--text-primary);
+      cursor: pointer; font-family: inherit;
+      transition: all 0.15s ease;
+    }
+    .tt-chip:hover { background: var(--surface-info-rest); }
+    .tt-chip--selected {
+      background: var(--surface-info-rest);
+      border-color: var(--action-primary-rest);
+      color: var(--text-action);
+      font-weight: 500;
+    }
+    .tt-modal__search {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 32px; padding: 6px 12px;
+      background: var(--surface-default);
+      border: 1px solid var(--border-rest);
+      border-radius: var(--radius-default);
+      color: var(--global-grey-60);
+      min-width: 220px;
+    }
+    .tt-modal__search input {
+      border: none; outline: none; background: transparent;
+      width: 100%; font-family: inherit; font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    /* Modal body — scrollable widget grid */
+    .tt-modal__body {
+      flex: 1; overflow-y: auto;
+      padding: 0 28px 28px;
+    }
+    .tt-modal__section { margin-top: 8px; }
+    .tt-modal__section-head {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 0; margin-bottom: 12px;
+      background: transparent; border: none; cursor: pointer;
+      color: var(--text-primary); font-family: inherit;
+    }
+    .tt-modal__section-icon { width: 18px; height: 18px; color: var(--text-primary); }
+    .tt-modal__section-title { font-size: 14px; font-weight: 500; }
+    .tt-modal__section-caret { color: var(--text-muted); }
+
+    .widget-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .widget-card {
+      background: var(--surface-default);
+      border: 1px solid var(--border-rest);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .widget-card__thumb {
+      background: var(--surface-background);
+      border: 1px solid rgba(46, 56, 77, 0.06);
+      border-radius: 6px;
+      height: 120px;
+      padding: 10px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .widget-card__thumb svg { max-width: 100%; max-height: 100%; }
+    .widget-card__title { font-size: 14px; font-weight: 500; margin: 0; }
+    .widget-card__desc {
+      font-size: 12px; color: var(--text-muted); margin: 0;
+      line-height: 1.4;
+    }
+    .widget-card__cta {
+      align-self: flex-start;
+      display: inline-flex; align-items: center;
+      padding: 6px 12px; height: 28px;
+      background: var(--surface-info-rest);
+      color: var(--text-action);
+      border: 1px solid var(--border-rest);
+      border-radius: var(--radius-default);
+      font-family: inherit; font-size: 13px; font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .widget-card__cta:hover { background: var(--surface-info-highlight); }
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+
+    <!-- ========== TOPBAR ========== -->
+    <header class="tt-topbar">
+      <div class="tt-topbar__left">
+        <button class="tt-topbar__icon-btn" aria-label="Vis/skjul meny" id="sidebar-toggle" aria-expanded="true" aria-controls="app">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <span class="tt-topbar__wordmark">tripletex</span>
+        <button class="tt-topbar__company">
+          <span class="tt-avatar">T</span>
+          <span>Tripletex AS</span>
+        </button>
+      </div>
+      <div class="tt-topbar__right">
+        <div class="tt-topbar__search">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M13 13l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Søk</span>
+        </div>
+        <button class="tt-topbar__assistant">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M16 7L16.9375 4.9375L19 4L16.9375 3.0625L16 1L15.0625 3.0625L13 4L15.0625 4.9375L16 7Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 3L9.53125 7.46875L14 9.5L9.53125 11.5312L7.5 16L5.46875 11.5312L1 9.5L5.46875 7.46875L7.5 3ZM7.5 12.5L8.43691 10.4369L10.5 9.5L8.43691 8.56309L7.5 6.5L6.56309 8.56309L4.5 9.5L6.56309 10.4369L7.5 12.5Z"/></svg>
+          Assistent
+        </button>
+        <div class="tt-topbar__actions">
+          <button class="tt-topbar__icon-btn" aria-label="Favourites"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5.2 5.6.5-4.3 3.7 1.3 5.5L10 14l-5 2.9 1.3-5.5L2 7.7l5.6-.5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+          <button class="tt-topbar__icon-btn" aria-label="Help"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M9.25 14H10.75V9H9.25V14ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18ZM10 16.5C13.59 16.5 16.5 13.59 16.5 10C16.5 6.41 13.59 3.5 10 3.5C6.41 3.5 3.5 6.41 3.5 10C3.5 13.59 6.41 16.5 10 16.5Z"/></svg></button>
+          <button class="tt-topbar__icon-btn" aria-label="Notifications"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 18a2 2 0 002-2H8a2 2 0 002 2zm6-3v-1l-1.5-1.5V8a4.5 4.5 0 00-3.5-4.4V3a1 1 0 10-2 0v.6A4.5 4.5 0 005.5 8v4.5L4 14v1h12z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+          <button class="tt-topbar__icon-btn" aria-label="Settings"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M15.65 11.2c.03-.26.06-.51.06-.78 0-.27-.02-.53-.06-.78l1.74-1.32a.4.4 0 00.1-.51l-1.65-2.77a.4.4 0 00-.49-.18l-2.05.8a6 6 0 00-1.35-.78l-.31-2.12A.4.4 0 0011.2 2.4H7.91a.4.4 0 00-.4.34l-.31 2.12a6 6 0 00-1.39.78L3.76 4.84a.4.4 0 00-.49.18L1.6 7.79a.4.4 0 00.1.51L3.44 9.62a6 6 0 00-.06.78c0 .27.02.53.06.78L1.7 12.5a.4.4 0 00-.1.51l1.64 2.77a.4.4 0 00.49.18l2.05-.8a6 6 0 001.4.79l.3 2.12a.4.4 0 00.4.34h3.29a.4.4 0 00.4-.34l.31-2.12a6 6 0 001.39-.79l2.05.8a.4.4 0 00.49-.18l1.64-2.77a.4.4 0 00-.1-.51L15.65 11.2zM9.54 13.28a2.88 2.88 0 110-5.76 2.88 2.88 0 010 5.76z"/></svg></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== SIDEBAR (full height) ========== -->
+    <!--
+      All 19 icons below come from BRAND_SIDEBAR_ICONS in
+      components/BrandSidebarIcons.tsx (32×32 viewBox, baked-in brand
+      colour). The selected item paints a blue background pill; CSS
+      forces the icon path to white in that state — see
+      .tt-sidebar-item--selected svg path { fill: #fff !important }.
+
+      `title` on each button gives a tooltip when collapsed.
+    -->
+    <nav class="tt-sidebar" aria-label="Hovednavigasjon">
+      <ul class="tt-sidebar__list">
+        <li><button class="tt-sidebar-item tt-sidebar-item--selected" title="Hjem">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M15.9999 10.1879L20.7058 14.6352V22.3539H18.8234V16.4241H13.1764V22.3539H11.294V14.6352L15.9999 10.1879ZM15.9999 7.5293L6.58813 16.4241H9.41166V24.3306H15.0587V18.4007H16.9411V24.3306H22.5881V16.4241H25.4117L15.9999 7.5293Z" fill="#0A41FA"/></svg></span>
+          <span class="tt-sidebar-item__label">Hjem</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Favoritter">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M26.625 13.0675L18.9856 12.4088L16 5.375L13.0144 12.4194L5.375 13.0675L11.1762 18.0931L9.43375 25.5625L16 21.5994L22.5662 25.5625L20.8344 18.0931L26.625 13.0675Z" fill="#FAB300"/></svg></span>
+          <span class="tt-sidebar-item__label">Favoritter</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Klient">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 23V20.2C6 19.65 6.14167 19.1333 6.425 18.65C6.70833 18.1667 7.1 17.8 7.6 17.55C8.45 17.1167 9.40833 16.75 10.475 16.45C11.5417 16.15 12.7167 16 14 16C14.5 16 14.9875 16.025 15.4625 16.075C15.9375 16.125 16.4 16.2 16.85 16.3L15.1 18.05C14.9167 18.0167 14.7375 18 14.5625 18H14C12.8167 18 11.7542 18.1417 10.8125 18.425C9.87083 18.7083 9.1 19.0167 8.5 19.35C8.35 19.4333 8.22917 19.55 8.1375 19.7C8.04583 19.85 8 20.0167 8 20.2V21H14.25L16.25 23H6ZM19.55 23.4L16.1 19.95L17.5 18.55L19.55 20.6L24.6 15.55L26 16.95L19.55 23.4ZM14 15C12.9 15 11.9583 14.6083 11.175 13.825C10.3917 13.0417 10 12.1 10 11C10 9.9 10.3917 8.95833 11.175 8.175C11.9583 7.39167 12.9 7 14 7C15.1 7 16.0417 7.39167 16.825 8.175C17.6083 8.95833 18 9.9 18 11C18 12.1 17.6083 13.0417 16.825 13.825C16.0417 14.6083 15.1 15 14 15ZM14 13C14.55 13 15.0208 12.8042 15.4125 12.4125C15.8042 12.0208 16 11.55 16 11C16 10.45 15.8042 9.97917 15.4125 9.5875C15.0208 9.19583 14.55 9 14 9C13.45 9 12.9792 9.19583 12.5875 9.5875C12.1958 9.97917 12 10.45 12 11C12 11.55 12.1958 12.0208 12.5875 12.4125C12.9792 12.8042 13.45 13 14 13Z" fill="#2E7A0B"/></svg></span>
+          <span class="tt-sidebar-item__label">Klient</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Timeliste">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M18.3333 5H12.6667V6.90567H18.3333V5ZM14.5556 17.3869H16.4444V11.6698H14.5556V17.3869ZM22.1394 11.0791L23.4806 9.72606C23.0744 9.24011 22.6306 8.78275 22.1489 8.38256L20.8078 9.73559C19.3439 8.55407 17.5022 7.84898 15.5 7.84898C10.8061 7.84898 7 11.6889 7 16.4245C7 21.1601 10.7967 25 15.5 25C20.2033 25 24 21.1601 24 16.4245C24 14.414 23.3011 12.556 22.1394 11.0791ZM15.5 23.1039C11.845 23.1039 8.88889 20.1215 8.88889 16.434C8.88889 12.7465 11.845 9.76417 15.5 9.76417C19.155 9.76417 22.1111 12.7465 22.1111 16.434C22.1111 20.1215 19.155 23.1039 15.5 23.1039Z" fill="#2B9A9C"/></svg></span>
+          <span class="tt-sidebar-item__label">Timeliste</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Reiser og utlegg">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5.66 22.2027H24.66V24.3029H5.66V22.2027ZM25.23 12.374C25.179 12.1739 25.0909 11.9864 24.9707 11.8221C24.8506 11.6579 24.7008 11.5201 24.5299 11.4167C24.3589 11.3133 24.1703 11.2463 23.9747 11.2196C23.7791 11.1929 23.5804 11.2069 23.39 11.2609L18.08 12.752L11.18 6L9.25 6.53554L13.39 14.0646L8.42 15.4612L6.45 13.8441L5 14.2536L7.59 18.9685L24.16 14.3166C24.5456 14.2054 24.8741 13.9392 25.0743 13.5757C25.2745 13.2122 25.3305 12.7805 25.23 12.374Z" fill="#3B84D9"/></svg></span>
+          <span class="tt-sidebar-item__label">Reiser og utlegg</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Bilag">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M22.5 6.57512L21 5L19.5 6.57512L18 5L16.5 6.57512L15 5L13.5 6.57512L12 5L10.5 6.57512L9 5L7.5 6.57512L6 5V26.0016L7.5 24.4265L9 26.0016L10.5 24.4265L12 26.0016L13.5 24.4265L15 26.0016L16.5 24.4265L18 26.0016L19.5 24.4265L21 26.0016L22.5 24.4265L24 26.0016V5L22.5 6.57512ZM22 22.9459H8V8.05573H22V22.9459ZM9 18.651H21V20.7512H9V18.651ZM9 14.4507H21V16.5509H9V14.4507ZM9 10.2504H21V12.3506H9V10.2504Z" fill="#4B64DE"/></svg></span>
+          <span class="tt-sidebar-item__label">Bilag</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Bank">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M10.5 14.4507H8.5V21.8013H10.5V14.4507ZM16.5 14.4507H14.5V21.8013H16.5V14.4507ZM25 23.9014H6V26.0016H25V23.9014ZM22.5 14.4507H20.5V21.8013H22.5V14.4507ZM15.5 7.37318L20.71 10.2504H10.29L15.5 7.37318ZM15.5 5L6 10.2504V12.3506H25V10.2504L15.5 5Z" fill="#128CCA"/></svg></span>
+          <span class="tt-sidebar-item__label">Bank</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Regnskap">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M25 7.53504C23.8651 7.17645 22.6852 6.99945 21.5 7.01C19.5548 6.91749 17.6311 7.46843 16 8.58512C14.3689 7.46843 12.4452 6.91749 10.5 7.01C8.55484 6.91749 6.6311 7.46843 5 8.58512V23.9688C5.00888 24.105 5.06441 24.2332 5.15632 24.3297C5.24823 24.4262 5.37032 24.4845 5.5 24.4938C5.6 24.4938 5.65 24.4413 5.75 24.4413C7.24323 23.7247 8.8588 23.3319 10.5 23.2862C12.4452 23.1937 14.3689 23.7447 16 24.8614C17.6869 23.8817 19.5731 23.3416 21.5 23.2862C23.1449 23.2452 24.7748 23.6235 26.25 24.3888C26.3268 24.4312 26.4136 24.4494 26.5 24.4413C26.6297 24.432 26.7518 24.3737 26.8437 24.2772C26.9356 24.1807 26.9911 24.0525 27 23.9163V8.58512C26.3929 8.12195 25.7171 7.76716 25 7.53504ZM25 21.7111C23.8657 21.3497 22.6853 21.1726 21.5 21.1861C19.5731 21.2414 17.6869 21.7816 16 22.7612V10.6853C17.6869 9.70566 19.5731 9.16549 21.5 9.11016C22.6853 9.09669 23.8657 9.27375 25 9.6352V21.7111Z" fill="#2B8494"/></svg></span>
+          <span class="tt-sidebar-item__label">Regnskap</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Rapporter">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M23 8.10016V10.2003H19V8.10016H23ZM13 8.10016V14.4006H9V8.10016H13ZM23 16.5008V22.8013H19V16.5008H23ZM13 20.7011V22.8013H9V20.7011H13ZM25 6H17V12.3005H25V6ZM15 6H7V16.5008H15V6ZM25 14.4006H17V24.9014H25V14.4006ZM15 18.601H7V24.9014H15V18.601Z" fill="#2B8494"/></svg></span>
+          <span class="tt-sidebar-item__label">Rapporter</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Prosjekt">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M24 10.2003H20V8.10016L18 6H14L12 8.10016V10.2003H8.00001C7.47007 10.202 6.96228 10.4238 6.58755 10.8173C6.21282 11.2108 6.0016 11.744 6.00001 12.3005V17.5509C5.99874 17.9195 6.09063 18.2819 6.26631 18.601C6.442 18.9202 6.69518 19.1847 7.00001 19.3675V22.8013C6.99909 23.0773 7.05019 23.3509 7.15037 23.6061C7.25055 23.8614 7.39784 24.0933 7.58374 24.2885C7.76964 24.4837 7.99048 24.6383 8.23355 24.7435C8.47662 24.8487 8.73711 24.9024 9.00001 24.9014H23C23.2629 24.9024 23.5234 24.8487 23.7665 24.7435C24.0095 24.6383 24.2304 24.4837 24.4163 24.2885C24.6022 24.0933 24.7495 23.8614 24.8497 23.6061C24.9498 23.3509 25.0009 23.0773 25 22.8013V19.357C25.3014 19.1727 25.5521 18.9094 25.7274 18.5927C25.9027 18.2761 25.9966 17.9171 26 17.5509V12.3005C25.9984 11.744 25.7872 11.2108 25.4125 10.8173C25.0377 10.4238 24.53 10.202 24 10.2003ZM14 8.10016H18V10.2003H14V8.10016ZM8.00001 12.3005H24V17.5509H19V14.4006H13V17.5509H8.00001V12.3005ZM17 18.601H15V16.5008H17V18.601ZM23 22.8013H9.00001V19.651H13V20.7011H19V19.651H23V22.8013Z" fill="#8339A3"/></svg></span>
+          <span class="tt-sidebar-item__label">Prosjekt</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Faktura">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M12 19.7011H20V21.8013H12V19.7011ZM12 15.5008H20V17.601H12V15.5008ZM18 5H10C9.47005 5.00166 8.96227 5.22346 8.58753 5.61696C8.2128 6.01045 8.00158 6.54367 8 7.10016V23.9014C7.99999 24.4566 8.20933 24.9892 8.58225 25.3828C8.95516 25.7763 9.4613 25.9988 9.99 26.0016H22C22.5299 25.9999 23.0377 25.7781 23.4125 25.3846C23.7872 24.9911 23.9984 24.4579 24 23.9014V11.3005L18 5ZM22 23.9014H10V7.10016H17V12.3506H22V23.9014Z" fill="#D9452B"/></svg></span>
+          <span class="tt-sidebar-item__label">Faktura</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Kunde">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M13 18.1882C10.66 18.1882 6 19.4168 6 21.8635V23.7011H20V21.8635C20 19.4168 15.34 18.1882 13 18.1882ZM8.34 21.601C9.7623 20.7558 11.3658 20.3041 13 20.2884C14.6342 20.3041 16.2377 20.7558 17.66 21.601H8.34ZM13 16.3506C13.6922 16.3506 14.3689 16.135 14.9445 15.7312C15.5201 15.3273 15.9687 14.7533 16.2336 14.0817C16.4985 13.4102 16.5678 12.6712 16.4327 11.9583C16.2977 11.2453 15.9644 10.5905 15.4749 10.0765C14.9854 9.56247 14.3617 9.21243 13.6828 9.07062C13.0039 8.92881 12.3001 9.00159 11.6606 9.27977C11.0211 9.55794 10.4744 10.029 10.0899 10.6334C9.70527 11.2378 9.5 11.9484 9.5 12.6753C9.5 13.65 9.86875 14.5848 10.5251 15.2741C11.1815 15.9633 12.0717 16.3506 13 16.3506ZM13 11.1002C13.2967 11.1002 13.5867 11.1925 13.8334 11.3656C14.08 11.5387 14.2723 11.7847 14.3858 12.0725C14.4994 12.3603 14.5291 12.677 14.4712 12.9826C14.4133 13.2881 14.2704 13.5688 14.0607 13.7891C13.8509 14.0093 13.5836 14.1594 13.2926 14.2201C13.0017 14.2809 12.7001 14.2497 12.426 14.1305C12.1519 14.0113 11.9176 13.8094 11.7528 13.5504C11.588 13.2913 11.5 12.9868 11.5 12.6753C11.5 12.2575 11.658 11.8569 11.9393 11.5615C12.2206 11.2661 12.6022 11.1002 13 11.1002ZM20.04 18.2512C20.6248 18.6372 21.1097 19.1689 21.4516 19.7991C21.7935 20.4293 21.9819 21.1384 22 21.8635V23.7011H26V21.8635C26 19.7423 22.5 18.5347 20.04 18.2512ZM19 16.3506C19.9283 16.3506 20.8185 15.9633 21.4749 15.2741C22.1313 14.5848 22.5 13.65 22.5 12.6753C22.5 11.7005 22.1313 10.7657 21.4749 10.0765C20.8185 9.38722 19.9283 9 19 9C18.48 9.0021 17.9672 9.12775 17.5 9.36753C18.1507 10.3352 18.5001 11.4907 18.5001 12.6753C18.5001 13.8599 18.1507 15.0154 17.5 15.983C17.9672 16.2228 18.48 16.3485 19 16.3506Z" fill="#58A316"/></svg></span>
+          <span class="tt-sidebar-item__label">Kunde</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Lønn">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M24 8.00001H8.00001C7.73765 7.99931 7.47776 8.05323 7.23537 8.15866C6.99297 8.26408 6.77289 8.41892 6.58784 8.61421C6.40278 8.80951 6.25644 9.04139 6.15725 9.29645C6.05807 9.55151 6.00803 9.82468 6.01001 10.1002L6.00001 22.7011C5.99909 22.9772 6.05019 23.2507 6.15037 23.506C6.25055 23.7612 6.39783 23.9931 6.58374 24.1883C6.76964 24.3835 6.99048 24.5382 7.23355 24.6434C7.47662 24.7486 7.73711 24.8023 8.00001 24.8013H24C24.2629 24.8023 24.5234 24.7486 24.7665 24.6434C25.0095 24.5382 25.2304 24.3835 25.4163 24.1883C25.6022 23.9931 25.7495 23.7612 25.8497 23.506C25.9498 23.2507 26.0009 22.9772 26 22.7011V10.1002C26.0009 9.8241 25.9498 9.55057 25.8497 9.29533C25.7495 9.04009 25.6022 8.80818 25.4163 8.61297C25.2304 8.41776 25.0095 8.2631 24.7665 8.1579C24.5234 8.0527 24.2629 7.99904 24 8.00001ZM24 22.7011H8.00001V16.4006H24V22.7011ZM24 12.2003H8.00001V10.1002H24V12.2003Z" fill="#DB5C35"/></svg></span>
+          <span class="tt-sidebar-item__label">Lønn</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Oppgaver">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 6C14.0222 6 12.0888 6.58649 10.4443 7.6853C8.79981 8.78412 7.51809 10.3459 6.76121 12.1732C6.00433 14.0004 5.8063 16.0111 6.19215 17.9509C6.578 19.8907 7.53041 21.6725 8.92894 23.0711C10.3275 24.4696 12.1093 25.422 14.0491 25.8078C15.9889 26.1937 17.9996 25.9957 19.8268 25.2388C21.6541 24.4819 23.2159 23.2002 24.3147 21.5557C25.4135 19.9112 26 17.9778 26 16C26 14.6868 25.7413 13.3864 25.2388 12.1732C24.7363 10.9599 23.9997 9.85752 23.0711 8.92893C22.1425 8.00035 21.0401 7.26375 19.8268 6.7612C18.6136 6.25866 17.3132 6 16 6ZM16 24C14.4178 24 12.871 23.5308 11.5554 22.6518C10.2398 21.7727 9.21447 20.5233 8.60897 19.0615C8.00347 17.5997 7.84504 15.9911 8.15372 14.4393C8.4624 12.8874 9.22433 11.462 10.3432 10.3431C11.462 9.22432 12.8874 8.4624 14.4393 8.15372C15.9911 7.84504 17.5997 8.00346 19.0615 8.60896C20.5233 9.21446 21.7727 10.2398 22.6518 11.5554C23.5308 12.871 24 14.4177 24 16C23.9971 18.1208 23.1533 20.154 21.6536 21.6536C20.154 23.1533 18.1208 23.9971 16 24ZM20.59 11.58L14 18.17L11.41 15.59L10 17L14 21L22 13L20.59 11.58Z" fill="#D63862"/></svg></span>
+          <span class="tt-sidebar-item__label">Oppgaver</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Produkt">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M13.17 10.1002L15.17 12.2003H24V22.7011H8V10.1002H13.17ZM14 8H8C7.4713 8.00278 6.96516 8.22527 6.59225 8.61882C6.21933 9.01238 6.00999 9.54498 6.01 10.1002L6 22.7011C6.00158 23.2576 6.2128 23.7908 6.58753 24.1843C6.96227 24.5778 7.47005 24.7996 8 24.8013H24C24.5299 24.7996 25.0377 24.5778 25.4125 24.1843C25.7872 23.7908 25.9984 23.2576 26 22.7011V12.2003C25.9984 11.6438 25.7872 11.1106 25.4125 10.7171C25.0377 10.3236 24.5299 10.1018 24 10.1002H16L14 8Z" fill="#8166C4"/></svg></span>
+          <span class="tt-sidebar-item__label">Produkt</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Dokument">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M18 5H10C9.4713 5.00278 8.96516 5.22527 8.59225 5.61882C8.21933 6.01238 8.00999 6.54498 8.01 7.10016L8 23.9014C7.99999 24.4566 8.20933 24.9892 8.58225 25.3828C8.95516 25.7763 9.4613 25.9988 9.99 26.0016H22C22.5299 25.9999 23.0377 25.7781 23.4125 25.3846C23.7872 24.9911 23.9984 24.4579 24 23.9014V11.3005L18 5ZM10 23.9014V7.10016H17V12.3506H22V23.9014H10Z" fill="#B334A2"/></svg></span>
+          <span class="tt-sidebar-item__label">Dokument</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Integrasjoner">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11.8 26H8C7.45 26 6.97917 25.8042 6.5875 25.4125C6.19583 25.0208 6 24.55 6 24V20.2C6.8 20.2 7.5 19.9458 8.1 19.4375C8.7 18.9292 9 18.2833 9 17.5C9 16.7167 8.7 16.0708 8.1 15.5625C7.5 15.0542 6.8 14.8 6 14.8V11C6 10.45 6.19583 9.97917 6.5875 9.5875C6.97917 9.19583 7.45 9 8 9H12C12 8.3 12.2417 7.70833 12.725 7.225C13.2083 6.74167 13.8 6.5 14.5 6.5C15.2 6.5 15.7917 6.74167 16.275 7.225C16.7583 7.70833 17 8.3 17 9H21C21.55 9 22.0208 9.19583 22.4125 9.5875C22.8042 9.97917 23 10.45 23 11V15C23.7 15 24.2917 15.2417 24.775 15.725C25.2583 16.2083 25.5 16.8 25.5 17.5C25.5 18.2 25.2583 18.7917 24.775 19.275C24.2917 19.7583 23.7 20 23 20V24C23 24.55 22.8042 25.0208 22.4125 25.4125C22.0208 25.8042 21.55 26 21 26H17.2C17.2 25.1667 16.9375 24.4583 16.4125 23.875C15.8875 23.2917 15.25 23 14.5 23C13.75 23 13.1125 23.2917 12.5875 23.875C12.0625 24.4583 11.8 25.1667 11.8 26ZM8 24H10.125C10.525 22.9 11.1667 22.125 12.05 21.675C12.9333 21.225 13.75 21 14.5 21C15.25 21 16.0667 21.225 16.95 21.675C17.8333 22.125 18.475 22.9 18.875 24H21V18H23C23.1333 18 23.25 17.95 23.35 17.85C23.45 17.75 23.5 17.6333 23.5 17.5C23.5 17.3667 23.45 17.25 23.35 17.15C23.25 17.05 23.1333 17 23 17H21V11H15V9C15 8.86667 14.95 8.75 14.85 8.65C14.75 8.55 14.6333 8.5 14.5 8.5C14.3667 8.5 14.25 8.55 14.15 8.65C14.05 8.75 14 8.86667 14 9V11H8V13.2C8.9 13.5333 9.625 14.0917 10.175 14.875C10.725 15.6583 11 16.5333 11 17.5C11 18.45 10.725 19.3167 10.175 20.1C9.625 20.8833 8.9 21.45 8 21.8V24Z" fill="#2E384D"/></svg></span>
+          <span class="tt-sidebar-item__label">Integrasjoner</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Årsoppgjør">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6.38281 23.1094V7.10938L20.6828 13.1094H20.3828C19.7995 13.1094 19.2495 13.176 18.7328 13.3094C18.2161 13.4427 17.7161 13.626 17.2328 13.8594L8.38281 10.1094V13.6094L14.3828 15.1094L8.38281 16.6094V20.1094L13.7828 17.8094C13.6495 18.1927 13.5495 18.5717 13.4828 18.9464C13.4161 19.3217 13.3828 19.7094 13.3828 20.1094V20.1594L6.38281 23.1094ZM20.3828 25.1094C18.9995 25.1094 17.8205 24.622 16.8458 23.6474C15.8705 22.672 15.3828 21.4927 15.3828 20.1094C15.3828 18.726 15.8705 17.5467 16.8458 16.5714C17.8205 15.5967 18.9995 15.1094 20.3828 15.1094C21.7661 15.1094 22.9455 15.5967 23.9208 16.5714C24.8955 17.5467 25.3828 18.726 25.3828 20.1094C25.3828 21.4927 24.8955 22.672 23.9208 23.6474C22.9455 24.622 21.7661 25.1094 20.3828 25.1094ZM22.0328 22.4594L22.7328 21.7594L20.8828 19.9094V17.1094H19.8828V20.3094L22.0328 22.4594Z" fill="#2E384D"/></svg></span>
+          <span class="tt-sidebar-item__label">Årsoppgjør</span>
+        </button></li>
+        <li><button class="tt-sidebar-item" title="Selskap">
+          <span class="tt-sidebar-item__icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M22 19H20V21H22M22 15H20V17H22M24 23H16V21H18V19H16V17H18V15H16V13H24M14 11H12V9H14M14 15H12V13H14M14 19H12V17H14M14 23H12V21H14M10 11H8V9H10M10 15H8V13H10M10 19H8V17H10M10 23H8V21H10M16 11V7H6V25H26V11H16Z" fill="#4C9B4C"/></svg></span>
+          <span class="tt-sidebar-item__label">Selskap</span>
+        </button></li>
+      </ul>
+    </nav>
+
+    <!-- ========== MAIN ========== -->
+    <main class="main">
+      <div class="page-header">
+        <h1 class="page-header__title">Tripletex-tavla</h1>
+        <button class="page-header__edit" id="open-modules">
+          Rediger Tripletex-tavla
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M5.49 19C5.08 19 4.73 18.85 4.44 18.56 4.15 18.27 4 17.91 4 17.5V8C4 7.59 4.15 7.23 4.44 6.94 4.73 6.65 5.09 6.5 5.5 6.5H7V6.17C7 5.33 7.28 4.6 7.84 3.96 8.41 3.32 9.13 3 10 3 10.83 3 11.54 3.29 12.13 3.88 12.71 4.46 13 5.17 13 6V6.5H14.5C14.91 6.5 15.27 6.65 15.56 6.94 15.85 7.23 16 7.59 16 8V17.5"/></svg>
+        </button>
+      </div>
+
+      <div class="layout">
+
+        <!-- ========== Left column ========== -->
+        <div>
+          <!-- Stat row -->
+          <div class="stats">
+            <div class="stat">
+              <div class="stat__top"><span>Bilagsmottak</span><span class="arrow">→</span></div>
+              <div class="stat__value">35</div>
+            </div>
+            <div class="stat">
+              <div class="stat__top"><span>Bilag til attestering</span><span class="arrow">→</span></div>
+              <div class="stat__value">38</div>
+            </div>
+            <div class="stat">
+              <div class="stat__top"><span>Ikke bokførte bilag</span><span class="arrow">→</span></div>
+              <div class="stat__value">92</div>
+            </div>
+            <div class="stat">
+              <div class="stat__top"><span>Automatisert siste 30 dager</span><span class="arrow">→</span></div>
+              <div class="stat__value">0</div>
+            </div>
+          </div>
+
+          <!-- Faktura-oversikt -->
+          <section class="tt-card">
+            <header class="tt-card__head">
+              <h2 class="tt-card__title">Faktura-oversikt</h2>
+              <div class="tt-card__meta">
+                <a class="tt-card__link" href="#">Ny faktura <span>→</span></a>
+                <span class="tt-card__date">📅 Mai 2025</span>
+              </div>
+            </header>
+
+            <div class="donut-wrap">
+              <!-- Donut chart -->
+              <svg width="180" height="180" viewBox="0 0 42 42">
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e6ebff" stroke-width="6"/>
+                <!-- Forfalte (over 30) — purple, 50% -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent"
+                        stroke="#7048b9" stroke-width="6"
+                        stroke-dasharray="50 50" stroke-dashoffset="25"
+                        transform="rotate(-90 21 21)"/>
+                <!-- Forfalte (under 30) — blue, 30% -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent"
+                        stroke="#0a41fa" stroke-width="6"
+                        stroke-dasharray="30 70" stroke-dashoffset="-25"
+                        transform="rotate(-90 21 21)"/>
+                <!-- Ikke forfalte — pink, 20% -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent"
+                        stroke="#f4a4c8" stroke-width="6"
+                        stroke-dasharray="20 80" stroke-dashoffset="-55"
+                        transform="rotate(-90 21 21)"/>
+              </svg>
+
+              <div>
+                <div class="legend">
+                  <div class="legend__row">
+                    <span class="legend__dot" style="background:#7048b9"></span>
+                    <div>
+                      <div class="legend__label">Forfalte fakturaer (Over 30 dager)</div>
+                      <div class="legend__value">NOK 1 981 992</div>
+                    </div>
+                  </div>
+                  <div class="legend__row">
+                    <span class="legend__dot" style="background:#0a41fa"></span>
+                    <div>
+                      <div class="legend__label">Forfalte fakturaer (Under 30 dager)</div>
+                      <div class="legend__value">NOK 300 842</div>
+                    </div>
+                  </div>
+                  <div class="legend__row">
+                    <span class="legend__dot" style="background:#f4a4c8"></span>
+                    <div>
+                      <div class="legend__label">Ikke forfalte fakturaer</div>
+                      <div class="legend__value">NOK 250</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:32px; margin-top:16px; font-size:13px;">
+                  <div>
+                    <div class="legend__label">Utestående fakturaer</div>
+                    <div class="legend__value">NOK 2 013 084</div>
+                  </div>
+                  <div>
+                    <div class="legend__label">Utestående ordrer</div>
+                    <div class="legend__value">NOK -5 213 292 228 434</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="text-align:right; margin-top:8px;">
+              <span class="small-link">Sist oppdatert 12:42 ↻</span>
+            </div>
+          </section>
+
+          <!-- Lønn -->
+          <section class="tt-card">
+            <header class="tt-card__head">
+              <h2 class="tt-card__title">Lønn</h2>
+              <div class="tt-card__meta">
+                <a class="tt-card__link" href="#">Ny lønnsutbetaling <span>→</span></a>
+                <span class="tt-card__date">📅 Mai 2025</span>
+              </div>
+            </header>
+            <div class="legend__label">Lønnsutbetaling (01.05 – 31.05)</div>
+            <div style="font-size:24px; font-weight:500; margin-top:4px;">NOK 22 653,20</div>
+            <div class="legend__label" style="margin-top:4px;">Det er <b style="color:var(--text-primary)">10</b> timer som forblir lønnsutbetalling.</div>
+
+            <div class="salary-bar">
+              <span style="width:50%; background:#0a41fa"></span>
+              <span style="width:26%; background:#a98edb"></span>
+              <span style="width:24%; background:#f4a4c8"></span>
+            </div>
+            <div class="salary-info">
+              <span><span class="legend__dot" style="background:#0a41fa"></span> Lønn <b>50 %</b></span>
+              <span><span class="legend__dot" style="background:#a98edb"></span> Arbeidsgiveravgift <b>26 %</b></span>
+              <span><span class="legend__dot" style="background:#f4a4c8"></span> Skatt <b>24 %</b></span>
+              <span style="margin-left:auto;"><a class="tt-card__link" href="#">Gå til detaljer <span>→</span></a></span>
+            </div>
+          </section>
+
+          <!-- Inntekter og utgifter — bar chart -->
+          <section class="tt-card">
+            <header class="tt-card__head">
+              <h2 class="tt-card__title">Inntekter og utgifter</h2>
+              <span class="tt-card__date">2025 📅</span>
+            </header>
+            <div class="legend__label">Resultat hittil i år</div>
+            <div class="chart-summary">
+              <span class="chart-summary__num">NOK 45 072 745,00</span>
+              <span class="chart-summary__delta">↑ +6 %</span>
+            </div>
+
+            <div class="barchart">
+              <div class="barchart__y">
+                <span>-20%</span><span>-10%</span><span>0</span><span>10%</span><span>20%</span>
+              </div>
+              <div class="barchart__plot">
+                <div class="barchart__zero" style="bottom:50%;"></div>
+                <!-- 12 months: pos%/neg% (positive grows up from middle, negative grows down) -->
+                <!-- Pos values 0-50% of 220px = 0-110px above center; Neg values similar -->
+                <div class="barchart__bar"><span class="barchart__pos" style="height:24%;"></span><span class="barchart__neg" style="height:14%;"></span><span class="barchart__label">Jan.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:42%;"></span><span class="barchart__neg" style="height:18%;"></span><span class="barchart__label">Feb.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:30%;"></span><span class="barchart__neg" style="height:22%;"></span><span class="barchart__label">Mar.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:14%;"></span><span class="barchart__neg" style="height:20%;"></span><span class="barchart__label">Apr.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:36%;"></span><span class="barchart__neg" style="height:16%;"></span><span class="barchart__label">Mai.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:22%;"></span><span class="barchart__neg" style="height:24%;"></span><span class="barchart__label">Jun.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:30%;"></span><span class="barchart__neg" style="height:8%;"></span><span class="barchart__label">Jul.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:18%;"></span><span class="barchart__neg" style="height:12%;"></span><span class="barchart__label">Aug.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:0;"></span><span class="barchart__neg" style="height:0;"></span><span class="barchart__label">Sep.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:0;"></span><span class="barchart__neg" style="height:0;"></span><span class="barchart__label">Okt.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:0;"></span><span class="barchart__neg" style="height:0;"></span><span class="barchart__label">Nov.</span></div>
+                <div class="barchart__bar"><span class="barchart__pos" style="height:0;"></span><span class="barchart__neg" style="height:0;"></span><span class="barchart__label">Des.</span></div>
+              </div>
+            </div>
+            <div class="chart-totals">
+              <span><span class="legend__dot" style="background:#0a41fa"></span> NOK 67 005 000,00</span>
+              <span><span class="legend__dot" style="background:#f4a4c8"></span> NOK 21 932 255,00</span>
+              <span><span class="legend__dot" style="background:#0a41fa"></span> Inntekter</span>
+              <span><span class="legend__dot" style="background:#f4a4c8"></span> Utgifter</span>
+              <span><span class="legend__dot" style="background:#0a41fa"></span> Positivt resultat</span>
+              <span><span class="legend__dot" style="background:#f4a4c8"></span> Negativt resultat</span>
+              <span style="margin-left:auto;"><a class="tt-card__link" href="#">Gå til detaljer <span>→</span></a></span>
+            </div>
+          </section>
+
+          <!-- Inntekter og utgifter — line chart -->
+          <section class="tt-card">
+            <header class="tt-card__head">
+              <h2 class="tt-card__title">Inntekter og utgifter</h2>
+              <span class="tt-card__date">2025 📅</span>
+            </header>
+            <div class="legend__label">Resultat hittil i år</div>
+            <div class="chart-summary">
+              <span class="chart-summary__num">NOK 45 072 745,00</span>
+              <span class="chart-summary__delta">↑ +6 %</span>
+            </div>
+
+            <div class="linechart">
+              <div class="barchart__y">
+                <span>0</span><span>20 000</span><span>40 000</span><span>60 000</span><span>80 000</span>
+              </div>
+              <div class="linechart__plot">
+                <svg viewBox="0 0 480 220" preserveAspectRatio="none">
+                  <!-- Background gridline -->
+                  <line x1="0" y1="219" x2="480" y2="219" stroke="#d5d7db" stroke-width="1"/>
+                  <!-- Bars (light blue + pink) -->
+                  <g>
+                    <rect x="6"    y="120" width="14" height="80"  fill="#9db3fd"/>
+                    <rect x="22"   y="135" width="14" height="65"  fill="#f4a4c8"/>
+                    <rect x="46"   y="80"  width="14" height="120" fill="#9db3fd"/>
+                    <rect x="62"   y="105" width="14" height="95"  fill="#f4a4c8"/>
+                    <rect x="86"   y="100" width="14" height="100" fill="#9db3fd"/>
+                    <rect x="102"  y="120" width="14" height="80"  fill="#f4a4c8"/>
+                    <rect x="126"  y="115" width="14" height="85"  fill="#9db3fd"/>
+                    <rect x="142"  y="135" width="14" height="65"  fill="#f4a4c8"/>
+                    <rect x="166"  y="95"  width="14" height="105" fill="#9db3fd"/>
+                    <rect x="182"  y="115" width="14" height="85"  fill="#f4a4c8"/>
+                    <rect x="206"  y="80"  width="14" height="120" fill="#9db3fd"/>
+                    <rect x="222"  y="105" width="14" height="95"  fill="#f4a4c8"/>
+                    <rect x="246"  y="60"  width="14" height="140" fill="#9db3fd"/>
+                    <rect x="262"  y="105" width="14" height="95"  fill="#f4a4c8"/>
+                    <rect x="286"  y="50"  width="14" height="150" fill="#9db3fd"/>
+                    <rect x="302"  y="100" width="14" height="100" fill="#f4a4c8"/>
+                  </g>
+                  <!-- Cumulative line -->
+                  <polyline
+                    fill="none" stroke="#0a41fa" stroke-width="2.5"
+                    points="14,170 54,150 94,135 134,120 174,98 214,75 254,55 294,40 334,25 374,18 414,15 454,12"/>
+                  <!-- Month labels -->
+                  <g font-family="Rubik, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">
+                    <text x="14"  y="215">Jan.</text>
+                    <text x="54"  y="215">Feb.</text>
+                    <text x="94"  y="215">Mar.</text>
+                    <text x="134" y="215">Apr.</text>
+                    <text x="174" y="215">Mai.</text>
+                    <text x="214" y="215">Jun.</text>
+                    <text x="254" y="215">Jul.</text>
+                    <text x="294" y="215">Aug.</text>
+                    <text x="334" y="215">Sep.</text>
+                    <text x="374" y="215">Okt.</text>
+                    <text x="414" y="215">Nov.</text>
+                    <text x="454" y="215">Des.</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="chart-totals" style="margin-top:8px;">
+              <span><span class="legend__dot" style="background:#9db3fd"></span> Inntekter</span>
+              <span><span class="legend__dot" style="background:#f4a4c8"></span> Utgifter</span>
+              <span><span class="legend__dot" style="background:#0a41fa"></span> Overskudd akkumulert</span>
+              <span style="margin-left:auto;"><a class="tt-card__link" href="#">Gå til detaljer <span>→</span></a></span>
+            </div>
+          </section>
+        </div>
+
+        <!-- ========== Right rail ========== -->
+        <aside class="rail">
+          <!-- Tips card -->
+          <div class="tip-card">
+            <span class="tip-card__badge">✨ Tips</span>
+            <div class="tip-card__title">Beskytt Kontoen din med 2FA</div>
+            <div class="tip-card__body">Øk sikkerheten på kontoen din ved å aktivere to-faktor-autentisering (2FA). Trykk på knappen nedenfor for å aktivere.</div>
+            <button class="tip-card__cta">Aktiver 2FA</button>
+          </div>
+
+          <!-- Frister -->
+          <section class="tt-card" style="padding:16px;">
+            <header class="tt-card__head" style="margin-bottom:8px;">
+              <h2 class="tt-card__title">Frister <span style="color:var(--text-muted); font-weight:400;">ⓘ</span></h2>
+            </header>
+            <div class="rail-list">
+              <div class="rail-item">
+                <span class="rail-item__icon">📅</span>
+                <div>
+                  <div class="rail-item__title">A-melding juni</div>
+                  <div class="rail-item__sub">• utløpt (07. juli)</div>
+                </div>
+              </div>
+              <div class="rail-item">
+                <span class="rail-item__icon">📅</span>
+                <div>
+                  <div class="rail-item__title">Betaling av skatt mai-juni</div>
+                  <div class="rail-item__sub">• om 5 dager (12. juli)</div>
+                </div>
+              </div>
+              <div class="rail-item">
+                <span class="rail-item__icon">📅</span>
+                <div>
+                  <div class="rail-item__title">A-melding juli</div>
+                  <div class="rail-item__sub">• om 25 dager (15. august)</div>
+                </div>
+              </div>
+            </div>
+            <a class="rail-card-link" href="#">Se historikk <span>→</span></a>
+          </section>
+
+          <!-- Oppgaver -->
+          <section class="tt-card" style="padding:16px;">
+            <header class="tt-card__head" style="margin-bottom:8px;">
+              <h2 class="tt-card__title">Oppgaver <span style="color:var(--text-muted); font-weight:400;">ⓘ</span></h2>
+            </header>
+            <div class="rail-list">
+              <div class="rail-item">
+                <span class="rail-item__icon">⛺</span>
+                <div>
+                  <div class="rail-item__title">Reiser og utlegg</div>
+                  <div class="rail-item__sub">12 reiser/utlegg til godkjenning</div>
+                </div>
+              </div>
+              <div class="rail-item">
+                <span class="rail-item__icon">⏱</span>
+                <div>
+                  <div class="rail-item__title">Timelister</div>
+                  <div class="rail-item__sub">24 timeoppføringer til godkjenning</div>
+                </div>
+              </div>
+            </div>
+            <a class="rail-card-link" href="#">Se historikk <span>→</span></a>
+          </section>
+        </aside>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========== MODAL: Moduler til Tripletex-tavla ========== -->
+  <div class="tt-modal" id="modules-modal" role="dialog" aria-modal="true" aria-labelledby="modules-modal-title">
+    <div class="tt-modal__panel">
+
+      <!-- Modal sidebar -->
+      <aside class="tt-modal__sidebar">
+        <h3 class="tt-modal__sidebar-title">Menu</h3>
+        <ul class="tt-modal__menu">
+          <li><button class="tt-modal__menu-item tt-modal__menu-item--selected">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a2 2 0 012-2h2v14a2 2 0 00-2 0H3V4zm5 0a2 2 0 012-2h2v14a2 2 0 00-2 0h-2V4zm5 0a2 2 0 012-2h2v14a2 2 0 00-2 0h-2V4z"/></svg>
+            Browse Library
+          </button></li>
+          <li><button class="tt-modal__menu-item">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M14 6l3 3-7 7-3-3 7-7zM6 2v4M4 4h4M11 13l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Widget Builder
+          </button></li>
+          <li><button class="tt-modal__menu-item">
+            <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            History
+          </button></li>
+        </ul>
+      </aside>
+
+      <!-- Modal main -->
+      <div class="tt-modal__main">
+
+        <header class="tt-modal__header">
+          <div>
+            <h2 id="modules-modal-title">Moduler til Tripletex-tavla</h2>
+            <p>Legg til modulene du trenger og få kontroll på regnskapet, fra nøkkeltall til varsler.</p>
+          </div>
+          <button class="tt-modal__close" id="close-modules" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M6.0625 15L5 13.9375L8.9375 10L5 6.0625L6.0625 5L10 8.9375L13.9375 5L15 6.0625L11.0625 10L15 13.9375L13.9375 15L10 11.0625L6.0625 15Z"/></svg>
+          </button>
+        </header>
+
+        <div class="tt-modal__filters">
+          <div class="tt-modal__filter-group">
+            <span class="tt-modal__filter-label">Velg modultyper</span>
+            <button class="tt-chip">Alle</button>
+            <button class="tt-chip">Reiser og utlegg</button>
+            <button class="tt-chip tt-chip--selected">Bilag</button>
+            <button class="tt-chip">Bank</button>
+            <button class="tt-chip">Lønn</button>
+          </div>
+          <label class="tt-modal__search">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+              <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M13 13l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="search" placeholder="Søk" />
+          </label>
+        </div>
+
+        <div class="tt-modal__body">
+
+          <!-- Lønn section -->
+          <section class="tt-modal__section">
+            <button class="tt-modal__section-head">
+              <span class="tt-modal__section-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M8 14.5C7.45 14.5 6.97 14.31 6.58 13.92 6.19 13.54 6 13.06 6 12.5 6 11.95 6.19 11.47 6.58 11.08 6.96 10.69 7.44 10.5 7.99 10.5 8.55 10.5 9.03 10.69 9.42 11.08 9.81 11.46 10 11.94 10 12.5 10 13.05 9.81 13.53 9.42 13.92 9.04 14.31 8.56 14.5 8 14.5ZM4.5 18C4.09 18 3.73 17.85 3.44 17.55 3.15 17.25 3 16.9 3 16.5V5.5C3 5.1 3.15 4.75 3.44 4.45 3.73 4.15 4.09 4 4.5 4H6V2H7.5V4H12.5V2H14V4H15.5C15.91 4 16.27 4.15 16.56 4.45 16.85 4.75 17 5.1 17 5.5V16.5C17 16.9 16.85 17.25 16.56 17.55 16.27 17.85 15.91 18 15.5 18H4.5ZM4.5 16.5H15.5V9H4.5V16.5ZM4.5 7.5H15.5V5.5H4.5V7.5Z"/></svg></span>
+              <span class="tt-modal__section-title">Lønn</span>
+              <span class="tt-modal__section-caret">⌃</span>
+            </button>
+            <div class="widget-grid">
+              <!-- Card 1 — Salary stacked bar preview -->
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="22" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Fakturaoversikt</text>
+                    <text x="14" y="42" font-family="Rubik" font-size="13" font-weight="500" fill="#2e384d">NOK 22 653,20</text>
+                    <text x="14" y="54" font-family="Rubik" font-size="7" fill="#6b7280">Det er 10 timer som forblir lønnsutbetaling.</text>
+                    <rect x="14" y="62" width="100" height="6" fill="#0a41fa" rx="3"/>
+                    <rect x="114" y="62" width="50" height="6" fill="#a98edb"/>
+                    <rect x="164" y="62" width="40" height="6" fill="#f4a4c8" rx="3"/>
+                    <circle cx="18" cy="80" r="2" fill="#0a41fa"/><text x="24" y="83" font-family="Rubik" font-size="6" fill="#6b7280">Lønn 50%</text>
+                    <circle cx="78" cy="80" r="2" fill="#a98edb"/><text x="84" y="83" font-family="Rubik" font-size="6" fill="#6b7280">Avgift 26%</text>
+                    <circle cx="138" cy="80" r="2" fill="#f4a4c8"/><text x="144" y="83" font-family="Rubik" font-size="6" fill="#6b7280">Skatt 24%</text>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets. Supercharge your workflow with beautifully crafted.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+              <!-- Card 2 — Number + small line -->
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="22" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Lønn</text>
+                    <text x="14" y="44" font-family="Rubik" font-size="14" font-weight="500" fill="#2e384d">NOK 22 653,20</text>
+                    <polyline fill="none" stroke="#0a41fa" stroke-width="1.5"
+                      points="14,80 40,72 70,75 100,65 130,60 160,55 190,40 204,35"/>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+              <!-- Card 3 — Donut + legend -->
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="20" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Fakturaoversikt</text>
+                    <g transform="translate(50,55)">
+                      <circle cx="0" cy="0" r="20" fill="none" stroke="#e6ebff" stroke-width="6"/>
+                      <circle cx="0" cy="0" r="20" fill="none" stroke="#7048b9" stroke-width="6"
+                              stroke-dasharray="62 100" transform="rotate(-90)"/>
+                      <circle cx="0" cy="0" r="20" fill="none" stroke="#0a41fa" stroke-width="6"
+                              stroke-dasharray="38 100" stroke-dashoffset="-62" transform="rotate(-90)"/>
+                    </g>
+                    <circle cx="90" cy="40" r="2" fill="#7048b9"/><text x="96" y="43" font-family="Rubik" font-size="6" fill="#6b7280">NOK 1 981 992</text>
+                    <circle cx="90" cy="55" r="2" fill="#0a41fa"/><text x="96" y="58" font-family="Rubik" font-size="6" fill="#6b7280">NOK 300 842</text>
+                    <circle cx="90" cy="70" r="2" fill="#f4a4c8"/><text x="96" y="73" font-family="Rubik" font-size="6" fill="#6b7280">NOK 250</text>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+              <!-- Card 4 — Bars + line -->
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="20" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Inntekter og utgifter</text>
+                    <text x="14" y="34" font-family="Rubik" font-size="11" font-weight="500" fill="#2e384d">NOK 45 072 745</text>
+                    <g>
+                      <rect x="14" y="62" width="6" height="22" fill="#9db3fd"/>
+                      <rect x="22" y="68" width="6" height="16" fill="#f4a4c8"/>
+                      <rect x="36" y="55" width="6" height="29" fill="#9db3fd"/>
+                      <rect x="44" y="62" width="6" height="22" fill="#f4a4c8"/>
+                      <rect x="58" y="50" width="6" height="34" fill="#9db3fd"/>
+                      <rect x="66" y="65" width="6" height="19" fill="#f4a4c8"/>
+                      <rect x="80" y="48" width="6" height="36" fill="#9db3fd"/>
+                      <rect x="88" y="60" width="6" height="24" fill="#f4a4c8"/>
+                      <rect x="102" y="44" width="6" height="40" fill="#9db3fd"/>
+                      <rect x="110" y="58" width="6" height="26" fill="#f4a4c8"/>
+                    </g>
+                    <polyline fill="none" stroke="#0a41fa" stroke-width="1.5"
+                      points="18,72 42,65 64,55 88,48 110,40 134,32 156,28 178,22 200,18"/>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+            </div>
+          </section>
+
+          <!-- Reiser og utlegg section -->
+          <section class="tt-modal__section">
+            <button class="tt-modal__section-head">
+              <span class="tt-modal__section-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M13 9.5V8H18V9.5H13ZM8 10C7.16667 10 6.45833 9.70833 5.875 9.125C5.29167 8.54167 5 7.83333 5 7C5 6.16667 5.29167 5.45833 5.875 4.875C6.45833 4.29167 7.16667 4 8 4C8.83333 4 9.54167 4.29167 10.125 4.875C10.7083 5.45833 11 6.16667 11 7C11 7.83333 10.7083 8.54167 10.125 9.125C9.54167 9.70833 8.83333 10 8 10ZM2 16V14.0833C2 13.7253 2.08681 13.3962 2.26042 13.096C2.43403 12.7959 2.67361 12.5556 2.97917 12.375C3.74306 11.9306 4.54861 11.5903 5.39583 11.3542C6.24306 11.1181 7.11111 11 8 11C8.88889 11 9.75694 11.1181 10.6042 11.3542C11.4514 11.5903 12.2569 11.9306 13.0208 12.375C13.3264 12.5556 13.566 12.7959 13.7396 13.096C13.9132 13.3962 14 13.7253 14 14.0833V16H2Z"/></svg></span>
+              <span class="tt-modal__section-title">Reiser og utlegg</span>
+              <span class="tt-modal__section-caret">⌃</span>
+            </button>
+            <div class="widget-grid">
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="22" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Fakturaoversikt</text>
+                    <text x="14" y="42" font-family="Rubik" font-size="13" font-weight="500" fill="#2e384d">NOK 22 653,20</text>
+                    <text x="14" y="54" font-family="Rubik" font-size="7" fill="#6b7280">Det er 10 timer som forblir lønnsutbetaling.</text>
+                    <rect x="14" y="62" width="100" height="6" fill="#0a41fa" rx="3"/>
+                    <rect x="114" y="62" width="50" height="6" fill="#a98edb"/>
+                    <rect x="164" y="62" width="40" height="6" fill="#f4a4c8" rx="3"/>
+                    <circle cx="18" cy="80" r="2" fill="#0a41fa"/><text x="24" y="83" font-family="Rubik" font-size="6" fill="#6b7280">Lønn 50%</text>
+                    <circle cx="78" cy="80" r="2" fill="#a98edb"/><text x="84" y="83" font-family="Rubik" font-size="6" fill="#6b7280">Avgift 26%</text>
+                    <circle cx="138" cy="80" r="2" fill="#f4a4c8"/><text x="144" y="83" font-family="Rubik" font-size="6" fill="#6b7280">Skatt 24%</text>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets. Supercharge your workflow with beautifully crafted.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="22" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Lønn</text>
+                    <text x="14" y="44" font-family="Rubik" font-size="14" font-weight="500" fill="#2e384d">NOK 22 653,20</text>
+                    <polyline fill="none" stroke="#0a41fa" stroke-width="1.5"
+                      points="14,80 40,72 70,75 100,65 130,60 160,55 190,40 204,35"/>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="20" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Fakturaoversikt</text>
+                    <g transform="translate(50,55)">
+                      <circle cx="0" cy="0" r="20" fill="none" stroke="#e6ebff" stroke-width="6"/>
+                      <circle cx="0" cy="0" r="20" fill="none" stroke="#7048b9" stroke-width="6"
+                              stroke-dasharray="62 100" transform="rotate(-90)"/>
+                      <circle cx="0" cy="0" r="20" fill="none" stroke="#0a41fa" stroke-width="6"
+                              stroke-dasharray="38 100" stroke-dashoffset="-62" transform="rotate(-90)"/>
+                    </g>
+                    <circle cx="90" cy="40" r="2" fill="#7048b9"/><text x="96" y="43" font-family="Rubik" font-size="6" fill="#6b7280">NOK 1 981 992</text>
+                    <circle cx="90" cy="55" r="2" fill="#0a41fa"/><text x="96" y="58" font-family="Rubik" font-size="6" fill="#6b7280">NOK 300 842</text>
+                    <circle cx="90" cy="70" r="2" fill="#f4a4c8"/><text x="96" y="73" font-family="Rubik" font-size="6" fill="#6b7280">NOK 250</text>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+              <article class="widget-card">
+                <div class="widget-card__thumb">
+                  <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="6" y="6" width="208" height="88" rx="6" fill="#fff" stroke="#e9eaed"/>
+                    <text x="14" y="20" font-family="Rubik" font-size="9" font-weight="500" fill="#2e384d">Inntekter og utgifter</text>
+                    <text x="14" y="34" font-family="Rubik" font-size="11" font-weight="500" fill="#2e384d">NOK 45 072 745</text>
+                    <g>
+                      <rect x="14" y="62" width="6" height="22" fill="#9db3fd"/>
+                      <rect x="22" y="68" width="6" height="16" fill="#f4a4c8"/>
+                      <rect x="36" y="55" width="6" height="29" fill="#9db3fd"/>
+                      <rect x="44" y="62" width="6" height="22" fill="#f4a4c8"/>
+                      <rect x="58" y="50" width="6" height="34" fill="#9db3fd"/>
+                      <rect x="66" y="65" width="6" height="19" fill="#f4a4c8"/>
+                      <rect x="80" y="48" width="6" height="36" fill="#9db3fd"/>
+                      <rect x="88" y="60" width="6" height="24" fill="#f4a4c8"/>
+                      <rect x="102" y="44" width="6" height="40" fill="#9db3fd"/>
+                      <rect x="110" y="58" width="6" height="26" fill="#f4a4c8"/>
+                    </g>
+                    <polyline fill="none" stroke="#0a41fa" stroke-width="1.5"
+                      points="18,72 42,65 64,55 88,48 110,40 134,32 156,28 178,22 200,18"/>
+                  </svg>
+                </div>
+                <h3 class="widget-card__title">Fakturaoversikt</h3>
+                <p class="widget-card__desc">Supercharge your workflow with beautifully crafted, easy-to-use widgets.</p>
+                <button class="widget-card__cta">Legg til modul</button>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var modal = document.getElementById('modules-modal');
+      var openBtn = document.getElementById('open-modules');
+      var closeBtn = document.getElementById('close-modules');
+
+      function open() { modal.classList.add('tt-modal--open'); document.body.style.overflow = 'hidden'; }
+      function close() { modal.classList.remove('tt-modal--open'); document.body.style.overflow = ''; }
+
+      openBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      // Click backdrop closes
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) close();
+      });
+      // Esc closes
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('tt-modal--open')) close();
+      });
+
+      // Filter chips: toggle selected (single-select within group)
+      document.querySelectorAll('.tt-modal__filter-group .tt-chip').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          document.querySelectorAll('.tt-modal__filter-group .tt-chip').forEach(function (c) {
+            c.classList.remove('tt-chip--selected');
+          });
+          chip.classList.add('tt-chip--selected');
+        });
+      });
+
+      // Sidebar collapse/expand — hamburger toggles `.app--sidebar-collapsed`
+      // on the app shell. CSS animates the grid column from 200px → 52px and
+      // hides each item's text label, leaving the 32×32 brand icons.
+      var app = document.getElementById('app');
+      var toggleBtn = document.getElementById('sidebar-toggle');
+      if (app && toggleBtn) {
+        toggleBtn.addEventListener('click', function () {
+          var collapsed = app.classList.toggle('app--sidebar-collapsed');
+          toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
