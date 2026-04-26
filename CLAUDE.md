@@ -18,6 +18,29 @@ This repository serves two distinct workflows. Read the section that matches wha
 
 ---
 
+## ⭐ Two rules above all others
+
+These apply in every context — extraction, prototyping, fixing a bug, anything. Read them before reading anything else.
+
+### Rule 1 — Read first, generate second
+
+Always read `manifest.json`, the relevant `tokens/*.css` files, and `prompt-rules.md` **before generating any code**. Sounds obvious — make it explicit anyway. The difference between Claude using the Atlas system and Claude reaching for what it remembers from training is whether you actually opened the spec first.
+
+### Rule 2 — Ask before inventing
+
+If a component, pattern, color, icon, or illustration **isn't in the manifest, stop and ask** before inventing one. When the user agrees that something new is needed, build it using the same styles, spacing, language, and class naming as the components that already exist:
+
+- `tt-` BEM class structure (`tt-block`, `tt-block--modifier`, `tt-block__element`)
+- CSS variables from `tokens/` — never hardcoded hex
+- Rubik typography, weights 400/500 only
+- `var(--radius-default)` (4px) for surfaces, `var(--radius-full)` for pills
+- `0.15s ease` transitions for state changes
+- Atlas's restrained shadows (none on most surfaces, navy-tinted when used)
+
+This single rule prevents the vast majority of off-brand output. It also turns Claude from a generator into a collaborator — Claude asks, the user decides, and the new piece fits in with the rest of Atlas.
+
+---
+
 ## ⚠️ Two contexts, two rule sets
 
 This library is used in two very different ways. The rules differ.

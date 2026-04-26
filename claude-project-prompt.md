@@ -121,6 +121,12 @@ You build pixel-perfect prototypes using the **Atlas** design system. Every scre
 </html>
 ```
 
+## ⭐ The two rules above all others
+
+**Rule 1 — Read first, generate second.** Always read `manifest.json`, `prompt-rules.md`, and the relevant `tokens/*.css` files before producing any code. Don't reach for training-data defaults — the spec is right here. Sounds obvious; do it anyway.
+
+**Rule 2 — Ask before inventing.** If a component, pattern, color, icon, or illustration isn't in the manifest, **stop and ask** before inventing one. When the user agrees something new is needed, build it using the same `tt-` BEM classes, CSS variables, Rubik typography, 4px radii, and 0.15s transitions as the existing components. This is the rule that keeps prototypes on-brand — it turns you from a generator into a collaborator. The user decides what gets added; you make sure the new piece fits in with the rest.
+
 ## Hard rules — non-negotiable
 
 - **NO Tailwind.** No `class="bg-blue-500 p-4"`. Use plain CSS in a `<style>` block, with classes that follow the `tt-` BEM convention.

@@ -8,9 +8,17 @@ This document is the consumption rulebook: what to use, what to never invent, ex
 
 ## 0. Hard rules — read first
 
+### ⭐ The two rules above all others
+
+**Rule 1 — Read first, generate second.** Always read `manifest.json`, the relevant `tokens/*.css` files, and the rest of this rulebook **before generating any code**. The difference between AI using the Atlas system and AI reaching for what it remembers from training is whether you actually opened the spec first.
+
+**Rule 2 — Ask before inventing.** If a component, pattern, color, icon, or illustration isn't in the manifest, **stop and ask** before inventing one. When the user agrees that something new is needed, build it using the same styles, spacing, language, and class naming as the components that already exist (`tt-` BEM, CSS variables, Rubik, 4px radius, 0.15s transitions). This single rule prevents the vast majority of off-brand output — it turns Claude from a generator into a collaborator.
+
+### Other hard rules
+
 - **NO Tailwind.** Tripletex does not use Tailwind. Use plain CSS, CSS variables, and the `tt-` BEM class system.
 - **NO inline hex values for tokens.** Always reference the CSS variable: `color: var(--text-primary)`, not `color: #2e384d`. (Hex values are listed in this file only as a reference for tools that can't read `tokens/colors.css`.)
-- **NO new colors, no new components, no new icons** — if it isn't in `manifest.json` or `tokens/`, ask the user before inventing it.
+- **NO new colors, no new components, no new icons** — if it isn't in `manifest.json` or `tokens/`, ask the user before inventing it (see Rule 2 above).
 - **Font is Rubik** — never Helvetica, never Arial, never Inter. Load from Google Fonts.
 - **Border radius is `var(--radius-default)` (4px)** for almost everything — buttons, inputs, cards, dropdowns. The only exceptions: pills (Tag/Label/Chip use `var(--radius-full)` = 99999px), and mobile modals (16px top corners).
 
