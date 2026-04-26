@@ -55,11 +55,13 @@ If you prefer the web interface, this works well for quick one-off prototypes.
 2. Name it: `Tripletex Prototyping`
 3. In the **Project Knowledge** section, upload these files from the repo:
    - `manifest.json` — every component with props, colors, sizing, icons, illustrations
+   - `prompt-rules.md` — full styling rulebook (colors, typography, per-component CSS patterns)
    - `tokens/colors.css` — semantic + global color tokens
    - `tokens/spacing.css` — element heights, radii, icon sizes
    - `tokens/typography.css` — font, weights, sizes
-   - `CLAUDE.md` — extraction & styling rules
-4. Start a new conversation inside the project.
+   - `icons-reference.html` — 50 most-used icons (with real SVG path data) + 12 illustrations
+4. In the **Project Instructions** box, paste the contents of `claude-project-prompt.md` from the repo
+5. Start a new conversation inside the project.
 
 ### How to prototype
 
