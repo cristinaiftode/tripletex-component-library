@@ -251,9 +251,9 @@ export function DetailPage() {
         secondaryAction={{ label: "Avbryt", onClick: () => setModalForm(false) }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: 12, width: 420 }}>
-          <Input label="Customer name *" defaultValue="Firm ES" />
-          <Input label="Organisasjonsnummer *" defaultValue="1000000000" />
-          <Input label="Postnummer" defaultValue="1604" />
+          <Input placeholder="Customer name *" defaultValue="Firm ES" />
+          <Input placeholder="Organisasjonsnummer *" defaultValue="1000000000" />
+          <Input placeholder="Postnummer" defaultValue="1604" />
         </div>
       </Modal>
 
