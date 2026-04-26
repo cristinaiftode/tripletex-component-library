@@ -158,11 +158,12 @@ This is the slide-by-slide outline with speaker notes. Paste each section into y
 **Bullets:**
 - **If the tool can clone a repo** (Claude Code, Cursor, Windsurf): just clone — nothing else
 - **If the tool only takes file uploads** (claude.ai, ChatGPT projects, v0): upload the 5 files
+- **Tools with strong defaults** (Lovable, v0, Bolt) work too — but expect to course-correct more, since their default is React + Tailwind and ours isn't.
 - **No tool lock-in** — if Claude gets worse, switch to GPT. The spec is the same.
 - The same approach already works for the e-conomic library (TACO) — it generalizes.
 
 **Speaker notes:**
-> "We deliberately didn't build this around one AI tool. The spec is plain text — markdown, JSON, CSS, SVG. Any AI that can read text can use it. If your team likes Cursor, use Cursor. If you live in claude.ai, use claude.ai."
+> "We deliberately didn't build this around one AI tool. The spec is plain text — markdown, JSON, CSS, SVG. Any AI that can read text can use it. If your team likes Cursor, use Cursor. If you live in claude.ai, use claude.ai. Tools like Lovable and v0 work too — they just need a bit more steering up front because their defaults are Tailwind-based."
 
 ---
 

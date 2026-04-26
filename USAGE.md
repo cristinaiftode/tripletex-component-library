@@ -85,6 +85,21 @@ Same as Option A — describe what you want, and Claude generates a complete HTM
 
 ---
 
+## A note on other tools (Lovable, v0, Bolt, Cursor, etc.)
+
+The spec is plain text, so any AI tool that reads text can in principle use it. In practice, the experience varies:
+
+- **Tools that clone repos** (Cursor, Windsurf, Claude Code) — drop-in. Same as Option A.
+- **Tools with strong opinionated defaults** — chiefly **Lovable**, but also v0 and Bolt to a lesser degree — generate React + Tailwind + shadcn/ui by default. Tripletex uses none of those. They *can* be steered to your spec, but you have to be explicit in the opening prompt:
+
+  > *"Do NOT use Tailwind, shadcn, or any UI library. Use plain CSS with the `tt-` BEM class prefix. Read the attached `manifest.json`, `tokens/colors.css`, and `prompt-rules.md` and use ONLY values defined there."*
+
+  Even with that framing, expect to course-correct more than in Claude Code or claude.ai. For quick PM mockups, Options A and B are smoother.
+
+If you want to compare, build the same screen in two tools and judge which output you'd actually take to a stakeholder.
+
+---
+
 ## What's in the library?
 
 ### Components (67 entries in `manifest.json`)
