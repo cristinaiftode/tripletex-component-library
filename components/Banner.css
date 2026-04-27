@@ -11,10 +11,14 @@
   box-sizing: border-box;
 }
 
-/* Sizes — fixed widths match Figma Product Spotlight sizes */
-.tt-banner--size-small { width: 368px; }
-.tt-banner--size-medium { width: 520px; }
-.tt-banner--size-large { width: 1200px; }
+/* Sizes — fixed widths match Figma Product Spotlight / Tips widget sizes
+   (Figma file: VqaGpmmrwTyUl1q3VLbMGa, node 209:553).
+   Small  = 322px (vertical narrow)
+   Medium = 595px (vertical wide)
+   Large  = 1068px (horizontal "Banner" — text on left, media on right) */
+.tt-banner--size-small { width: 322px; }
+.tt-banner--size-medium { width: 595px; }
+.tt-banner--size-large { width: 1068px; }
 
 /* Variants — info-blue family (Info / Help / Tips / News / Get started) */
 .tt-banner--variant-info,
@@ -150,7 +154,7 @@
   flex-wrap: wrap;
 }
 
-/* Illustration */
+/* Illustration — small fixed-size mascot/icon (right of text) */
 .tt-banner__illustration {
   display: flex;
   align-items: center;
@@ -159,6 +163,55 @@
   height: 100px;
   flex-shrink: 0;
 }
+
+/* Media slot — full-bleed image area used by Tips/Upsell widget.
+   Stacked above text for size small/medium; sits beside text for size large. */
+.tt-banner__media {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: var(--radius-default);
+  overflow: hidden;
+}
+.tt-banner__media > img,
+.tt-banner__media > svg,
+.tt-banner__media > .tt-media-placeholder {
+  width: 100%;
+  display: block;
+}
+
+/* Stack mode — small/medium: media sits above text inside body-wrap.
+   Heights chosen to match Figma node 209:553 spec. */
+.tt-banner--size-small .tt-banner__media { height: 181px; }
+.tt-banner--size-medium .tt-banner__media { height: 315px; }
+.tt-banner--has-media-stack .tt-banner__body-wrap { gap: 16px; }
+
+/* Side mode — large: text and media sit in a row */
+.tt-banner__split {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+}
+.tt-banner__split-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-width: 270px;
+}
+.tt-banner__media--side {
+  flex: 0 0 340px;
+  width: 340px;
+  min-height: 100%;
+  align-self: stretch;
+}
+.tt-banner__media--side > .tt-media-placeholder {
+  height: 100%;
+  min-height: 100%;
+}
+.tt-banner--has-media-side .tt-banner__body-wrap { gap: 12px; }
 
 /* Close button */
 .tt-banner__close {

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tips widget — Atlas prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       ATLAS TOKENS — subset used in this prototype
+       Source: tokens/colors.css, tokens/spacing.css, tokens/typography.css
+    ============================================================ */
+    :root {
+      /* Surfaces */
+      --surface-default: #ffffff;
+      --surface-background: #f7f8fc;
+      --surface-info-rest: #f2f5ff;
+      --surface-info-highlight: #ced9fe;
+      --action-secondary-rest: #e6ebff;
+      --action-secondary-hover: #ced9fe;
+      --action-tertiary-rest: transparent;
+      --action-tertiary-hover: rgba(46, 56, 77, 0.08);
+
+      /* Text */
+      --text-primary: #2e384d;
+      --text-action: #0a41fa;
+
+      /* Borders */
+      --border-rest: #d5d7db;
+      --border-info: #9db3fd;
+
+      /* Sizing */
+      --element-height-small: 24px;
+      --element-height-medium: 32px;
+      --element-height-large: 40px;
+      --radius-default: 4px;
+      --radius-full: 99999px;
+      --icon-size-small: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-primary);
+      background: var(--surface-background);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    button { font-family: inherit; }
+
+    /* ============================================================
+       PAGE LAYOUT
+    ============================================================ */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 32px 96px;
+    }
+    .page__title {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .page__subtitle {
+      margin: 0 0 48px;
+      color: rgba(46, 56, 77, 0.7);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .section {
+      margin-bottom: 64px;
+    }
+    .section__heading {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .section__caption {
+      margin: 0 0 24px;
+      color: rgba(46, 56, 77, 0.7);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .gallery { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+
+    /* ============================================================
+       MediaPlaceholder (Figma node 223:1231)
+    ============================================================ */
+    .tt-media-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 322px;
+      height: 180px;
+      padding: 32px;
+      background-color: var(--surface-background);
+      border: 1px dashed var(--border-rest);
+      border-radius: var(--radius-default);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .tt-media-placeholder__label {
+      font-family: Rubik, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--text-primary);
+      text-align: center;
+    }
+    /* When the placeholder lives inside a Banner media slot, stretch to fill */
+    .tt-banner__media .tt-media-placeholder,
+    .tt-banner__media--side .tt-media-placeholder {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ============================================================
+       Banner (Tips / Upsell widget) — Figma node 209:553
+       Sizes: small 322px / medium 595px / large 1068px
+    ============================================================ */
+    .tt-banner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border-radius: var(--radius-default);
+      border: 1px solid var(--border-info);
+      background-color: var(--surface-info-rest);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .tt-banner--size-small { width: 322px; }
+    .tt-banner--size-medium { width: 595px; }
+    .tt-banner--size-large { width: 1068px; }
+
+    /* Decorative blob background (visible behind text) */
+    .tt-banner--has-decoration { border-color: var(--border-rest); }
+    .tt-banner__decoration {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .tt-banner__deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      background-color: var(--surface-info-highlight);
+      opacity: 0.55;
+    }
+    .tt-banner--size-small .tt-banner__deco-circle--a { right: -90px;  bottom: -40px;  width: 280px; height: 280px; }
+    .tt-banner--size-small .tt-banner__deco-circle--b { left: -160px; top: -160px;    width: 290px; height: 290px; }
+    .tt-banner--size-medium .tt-banner__deco-circle--a { right: -120px; bottom: 30px;  width: 440px; height: 440px; }
+    .tt-banner--size-medium .tt-banner__deco-circle--b { left: -200px; top: -180px;   width: 350px; height: 350px; }
+    .tt-banner--size-large .tt-banner__deco-circle--a { right: -52px;  bottom: -380px; width: 600px; height: 600px; }
+    .tt-banner--size-large .tt-banner__deco-circle--b { left: -30px;   top: -290px;   width: 390px; height: 390px; }
+
+    /* Content layout */
+    .tt-banner__content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    .tt-banner__body-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .tt-banner--has-media-stack .tt-banner__body-wrap { gap: 16px; }
+
+    /* Chip */
+    .tt-banner__chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      height: var(--element-height-small);
+      padding: 0 8px 0 4px;
+      border-radius: var(--radius-full);
+      background-color: var(--surface-info-highlight);
+      color: var(--text-primary);
+      font-size: 14px;
+      line-height: 1.4;
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+    .tt-banner__chip-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--element-height-small);
+      height: var(--element-height-small);
+      color: var(--text-primary);
+    }
+    .tt-banner__chip-icon > svg {
+      width: var(--icon-size-small);
+      height: var(--icon-size-small);
+      display: block;
+    }
+    .tt-banner__chip-label { white-space: nowrap; }
+
+    /* Text */
+    .tt-banner__text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+      color: var(--text-primary);
+    }
+    .tt-banner__title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .tt-banner__body {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    /* Button (secondary) */
+    .tt-banner__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--element-height-large);
+      padding: 9.5px 12px;
+      background-color: var(--action-secondary-rest);
+      color: var(--text-action);
+      font-family: Rubik, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4;
+      border: none;
+      border-radius: var(--radius-default);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease;
+    }
+    .tt-banner__btn:hover { background-color: var(--action-secondary-hover); }
+
+    /* Close button */
+    .tt-banner__close {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: var(--element-height-medium);
+      height: var(--element-height-medium);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--action-tertiary-rest);
+      border: none;
+      border-radius: var(--radius-default);
+      color: var(--text-primary);
+      cursor: pointer;
+      z-index: 2;
+      padding: 0;
+    }
+    .tt-banner__close:hover { background-color: var(--action-tertiary-hover); }
+    .tt-banner__close > svg {
+      width: var(--icon-size-small);
+      height: var(--icon-size-small);
+      display: block;
+    }
+
+    /* Media slot — full-bleed image area
+       Stack mode (small/medium): media sits ABOVE text inside body-wrap. */
+    .tt-banner__media {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border-radius: var(--radius-default);
+      overflow: hidden;
+    }
+    .tt-banner--size-small  .tt-banner__media { height: 181px; }
+    .tt-banner--size-medium .tt-banner__media { height: 315px; }
+
+    /* Side mode (large): text + media in a row */
+    .tt-banner__split {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 24px;
+      width: 100%;
+    }
+    .tt-banner__split-text {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1 1 auto;
+      min-width: 270px;
+    }
+    .tt-banner__media--side {
+      flex: 0 0 340px;
+      width: 340px;
+      min-height: 100%;
+      align-self: stretch;
+    }
+
+    /* ============================================================
+       Standalone primitive showcase (node 223:1231)
+    ============================================================ */
+    .standalone-card {
+      padding: 32px;
+      background: var(--surface-default);
+      border: 1px solid rgba(213, 215, 219, 0.6);
+      border-radius: var(--radius-default);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1 class="page__title">Tips widget &mdash; Product Spotlight</h1>
+    <p class="page__subtitle">
+      Implementation of Figma <code>VqaGpmmrwTyUl1q3VLbMGa</code> nodes <code>223:1231</code>
+      (image placeholder primitive) and <code>209:553</code> (Tips widget &mdash; Small / Medium /
+      Banner). Built with the Atlas Banner component (<code>variant="tips"</code>) plus the
+      new <code>media</code> slot and <code>MediaPlaceholder</code> primitive.
+    </p>
+
+    <!-- ============================================================
+         Section 1 — MediaPlaceholder primitive (node 223:1231)
+    ============================================================ -->
+    <section class="section">
+      <h2 class="section__heading">1. MediaPlaceholder &mdash; primitive (322&times;180)</h2>
+      <p class="section__caption">
+        Dashed-border empty-image block. Used as the <code>media</code> slot in the Tips widget
+        while waiting on final artwork. Figma node <code>223:1231</code>.
+      </p>
+      <div class="standalone-card">
+        <div class="tt-media-placeholder" role="img" aria-label="Optional illustration or image">
+          <span class="tt-media-placeholder__label">Optional illustration or image</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Section 2 — Tips widget — Small (vertical narrow)
+    ============================================================ -->
+    <section class="section">
+      <h2 class="section__heading">2. Tips widget &mdash; Small (322&times;auto)</h2>
+      <p class="section__caption">
+        Vertical narrow layout. Media block stacks above the text. Figma node
+        <code>207:8748</code>.
+      </p>
+      <div class="gallery">
+        <article class="tt-banner tt-banner--variant-tips tt-banner--size-small tt-banner--has-decoration tt-banner--has-media-stack" role="region" aria-label="Tips">
+          <div class="tt-banner__decoration" aria-hidden="true">
+            <span class="tt-banner__deco-circle tt-banner__deco-circle--a"></span>
+            <span class="tt-banner__deco-circle tt-banner__deco-circle--b"></span>
+          </div>
+          <div class="tt-banner__content">
+            <div class="tt-banner__body-wrap">
+              <span class="tt-banner__chip">
+                <span class="tt-banner__chip-icon" aria-hidden="true">
+                  <!-- TipIcon (lightbulb) -->
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 14h6M8 17h4M10 2.5a5 5 0 0 0-3 9c.6.45 1 1.16 1 1.92V14h4v-.58c0-.76.4-1.47 1-1.92a5 5 0 0 0-3-9Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <span class="tt-banner__chip-label">Tips</span>
+              </span>
+              <div class="tt-banner__media">
+                <div class="tt-media-placeholder" role="img" aria-label="Optional illustration or image">
+                  <span class="tt-media-placeholder__label">Optional illustration or image</span>
+                </div>
+              </div>
+              <div class="tt-banner__text">
+                <p class="tt-banner__title">Heading (1 line)</p>
+                <div class="tt-banner__body">Body text (max 130 characters)</div>
+              </div>
+              <div class="tt-banner__actions">
+                <button type="button" class="tt-banner__btn">Button</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="tt-banner__close" aria-label="Dismiss">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Section 3 — Tips widget — Medium (vertical wide)
+    ============================================================ -->
+    <section class="section">
+      <h2 class="section__heading">3. Tips widget &mdash; Medium (595&times;auto)</h2>
+      <p class="section__caption">
+        Vertical wide layout. Media block stacks above the text, full width. Figma node
+        <code>227:498</code>.
+      </p>
+      <div class="gallery">
+        <article class="tt-banner tt-banner--variant-tips tt-banner--size-medium tt-banner--has-decoration tt-banner--has-media-stack" role="region" aria-label="Tips">
+          <div class="tt-banner__decoration" aria-hidden="true">
+            <span class="tt-banner__deco-circle tt-banner__deco-circle--a"></span>
+            <span class="tt-banner__deco-circle tt-banner__deco-circle--b"></span>
+          </div>
+          <div class="tt-banner__content">
+            <div class="tt-banner__body-wrap">
+              <span class="tt-banner__chip">
+                <span class="tt-banner__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 14h6M8 17h4M10 2.5a5 5 0 0 0-3 9c.6.45 1 1.16 1 1.92V14h4v-.58c0-.76.4-1.47 1-1.92a5 5 0 0 0-3-9Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <span class="tt-banner__chip-label">Tips</span>
+              </span>
+              <div class="tt-banner__media">
+                <div class="tt-media-placeholder" role="img" aria-label="Optional illustration or image">
+                  <span class="tt-media-placeholder__label">Optional illustration or image</span>
+                </div>
+              </div>
+              <div class="tt-banner__text">
+                <p class="tt-banner__title">Heading (1 line)</p>
+                <div class="tt-banner__body">Body text (max 130 characters)</div>
+              </div>
+              <div class="tt-banner__actions">
+                <button type="button" class="tt-banner__btn">Button</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="tt-banner__close" aria-label="Dismiss">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Section 4 — Tips widget — Banner (horizontal large)
+    ============================================================ -->
+    <section class="section">
+      <h2 class="section__heading">4. Tips widget &mdash; Banner (1068&times;auto)</h2>
+      <p class="section__caption">
+        Horizontal layout. Text and button on the left, media on the right (340px column).
+        Figma node <code>227:575</code>.
+      </p>
+      <div class="gallery">
+        <article class="tt-banner tt-banner--variant-tips tt-banner--size-large tt-banner--has-decoration tt-banner--has-media-side" role="region" aria-label="Tips">
+          <div class="tt-banner__decoration" aria-hidden="true">
+            <span class="tt-banner__deco-circle tt-banner__deco-circle--a"></span>
+            <span class="tt-banner__deco-circle tt-banner__deco-circle--b"></span>
+          </div>
+          <div class="tt-banner__content">
+            <div class="tt-banner__body-wrap">
+              <span class="tt-banner__chip">
+                <span class="tt-banner__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 14h6M8 17h4M10 2.5a5 5 0 0 0-3 9c.6.45 1 1.16 1 1.92V14h4v-.58c0-.76.4-1.47 1-1.92a5 5 0 0 0-3-9Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <span class="tt-banner__chip-label">Tips</span>
+              </span>
+              <div class="tt-banner__split">
+                <div class="tt-banner__split-text">
+                  <div class="tt-banner__text">
+                    <p class="tt-banner__title">Heading (1 line)</p>
+                    <div class="tt-banner__body">
+                      Oppdag den ultimate l&oslash;sningen for dine behov med v&aring;rt innovative produkt.
+                      Oppdag den ultimate l&oslash;sningen for dine behov med v&aring;rt
+                    </div>
+                  </div>
+                  <div class="tt-banner__actions">
+                    <button type="button" class="tt-banner__btn">Button</button>
+                  </div>
+                </div>
+                <div class="tt-banner__media tt-banner__media--side">
+                  <div class="tt-media-placeholder" role="img" aria-label="Optional illustration or image">
+                    <span class="tt-media-placeholder__label">Optional illustration or image</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="tt-banner__close" aria-label="Dismiss">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Wire close buttons — fade and remove for demo only
+    document.querySelectorAll('.tt-banner__close').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const card = e.currentTarget.closest('.tt-banner');
+        if (!card) return;
+        card.style.transition = 'opacity 0.2s ease';
+        card.style.opacity = '0';
+        setTimeout(() => { card.style.display = 'none'; }, 220);
+      });
+    });
+  </script>
+</body>
+</html>

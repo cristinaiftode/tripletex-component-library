@@ -41,7 +41,15 @@ export type BannerProps = {
   primaryAction?: BannerAction;
   secondaryAction?: BannerAction;
   onClose?: () => void;
+  /** Small fixed-size illustration (e.g. 100×100) rendered to the right of the text. */
   illustration?: React.ReactNode;
+  /**
+   * Full-bleed media slot — typically a hero image or `<MediaPlaceholder />`.
+   * Stacks ABOVE the text for `small` and `medium` sizes; sits BESIDE the
+   * text (right column, 340px wide) for `large`. Mirrors Figma "Tips/Upsell
+   * widget" Small/Medium/Banner variants.
+   */
+  media?: React.ReactNode;
   decorativeBackground?: boolean;
   className?: string;
 };
@@ -69,15 +77,23 @@ export function Banner({
   secondaryAction,
   onClose,
   illustration,
+  media,
   decorativeBackground = false,
   className,
 }: BannerProps) {
+  // For sizes small/medium the media block stacks above the text;
+  // for size large it sits beside the text in a row.
+  const mediaSide = !!media && size === "large";
+  const mediaStack = !!media && size !== "large";
+
   const classes = [
     "tt-banner",
     `tt-banner--variant-${variant}`,
     `tt-banner--size-${size}`,
     decorativeBackground && "tt-banner--has-decoration",
     illustration && "tt-banner--has-illustration",
+    mediaSide && "tt-banner--has-media-side",
+    mediaStack && "tt-banner--has-media-stack",
     className,
   ]
     .filter(Boolean)
@@ -102,25 +118,56 @@ export function Banner({
             </span>
             <span className="tt-banner__chip-label">{chipLabel}</span>
           </span>
-          {(title || children) && (
-            <div className="tt-banner__text">
-              {title && <p className="tt-banner__title">{title}</p>}
-              {children && <div className="tt-banner__body">{children}</div>}
+          {mediaStack && <div className="tt-banner__media">{media}</div>}
+          {mediaSide ? (
+            <div className="tt-banner__split">
+              <div className="tt-banner__split-text">
+                {(title || children) && (
+                  <div className="tt-banner__text">
+                    {title && <p className="tt-banner__title">{title}</p>}
+                    {children && <div className="tt-banner__body">{children}</div>}
+                  </div>
+                )}
+                {(primaryAction || secondaryAction) && (
+                  <div className="tt-banner__actions">
+                    {primaryAction && (
+                      <Button variant="primary" onClick={primaryAction.onClick}>
+                        {primaryAction.label}
+                      </Button>
+                    )}
+                    {secondaryAction && (
+                      <Button variant="secondary" onClick={secondaryAction.onClick}>
+                        {secondaryAction.label}
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="tt-banner__media tt-banner__media--side">{media}</div>
             </div>
-          )}
-          {(primaryAction || secondaryAction) && (
-            <div className="tt-banner__actions">
-              {primaryAction && (
-                <Button variant="primary" onClick={primaryAction.onClick}>
-                  {primaryAction.label}
-                </Button>
+          ) : (
+            <>
+              {(title || children) && (
+                <div className="tt-banner__text">
+                  {title && <p className="tt-banner__title">{title}</p>}
+                  {children && <div className="tt-banner__body">{children}</div>}
+                </div>
               )}
-              {secondaryAction && (
-                <Button variant="secondary" onClick={secondaryAction.onClick}>
-                  {secondaryAction.label}
-                </Button>
+              {(primaryAction || secondaryAction) && (
+                <div className="tt-banner__actions">
+                  {primaryAction && (
+                    <Button variant="primary" onClick={primaryAction.onClick}>
+                      {primaryAction.label}
+                    </Button>
+                  )}
+                  {secondaryAction && (
+                    <Button variant="secondary" onClick={secondaryAction.onClick}>
+                      {secondaryAction.label}
+                    </Button>
+                  )}
+                </div>
               )}
-            </div>
+            </>
           )}
         </div>
         {illustration && <div className="tt-banner__illustration">{illustration}</div>}

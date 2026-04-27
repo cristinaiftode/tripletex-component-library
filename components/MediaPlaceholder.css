@@ -1,0 +1,25 @@
+/* MediaPlaceholder — Figma node 223:1231
+   Dashed-border empty-image placeholder used as the `media` slot in Banner
+   (Tips / Upsell widget) when no illustration has been provided yet. */
+.tt-media-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 180px;
+  padding: 32px;
+  background-color: var(--surface-background, #f7f8fc);
+  border: 1px dashed var(--border-rest, #d5d7db);
+  border-radius: var(--radius-default, 4px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tt-media-placeholder__label {
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-primary, #2e384d);
+  text-align: center;
+}

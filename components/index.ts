@@ -16,6 +16,9 @@ export type { AvatarWithNameProps } from "./AvatarWithName";
 export { Banner } from "./Banner";
 export type { BannerProps, BannerVariant, BannerSize, BannerAction } from "./Banner";
 
+export { MediaPlaceholder } from "./MediaPlaceholder";
+export type { MediaPlaceholderProps } from "./MediaPlaceholder";
+
 export { Chip } from "./Chip";
 export type { ChipProps, ChipSize, ChipVariant } from "./Chip";
 

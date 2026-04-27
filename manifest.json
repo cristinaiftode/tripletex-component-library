@@ -249,18 +249,19 @@
       "usage": "<AvatarWithName name=\"John Doe\" initials=\"JD\" online={true} />"
     },
     "Banner": {
-      "description": "Prominent hero message with chip label, title, body, optional illustration, action buttons, decorative background, and close button.",
-      "import": "import { Banner } from \"./components\";",
+      "description": "Prominent hero message with chip label, title, body, optional illustration or full-bleed media slot, action buttons, decorative background, and close button. Used for Tips / Upsell / Product-Spotlight widgets.",
+      "import": "import { Banner, MediaPlaceholder } from \"./components\";",
       "props": {
         "variant": { "type": "enum", "values": ["info", "help", "tips", "news", "get-started", "automation", "success", "warning", "error"], "default": "info" },
-        "size": { "type": "enum", "values": ["small", "medium", "large"], "default": "medium", "description": "Fixed widths: 368/520/1200px" },
+        "size": { "type": "enum", "values": ["small", "medium", "large"], "default": "medium", "description": "Fixed widths matching Figma Tips widget: 322/595/1068px" },
         "label": { "type": "string", "description": "Chip label; defaults to variant name" },
         "title": { "type": "string" },
         "children": { "type": "ReactNode", "description": "Body text/content" },
         "primaryAction": { "type": "object", "description": "{label, onClick?}" },
         "secondaryAction": { "type": "object", "description": "{label, onClick?}" },
-        "illustration": { "type": "ReactNode", "description": "Right-aligned illustration" },
-        "decorativeBackground": { "type": "boolean", "default": false, "description": "Animated background circles" },
+        "illustration": { "type": "ReactNode", "description": "Small (100×100) right-aligned illustration/mascot" },
+        "media": { "type": "ReactNode", "description": "Full-bleed media slot — stacks ABOVE text for small/medium, sits BESIDE text (340px right column) for large. Pair with <MediaPlaceholder /> while waiting on artwork." },
+        "decorativeBackground": { "type": "boolean", "default": false, "description": "Decorative background circles (set true for Tips/Upsell widget)" },
         "onClose": { "type": "function" }
       },
       "colorMapping": {
@@ -271,12 +272,29 @@
         "error": { "bg": "#FEF4F5", "chipBg": "#FBD6DA", "border": "#EC5E6A" }
       },
       "styling": {
-        "dimensions": { "width": "368/520/1200px (small/medium/large)", "padding": "24px", "gap": "12px" },
+        "dimensions": { "width": "322/595/1068px (small/medium/large)", "padding": "24px", "gap": "12-16px" },
+        "mediaSlot": { "stackHeights": "181px (small) / 315px (medium)", "sideWidth": "340px (large)" },
         "border": { "width": "1px" },
         "radius": "4px",
-        "typography": { "titleSize": "16px", "titleWeight": 500, "bodySize": "14px" }
+        "typography": { "titleSize": "16px", "titleWeight": 500, "bodySize": "14px", "bodyLineHeight": 1.6 }
       },
-      "usage": "<Banner variant=\"success\" title=\"Saved\" primaryAction={{label: 'View'}} />"
+      "usage": "<Banner variant=\"tips\" size=\"medium\" title=\"Heading\" media={<MediaPlaceholder />} primaryAction={{label: 'Button'}} decorativeBackground onClose={() => {}}>Body text</Banner>"
+    },
+    "MediaPlaceholder": {
+      "description": "Dashed-border empty-image placeholder block (Figma node 223:1231). Use as the `media` slot in Banner while waiting on final artwork.",
+      "import": "import { MediaPlaceholder } from \"./components\";",
+      "props": {
+        "width": { "type": "number | string", "description": "Optional fixed width (px or CSS). Defaults to 100%." },
+        "height": { "type": "number | string", "description": "Optional fixed height. Defaults to 180px." },
+        "label": { "type": "string", "default": "Optional illustration or image" }
+      },
+      "styling": {
+        "background": "#F7F8FC",
+        "border": "1px dashed #D5D7DB",
+        "radius": "4px",
+        "typography": { "size": "14px", "weight": 400, "color": "#2E384D" }
+      },
+      "usage": "<MediaPlaceholder /> — or pass as media: <Banner variant=\"tips\" media={<MediaPlaceholder />} />"
     },
     "Chip": {
       "description": "Compact label or filter token with optional icon/avatar; supports static, clickable, and removable variants.",
