@@ -32,7 +32,7 @@ Import from the local barrel export when prototyping in React:
 import {
   Button, Input, Select, Combobox, Checkbox, Radio, Toggle,
   Modal, Popover, PopoverOpener, PopupMenu, PopupMenuItem,
-  Tag, Label, Tooltip, Banner, Alert,
+  Tag, Label, Tooltip, Banner, MediaPlaceholder, Alert,
   Table, TablePagination, TableFilter,
   PageHeader, Breadcrumb, Sidebar, SidebarItem, Topbar,
   Avatar, Badge, Spinner, ProgressStepper,
@@ -466,7 +466,7 @@ Dark navy background, white text, **8px padding**, **4px radius**, 14×8px SVG a
 
 ### 6.8 Banner
 
-Fixed widths: `small` 368px · `medium` 520px · `large` 1200px. Border-left accent + tinted background.
+Fixed widths matching the Figma Tips / Upsell / Product-Spotlight widget: `small` 322px · `medium` 595px · `large` 1068px. Padding `24px`, radius `4px`, 1px border.
 
 | Variant | Background | Border | Highlight chip |
 | --- | --- | --- | --- |
@@ -479,13 +479,63 @@ Fixed widths: `small` 368px · `medium` 520px · `large` 1200px. Border-left acc
 ```css
 .tt-banner {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  padding: 12px 16px;
+  padding: 24px;
   border: 1px solid var(--border-info);
-  border-left-width: 4px;
   border-radius: var(--radius-default);
   background: var(--surface-info-rest);
 }
+```
+
+**`media` slot (Tips / Upsell widget pattern).** Pass a hero image — or the `MediaPlaceholder` primitive — via the `media` prop. Layout switches automatically by size:
+
+- `size="small"` & `size="medium"` → media stacks **above** the text inside `body-wrap`. Heights: 181px (small) / 315px (medium).
+- `size="large"` → media sits **beside** the text in a row, in a fixed `340px` right column (use this for the horizontal "Banner" variant of the widget).
+
+Always pair with `decorativeBackground` for the Tips widget look (two soft `--surface-info-highlight` blob circles behind the content).
+
+```tsx
+<Banner
+  variant="tips"
+  size="medium"
+  title="Heading (1 line)"
+  media={<MediaPlaceholder />}
+  primaryAction={{ label: "Button" }}
+  decorativeBackground
+  onClose={() => {}}
+>
+  Body text (max 130 characters)
+</Banner>
+```
+
+### 6.8a MediaPlaceholder
+
+Dashed-border empty-image block used as the `media` slot in Banner while waiting on final artwork. Mirrors Figma node `223:1231`. Default size 100% × 180px (configurable via `width` / `height`).
+
+```css
+.tt-media-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 180px;
+  padding: 32px;
+  background: var(--surface-background);
+  border: 1px dashed var(--border-muted);
+  border-radius: var(--radius-default);
+}
+.tt-media-placeholder__label {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  text-align: center;
+}
+```
+
+```tsx
+<MediaPlaceholder />                         // 100% × 180
+<MediaPlaceholder width={322} height={180} /> // fixed
 ```
 
 ### 6.9 Alert

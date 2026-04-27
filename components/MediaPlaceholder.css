@@ -9,7 +9,7 @@
   min-height: 180px;
   padding: 32px;
   background-color: var(--surface-background, #f7f8fc);
-  border: 1px dashed var(--border-rest, #d5d7db);
+  border: 1px dashed var(--border-muted, #d5d7db);
   border-radius: var(--radius-default, 4px);
   box-sizing: border-box;
   overflow: hidden;
